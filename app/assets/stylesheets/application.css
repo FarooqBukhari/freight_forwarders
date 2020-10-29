@@ -12,3 +12,15 @@
  *
  *= require_self
  */
+
+@import "../fonts/flaticon.scss";
+@import "./theme_files/vendor/bootstrap.min";
+@import "./theme_files/vendor/bicon.min";
+@import "./theme_files/vendor/flaticon";
+@import "./theme_files/plugin/plyr";
+@import "./theme_files/plugin/slick.min";
+@import "./theme_files/plugin/nice-select";
+@import "./theme_files/plugin/perfect-scrollbar";
+@import "./theme_files/plugin/lightgallery.min";
+@import "./theme_files/style.min";
+@import "./theme_files/style.scss";
