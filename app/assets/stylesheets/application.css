@@ -13,7 +13,7 @@
  *= require_self
  */
 
-@import "../fonts/flaticon.scss";
+@import "./fonts/_flaticon.scss";
 @import "./theme_files/vendor/bootstrap.min";
 @import "./theme_files/vendor/bicon.min";
 @import "./theme_files/vendor/flaticon";
