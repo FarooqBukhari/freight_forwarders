@@ -1,62 +1,69 @@
-<div class="bs-stepper">
-  <div class="bs-stepper-header" role="tablist">
-    <!-- your steps here -->
-    <div class="step" data-target="#logins-part">
-      <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
-        <span class="bs-stepper-circle">1</span>
-        <span class="bs-stepper-label">Logins</span>
-      </button>
-    </div>
-    <div class="line"></div>
-    <div class="step" data-target="#information-part">
-      <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
-        <span class="bs-stepper-circle">2</span>
-        <span class="bs-stepper-label">Various information</span>
-      </button>
-    </div>
-  </div>
-  <div class="bs-stepper-content">
-    <!-- your steps content here -->
-    <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger"></div>
-    <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger"></div>
-  </div>
-</div>
-
-<main class="bg-transparent">
-    <div class="main-wrapper pb-0 mb-0">
-        <div class="timeline-wrapper">
-            <div class="timeline-page-wrapper">
-                <div class="container-fluid p-0">
+<div class="row">
+  <div class="col-md-4"></div>
+  <div class="col-md-4">
+    <div class="bs-stepper">
+      <div class="bs-stepper-header" role="tablist">
+<!--         your steps here-->
+        <div class="step" data-target="#logins-part">
+          <button type="button" class="step-trigger" role="tab" aria-controls="logins-part" id="logins-part-trigger">
+            <span class="bs-stepper-circle">1</span>
+            <span class="bs-stepper-label">Logins</span>
+          </button>
+        </div>
+        <div class="line"></div>
+        <div class="step" data-target="#information-part">
+          <button type="button" class="step-trigger" role="tab" aria-controls="information-part" id="information-part-trigger">
+            <span class="bs-stepper-circle">2</span>
+            <span class="bs-stepper-label">Various information</span>
+          </button>
+        </div>
+      </div>
+      <div class="bs-stepper-content">
+<!--         your steps content here-->
+        <div id="logins-part" class="content" role="tabpanel" aria-labelledby="logins-part-trigger">
+          <main class="bg-transparent">
+            <div class="main-wrapper pb-0 mb-0">
+              <div class="timeline-wrapper">
+                <div class="timeline-page-wrapper">
+                  <div class="container-fluid p-0">
                     <div class="row no-gutters">
                       <div class="col-12 order-1 order-lg-2 d-flex align-items-center justify-content-center">
-                          <div class="signup-form-wrapper personal-form-wrapper">
-                              <div class="signup-inner text-center">
-                                  <h3 class="title">Personal Information</h3>
-                                  <%= form_for(@user, url: wizard_path, html: {class: "signup-inner--form"}) do |f| %>
-                                    <div class="row">
-                                      <div class="col-12">
-                                          <%= f.text_field :name, autocomplete: "name", class:"single-field", placeholder: "Full Name" %>
-                                      </div>
-                                      <div class="col-12">
-                                          <%= f.telephone_field :phone, autocomplete: "phone", class:"single-field", placeholder: "Phone Number" %>
-                                      </div>
-                                      <div class="col-12">
-                                          <%= f.url_field :website, autocomplete: "website", class:"single-field", placeholder: "Company Website Url" %>
-                                      </div>
-                                      <div class="col-12">
-                                          <%= f.text_field :job_title, autocomplete: "job_title", class:"single-field", placeholder: "Job Title" %>
-                                      </div>
-                                      <div class="col-12">
-                                          <%= f.submit "Submit", class: "submit-btn" %>
-                                      </div>
-                                    </div>
-                                  <% end %>
+                        <div class="signup-form-wrapper personal-form-wrapper">
+                          <div class="signup-inner text-center">
+                            <h3 class="title">Personal Information</h3>
+                            <%= form_for(@user, url: wizard_path, html: {class: "signup-inner--form"}) do |f| %>
+                              <div class="row">
+                                <div class="col-12">
+                                  <%= f.text_field :name, autocomplete: "name", class:"single-field", placeholder: "Full Name" %>
+                                </div>
+                                <div class="col-12">
+                                  <%= f.telephone_field :phone, autocomplete: "phone", class:"single-field", placeholder: "Phone Number" %>
+                                </div>
+                                <div class="col-12">
+                                  <%= f.url_field :website, autocomplete: "website", class:"single-field", placeholder: "Company Website Url" %>
+                                </div>
+                                <div class="col-12">
+                                  <%= f.text_field :job_title, autocomplete: "job_title", class:"single-field", placeholder: "Job Title" %>
+                                </div>
+                                <div class="col-12">
+                                  <%= f.submit "Submit", class: "submit-btn" %>
+                                </div>
                               </div>
+                            <% end %>
                           </div>
+                        </div>
                       </div>
                     </div>
+                  </div>
                 </div>
+              </div>
             </div>
+          </main>
         </div>
+        <div id="information-part" class="content" role="tabpanel" aria-labelledby="information-part-trigger">
+          <h3> okay</h3>
+        </div>
+      </div>
     </div>
-</main>
+  </div>
+</div>
