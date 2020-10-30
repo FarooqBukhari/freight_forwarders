@@ -1,0 +1,95 @@
+<main class="bg-transparent">
+    <div class="main-wrapper pb-0 mb-0">
+        <div class="timeline-wrapper">
+            <div class="timeline-header">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-lg-4">
+                            <div class="timeline-logo-area d-flex align-items-center">
+                                <div class="timeline-logo">
+                                    <a href="/">
+                                        <img src="assets/logo/logo.png" alt="timeline logo">
+                                    </a>
+                                </div>
+                                <div class="timeline-tagline">
+                                    <h6 class="tagline">It’s helps you to connect your life</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8">
+                            <div class="login-area">
+                                <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class:"row align-items-center"}) do |f| %>
+                                    <div class="col-12 col-sm">
+                                        <%= f.email_field :email, autocomplete: "email", class:"single-field", placeholder: "Email" %>
+                                    </div>
+                                    <div class="col-12 col-sm">
+                                        <%= f.password_field :password, autocomplete: "current-password", class:"single-field", placeholder: "Password" %>
+                                    </div>
+                                    <% if devise_mapping.rememberable? %>
+                                        <div class="col-12 col-sm">
+                                          <div class="row single-field">
+                                            <div class="col-12 col-sm">
+                                              <%= f.check_box :remember_me%>
+                                              <span> Remember me? </span>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    <% end %>
+                                    <div class="col-12 col-sm-auto">
+                                        <%= f.submit "Login", class: "login-btn" %>
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-page-wrapper">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6 order-2 order-lg-1">
+                            <div class="timeline-bg-content bg-img" data-bg="assets/timeline/adda-timeline.png">
+                                <h3 class="timeline-bg-title">Let’s see what’s happening to you and your world. Welcome in Adda.</h3>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-1 order-lg-2 d-flex align-items-center justify-content-center">
+                            <div class="signup-form-wrapper">
+                                <h1 class="create-acc text-center">Create An Account</h1>
+                                <div class="signup-inner text-center">
+                                    <h3 class="title">Wellcome to Adda</h3>
+                                    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "signup-inner--form"}) do |f| %>
+                                      <div class="row">
+                                        <div class="col-12">
+                                          <%= render "users/shared/error_messages", resource: resource %>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <%= f.email_field :email, autocomplete: "email", class: "single-field", placeholder: "Email" %>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <% if @minimum_password_length %>
+                                            <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+                                          <% end %>
+                                          <%= f.password_field :password, autocomplete: "new-password", class: "single-field", placeholder: "Password" %>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "single-field", placeholder: "Confirm Password" %>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <%= f.submit "Sign up", class: "submit-btn" %>
+                                        </div>
+                                      </div>
+                                    <% end %>
+                                    <%= render "users/shared/links" %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
