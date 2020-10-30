@@ -5,6 +5,7 @@
 //= require jquery
 //= require vendor.min
 //= require plugins.min
+//= require bs-stepper.min
 //= require_self
 
 // Uncomment to copy all static images under ../images to the output folder and reference
