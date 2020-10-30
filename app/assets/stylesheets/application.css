@@ -24,3 +24,13 @@
 @import "./theme_files/plugins/lightgallery.min";
 @import "./theme_files/style.min";
 @import "./theme_files/style.scss";
+
+
+.terms-condition {
+  padding-top: 5px !important;
+  margin-bottom: 5px !important;
+}
+
+.personal-form-wrapper{
+  padding: 47px 0px 0px 0px !important;
+}

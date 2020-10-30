@@ -1,0 +1,38 @@
+<main class="bg-transparent">
+    <div class="main-wrapper pb-0 mb-0">
+        <div class="timeline-wrapper">
+            <div class="timeline-page-wrapper">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters">
+                      <div class="col-12 order-1 order-lg-2 d-flex align-items-center justify-content-center">
+                          <div class="signup-form-wrapper personal-form-wrapper">
+                              <div class="signup-inner text-center">
+                                  <h3 class="title">Personal Information</h3>
+                                  <%= form_for(@user, url: wizard_path, html: {class: "signup-inner--form"}) do |f| %>
+                                    <div class="row">
+                                      <div class="col-12">
+                                          <%= f.text_field :name, autocomplete: "name", class:"single-field", placeholder: "Full Name" %>
+                                      </div>
+                                      <div class="col-12">
+                                          <%= f.telephone_field :phone, autocomplete: "phone", class:"single-field", placeholder: "Phone Number" %>
+                                      </div>
+                                      <div class="col-12">
+                                          <%= f.url_field :website, autocomplete: "website", class:"single-field", placeholder: "Company Website Url" %>
+                                      </div>
+                                      <div class="col-12">
+                                          <%= f.text_field :job_title, autocomplete: "job_title", class:"single-field", placeholder: "Job Title" %>
+                                      </div>
+                                      <div class="col-12">
+                                          <%= f.submit "Submit", class: "submit-btn" %>
+                                      </div>
+                                    </div>
+                                  <% end %>
+                              </div>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
