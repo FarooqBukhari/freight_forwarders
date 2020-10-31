@@ -179,7 +179,7 @@ textarea {
     line-height: 1;
 }
 @for $i from 3 through 20 {
-    &.slick-row-#{1 * $i} {
+    slick-row-#{1 * $i} {
         .slick-list {
             margin: 0 #{-1px * $i};
 

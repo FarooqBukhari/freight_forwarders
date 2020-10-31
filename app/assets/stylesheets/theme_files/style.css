@@ -2403,7 +2403,7 @@ textarea:focus {
   position: absolute;
   height: 170px;
   width: 174px;
-  background-image: url("../images/icons/login.png");
+  background-image: url("app/assets/images/login.png");
   background-repeat: no-repeat;
   -webkit-transform: translate(-50%, -80%);
       -ms-transform: translate(-50%, -80%);

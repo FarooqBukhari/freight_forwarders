@@ -18,6 +18,10 @@
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;
+    $('[data-toggle=offcanvas]').click(function() {
+        $('.row-offcanvas').toggleClass('active');
+    });
+
     (function ($) {
         "use strict";
 
