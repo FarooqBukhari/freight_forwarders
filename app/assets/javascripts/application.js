@@ -3,8 +3,6 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require vendor.min
 //= require plugins.min
 //= require bs-stepper.min
@@ -20,6 +18,10 @@
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;
+    $('[data-toggle=offcanvas]').click(function() {
+        $('.row-offcanvas').toggleClass('active');
+    });
+
     (function ($) {
         "use strict";
 
