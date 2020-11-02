@@ -2,7 +2,8 @@
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
-//= require rails_ujs
+//= require jquery
+//= require jquery_ujs
 //= require vendor.min
 //= require plugins.min
 //= require bs-stepper.min
