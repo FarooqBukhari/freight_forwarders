@@ -43,6 +43,7 @@ gem 'acts_as_paranoid', '~> 0.7.0'
 gem 'geokit'
 gem "select2-rails"
 gem "cocoon"
+gem "country-select"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
