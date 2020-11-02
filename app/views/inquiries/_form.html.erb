@@ -1,0 +1,76 @@
+<main class="bg-transparent">
+    <div class="main-wrapper pb-0 mb-0">
+        <div class="timeline-wrapper">
+            <div class="timeline-page-wrapper">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters">
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <div class="signup-form-wrapper">
+                                <h1 class="create-acc text-center">Create An Account</h1>
+                                <div class="signup-inner inquiry-inner text-center">
+                                    <%= form_for inquiry do |f| %>
+                                      <h3 class="title">Where are you shipping from?</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-12">
+                                            <%= render "users/shared/error_messages", resource: inquiry %>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <%= f.select(:origin_location_type, Inquiry.origin_location_types.map {|key, value| [value, key]}, class: "single-field", id: "select2-origin-location-type" ) %>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <%= f.text_field :origin_country, autocomplete: "origin_country", class: "single-field", placeholder: "Origin Country" %>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address" %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h3 class="title">Where are you shipping to?</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <%= f.select(:destination_location_type, Inquiry.destination_location_types.map {|key, value| [value, key]}, class: "single-field", id: "select2-dest-location-type" ) %>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <%= f.text_field :destination_country, autocomplete: "destination_country", class: "single-field", placeholder: "Destination Country" %>
+                                          </div>
+
+                                          <div class="col-md-4">
+                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address" %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h3 class="title">What are you shipping?</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-12">
+                                            <div id='inquiry_items'>
+                                              <%= f.fields_for :inquiry_items do |inquiry_item| %>
+                                                <%= render 'inquiry_items', :f => inquiry_item %>
+                                              <% end %>
+                                              <div class='links'>
+                                                <%= link_to_add_association 'add item', f, :inquiry_items %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-4"></div>
+                                          <div class="col-4">
+                                            <%= f.submit "Post Inquiry", class: "submit-btn" %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

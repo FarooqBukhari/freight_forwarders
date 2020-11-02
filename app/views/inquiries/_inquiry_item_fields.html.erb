@@ -1,0 +1,21 @@
+<div class='nested-fields row'>
+    <div class="field col-md-4">
+      <%= f.text_field :commodity, autocomplete: "commodity", class: "single-field", placeholder: "Commodity" %>
+    </div>
+    <div class="field col-md-2">
+      <%= f.number_field :number_of_units, autocomplete: "number_of_units", class: "single-field", placeholder: "# of Units" %>
+    </div>
+    <div class="field col-md-1">
+      <%= f.number_field :length, autocomplete: "length", class: "single-field", placeholder: "L" %>
+    </div>
+    <div class="field col-md-1">
+      <%= f.number_field :width, autocomplete: "width", class: "single-field", placeholder: "W" %>
+    </div>
+    <div class="field col-md-1">
+      <%= f.number_field :heigth, autocomplete: "heigth", class: "single-field", placeholder: "H" %>
+    </div>
+    <div class="field col-md-2">
+      <%= f.number_field :weight, autocomplete: "weight", class: "single-field", placeholder: "Weight" %>
+    </div>
+    <%= link_to_remove_association "remove item", f %>
+  </div>
