@@ -19,7 +19,7 @@
                                             <%= f.select :origin_location_type, Inquiry.origin_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field", :id=>"select2-origin-location-type"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :origin_country, {}, { :class=> "single-field"} %>
+                                            <%= f.country_select :origin_country, nil, {}, {:class=> "single-field", :id=>"select2-origin-country-location"} %>
                                           </div>
                                           <div class="col-md-4">
                                             <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address" %>
@@ -33,7 +33,7 @@
                                             <%= f.select :destination_location_type, Inquiry.destination_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field", :id=> "select2-dest-location-type"}  %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :destination_country, {}, { :class=> "single-field"} %>
+                                            <%= f.country_select :destination_country, nil, {}, { class: "single-field", :id=>"select2-dest-country-location"} %>
                                           </div>
                                           <div class="col-md-4">
                                             <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address" %>

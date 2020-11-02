@@ -29,7 +29,13 @@ $( document ).ready(function() {
     $( "#select2-origin-location-type" ).select2({
         theme: "bootstrap"
     });
+    $( "#select2-origin-country-location" ).select2({
+        theme: "bootstrap"
+    });
     $( "#select2-dest-location-type" ).select2({
+        theme: "bootstrap"
+    });
+    $( "#select2-dest-country-location" ).select2({
         theme: "bootstrap"
     });
 
