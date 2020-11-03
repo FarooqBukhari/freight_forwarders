@@ -16,9 +16,11 @@ Rails.application.routes.draw do
   end
   resources :after_signup
   resources :users do
-    resources :inquiries, except: [:show, :index]
+    member do
+      get :my_inquiries
+    end
   end
-  resources :inquiries, only: [:show, :index]
+  resources :inquiries
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
