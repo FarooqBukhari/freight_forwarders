@@ -6,7 +6,7 @@ class InquiriesController < ApplicationController
   # GET /inquiries
   # GET /inquiries.json
   def index
-    @inquiries = Inquiry.all
+    @inquiries = Inquiry.where("user_id != ?", current_user.id)
   end
 
   # GET /inquiries/1

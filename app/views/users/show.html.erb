@@ -46,7 +46,7 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 order-2 order-lg-1">
+        <div class="col-md-3">
           <aside class="widget-area profile-sidebar">
             <!-- widget single item start -->
             <div class="card widget-item">
@@ -212,7 +212,7 @@
           </aside>
         </div>
 
-        <div class="col-lg-6 order-1 order-lg-2">
+        <div class="col-md-9">
           <!-- share box start -->
           <div class="card card-small">
             <div class="share-box-inner">
@@ -232,187 +232,17 @@
                   <%= link_to "Post an Inquiry", new_inquiry_path, class:"btn-post-inquiry" %>
                 </form>
               </div>
+              <div class="share-content-box w-100">
+                <form class="share-text-box">
+                  <%= link_to "Manage my Inquiries", my_inquiries_user_path, class:"btn-post-inquiry" %>
+                </form>
+              </div>
             </div>
           </div>
           <!-- share box end -->
-
           <!-- post status start -->
-          <div class="card">
-            <!-- post title start -->
-            <div class="post-title d-flex align-items-center">
-              <!-- profile picture end -->
-              <div class="profile-thumb">
-                <a href="#">
-                  <figure class="profile-thumb-middle">
-                    <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                  </figure>
-                </a>
-              </div>
-              <!-- profile picture end -->
-
-              <div class="posted-author">
-                <h6 class="author"><a href="#">Kate Palson</a></h6>
-                <span class="post-time">35 min ago</span>
-              </div>
-
-              <div class="post-settings-bar">
-                <span></span>
-                <span></span>
-                <span></span>
-                <div class="post-settings arrow-shape">
-                  <ul>
-                    <li><button>copy link to adda</button></li>
-                    <li><button>edit post</button></li>
-                    <li><button>embed adda</button></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- post title start -->
-            <div class="post-content">
-              <p class="post-desc">
-                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                in their infancy.
-              </p>
-              <div class="post-thumb-gallery img-gallery">
-                <div class="row no-gutters">
-                  <div class="col-12">
-                    <figure class="post-thumb">
-                      <img src="<%= asset_path 'post-1.jpg' %>" alt="post image">
-                    </figure>
-                  </div>
-                </div>
-              </div>
-              <div class="post-meta">
-                <button class="post-meta-like">
-                  <i class="bi bi-heart-beat"></i>
-                  <span>You and 207 people like this</span>
-                  <strong>207</strong>
-                </button>
-                <ul class="comment-share-meta">
-                  <li>
-                    <button class="post-comment">
-                      <i class="bi bi-chat-bubble"></i>
-                      <span>41</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button class="post-share">
-                      <i class="bi bi-share"></i>
-                      <span>07</span>
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
+          <%= render 'inquiries/inquiries', inquiries: @inquiries %>
           <!-- post status end -->
-        </div>
-
-        <div class="col-lg-3 order-3">
-          <aside class="widget-area">
-            <!-- widget single item start -->
-            <div class="card widget-item">
-              <h4 class="widget-title">Recent Notifications</h4>
-              <div class="widget-body">
-                <ul class="like-page-list-wrapper">
-                  <li class="unorder-list">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb">
-                      <a href="#">
-                        <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                        </figure>
-                      </a>
-                    </div>
-                    <!-- profile picture end -->
-
-                    <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                      <p class="list-subtitle">5 min ago</p>
-                    </div>
-                  </li>
-                  <li class="unorder-list">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb">
-                      <a href="#">
-                        <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                        </figure>
-                      </a>
-                    </div>
-                    <!-- profile picture end -->
-
-                    <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                      <p class="list-subtitle">5 min ago</p>
-                    </div>
-                  </li>
-                  <li class="unorder-list">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb">
-                      <a href="#">
-                        <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                        </figure>
-                      </a>
-                    </div>
-                    <!-- profile picture end -->
-
-                    <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                      <p class="list-subtitle">5 min ago</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- widget single item end -->
-
-            <!-- widget single item start -->
-            <div class="card widget-item">
-              <h4 class="widget-title">Advertizement</h4>
-              <div class="widget-body">
-                <div class="add-thumb">
-                  <a href="#">
-                    <img src="<%= asset_path 'advertise.jpg' %>" alt="advertisement">
-                  </a>
-                </div>
-              </div>
-            </div>
-            <!-- widget single item end -->
-
-            <!-- widget single item start -->
-            <div class="card widget-item">
-              <h4 class="widget-title">Friends Zone</h4>
-              <div class="widget-body">
-                <ul class="like-page-list-wrapper">
-                  <li class="unorder-list">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb">
-                      <a href="#">
-                        <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                        </figure>
-                      </a>
-                    </div>
-                    <!-- profile picture end -->
-
-                    <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">arfim bolt</a></h3>
-                      <p class="list-subtitle"><a href="#">10 mutual</a></p>
-                    </div>
-                    <button class="like-button">
-                      <img class="heart" src="<%= asset_path 'heart.png' %>" alt="">
-                      <img class="heart-color" src="<%= asset_path 'heart-color.png' %>" alt="">
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- widget single item end -->
-          </aside>
         </div>
       </div>
     </div>

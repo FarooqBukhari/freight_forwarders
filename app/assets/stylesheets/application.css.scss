@@ -40,6 +40,40 @@
   padding: 47px 0px 0px 0px !important;
 }
 
+.inquiry-popup-option {
+  color: #000 !important;
+}
+
+.inquiry-popup-option:hover {
+  color: #dc4734 !important;
+}
+
+.inquiry-manage-option {
+  color: #000 !important;
+}
+
+.inquiry-manage-option:hover {
+  text-decoration: underline;
+  color: #dc4734 !important;
+}
+
+.table > thead > tr > th{
+  color: #dc4734;
+}
+
+.goods-ready-dates-bold {
+  color: #dc4734;
+}
+
+.manage-inquiries {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.inquiry-items {
+  margin-top: -50px;
+  margin-bottom: 100px;
+}
 /*
  * Off Canvas sidebar at medium breakpoint
  * --------------------------------------------------

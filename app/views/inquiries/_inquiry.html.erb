@@ -1,0 +1,98 @@
+<div class="card manage-inquiries">
+  <!-- post title start -->
+  <div class="post-title d-flex align-items-center">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <a href="#">
+        <figure class="profile-thumb-middle">
+          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+        </figure>
+      </a>
+    </div>
+    <!-- profile picture end -->
+
+    <div class="posted-author">
+      <h6 class="author"><a href="#"><%= inquiry.user.name %></a></h6>
+      <span class="post-time"><%= time_ago_in_words(inquiry.updated_at) %></span>
+    </div>
+
+    <div class="post-settings-bar">
+      <span></span>
+      <span></span>
+      <span></span>
+      <div class="post-settings arrow-shape">
+        <ul class="inquiry-popup-options">
+          <% if current_user.id == inquiry.user.id %>
+          <li><button><%= link_to 'Edit Inquiry', edit_inquiry_path(inquiry), class: 'inquiry-popup-option' %></button></li>
+          <li><button><%= link_to 'Delete Inquiry', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-popup-option' %></button></li>
+          <% end %>
+          <li><button><%= link_to 'Show Full Details', inquiry, class: 'inquiry-popup-option' %></button></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!-- post title start -->
+  <div class="post-content">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Origin Location Type</th>
+          <th>Origin Country</th>
+          <th>Origin Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
+          <td><%= inquiry.origin_country %></td>
+          <td><%= inquiry.origin_address %></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Destination Location Type</th>
+          <th>Destination Country</th>
+          <th>Destination Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
+          <td><%= inquiry.destination_country %></td>
+          <td><%= inquiry.destination_address %></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="pull-right post-desc">
+      <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
+    </p>
+  </div>
+</div>
+
+<div class="card inquiry-items">
+  <h2 class="goods-ready-dates-bold">Inquiry Items</h2>
+  <div class="post-content">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Commodity</th>
+          <th>No. of Units</th>
+          <th>Dimensions <span>L*W*H</span></th>
+          <th>Total Weight</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inquiry.inquiry_items.each do |item| %>
+          <tr>
+            <td><%= item.commodity %></td>
+            <td><%= item.number_of_units %></td>
+            <td><%= item.length.to_s + '*' + item.width.to_s + '*' + item.heigth.to_s %></td>
+            <td><%= item.weight %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :my_inquiries, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
@@ -8,9 +8,14 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def my_inquiries
+    @inquiries = @user.inquiries
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
+    @inquiries = @user.inquiries
   end
 
   # GET /users/new
