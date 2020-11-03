@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   end
   resources :after_signup
   resources :users do
-    resources :inquiries, except: [:show, :index]
+    resources :inquiries, only: [:new, :edit, :create, :update, :destroy]
   end
   resources :inquiries, only: [:show, :index]
 

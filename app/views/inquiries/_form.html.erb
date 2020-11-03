@@ -8,7 +8,7 @@
                             <div class="signup-form-wrapper">
                                 <h1 class="create-acc text-center">Create An Account</h1>
                                 <div class="signup-inner inquiry-inner text-center">
-                                    <%= form_for inquiry do |f| %>
+                                    <%= form_for [user, inquiry], url: url, method: method do |f| %>
                                       <h3 class="title">Where are you shipping from?</h3>
                                       <div class="signup-inner--form">
                                         <div class="row">
@@ -40,13 +40,23 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <h3 class="title">When will you be shipping?</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-md-4"></div>
+                                          <div class="col-md-4">
+                                            <%= f.label :shipping_date %>
+                                            <%= f.date_field :goods_ready_date, class: "single-field" %>
+                                          </div>
+                                        </div>
+                                      </div>
                                       <h3 class="title">What are you shipping?</h3>
                                       <div class="signup-inner--form">
                                         <div class="row">
                                           <div class="col-12">
                                             <div id='inquiry_items'>
                                               <%= f.fields_for :inquiry_items do |inquiry_item| %>
-                                                <%= render 'inquiry_items', :f => inquiry_item %>
+                                                <%= render 'inquiry_item_fields', :f => inquiry_item %>
                                               <% end %>
                                               <div class='links'>
                                                 <%= link_to_add_association 'add item', f, :inquiry_items %>
