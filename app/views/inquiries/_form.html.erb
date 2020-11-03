@@ -8,7 +8,7 @@
                             <div class="signup-form-wrapper">
                                 <h1 class="create-acc text-center">Create An Account</h1>
                                 <div class="signup-inner inquiry-inner text-center">
-                                    <%= form_for [user, inquiry], url: url, method: method do |f| %>
+                                    <%= form_with(model: inquiry, local: true) do |f| %>
                                       <h3 class="title">Where are you shipping from?</h3>
                                       <div class="signup-inner--form">
                                         <div class="row">

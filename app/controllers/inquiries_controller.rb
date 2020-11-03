@@ -2,44 +2,67 @@ class InquiriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inquiry, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
-  before_action :set_user, only: [:edit, :new]
 
+  # GET /inquiries
+  # GET /inquiries.json
   def index
+    @inquiries = Inquiry.all
   end
 
+  # GET /inquiries/1
+  # GET /inquiries/1.json
+  def show
+  end
+
+  # GET /inquiries/new
   def new
     @inquiry = Inquiry.new
     1.times {@inquiry.inquiry_items.build}
   end
 
-  def create
-    @inquiry = Inquiry.new(inquiry_params)
-    @inquiry.user_id = current_user.id
-    if @inquiry.save
-
-      redirect_to root_path
-    else
-      render :new
-    end
-  end
-
+  # GET /inquiries/1/edit
   def edit
   end
 
-  def update
-    if @inquiry.update_attributes(inquiry_params)
-     redirect_to root_path
-    else
-     render :edit
+  # POST /inquiries
+  # POST /inquiries.json
+  def create
+    @inquiry = Inquiry.new(inquiry_params)
+    @inquiry.user_id = current_user.id
+    respond_to do |format|
+      if @inquiry.save
+        format.html { redirect_to @inquiry, notice: 'Inquiry was successfully created.' }
+        format.json { render :show, status: :created, location: @inquiry }
+      else
+        format.html { render :new }
+        format.json { render json: @inquiry.errors, status: :unprocessable_entity }
+      end
     end
   end
 
-  def show
+  # PATCH/PUT /inquiries/1
+  # PATCH/PUT /inquiries/1.json
+  def update
+    respond_to do |format|
+      if @inquiry.update(inquiry_params)
+        format.html { redirect_to @inquiry, notice: 'Inquiry was successfully updated.' }
+        format.json { render :show, status: :ok, location: @inquiry }
+      else
+        format.html { render :edit }
+        format.json { render json: @inquiry.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  def delete
+  # DELETE /inquiries/1
+  # DELETE /inquiries/1.json
+  def destroy
+    @inquiry.destroy
+    respond_to do |format|
+      format.html { redirect_to inquiries_url, notice: 'Inquiry was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
-
 
   private
   def check_user
@@ -48,10 +71,6 @@ class InquiriesController < ApplicationController
 
   def set_inquiry
     @inquiry = Inquiry.eager_load(:inquiry_items).find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(current_user.id)
   end
 
   def inquiry_params

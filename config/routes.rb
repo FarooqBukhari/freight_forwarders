@@ -15,10 +15,8 @@ Rails.application.routes.draw do
     end
   end
   resources :after_signup
-  resources :users do
-    resources :inquiries, only: [:new, :edit, :create, :update, :destroy]
-  end
-  resources :inquiries, only: [:show, :index]
+  resources :users
+  resources :inquiries
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
