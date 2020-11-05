@@ -40,5 +40,59 @@ class User < ApplicationRecord
   #Associations
   has_many :inquiries, dependent: :destroy
 
+  has_many :friended_users, foreign_key: :friend_id, class_name: 'Friendship'
+  has_many :frienders, through: :friended_users
+  has_many :friender_users, foreign_key: :friendable_id, class_name: 'Friendship'
+  has_many :friendeds, through: :friender_users
+  has_many :requested_users, foreign_key: :requested_id, class_name: 'FriendRequest'
+  has_many :requesters, through: :requested_users
+  has_many :requester_users, foreign_key: :requester_id, class_name: 'FriendRequest'
+  has_many :requesteds, through: :requester_users
   #Validations
+
+
+  # methods
+  def friend_request(user)
+    FriendRequest.create(requester: self, requested: user)
+  end
+
+  def accept_request(user)
+    FriendRequest.find_by(requested: self, requester: user).destroy
+    Friendship.create(friended: self, friender: user)
+  end
+
+  def cancel_request(user)
+    FriendRequest.find_by(requester: self, requested: user).destroy
+  end
+
+  def reject_request(user)
+    FriendRequest.find_by(requester: user, requested: self).destroy
+  end
+
+  def remove_friend(user)
+    Friendship.where(' (friendable_id = ? AND friend_id = ?) OR (friendable_id = ? AND friend_id = ?)',self.id, user.id, user.id, self.id).first.destroy
+  end
+
+  def strangers
+    users = []
+    User.all.each do |user|
+
+      if(self.friends_with?(user) != true &&
+          self != user &&
+          self.isFriend(user).exists? != true &&
+          self.requester_users.find_by(requested_id: user.id) == nil)
+        users << user
+      end
+    end
+    users.to(5)
+  end
+
+  def my_friends
+    Friendship.where('friendable_id = ? OR friend_id = ?', self.id, self.id)
+  end
+
+  def isFriend(user)
+    @friends = self.my_friends
+    @friends.where('friendable_id = ? OR friend_id = ?', user.id, user.id)
+  end
 end

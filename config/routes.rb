@@ -22,5 +22,12 @@ Rails.application.routes.draw do
   end
   resources :inquiries
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :friends, only: [:index, :create]
+  post "/friends/add" => "friends/add", as: :add_friend
+  post "/friends/reject" => "friends/reject", as: :reject_friend
+  post "/friends/remove" => "friends/remove", as: :remove_friend
+  post "/friends/cancel" => "friends/cancel", as: :cancel_request
+  # get "/friends/search" => "friends/search"
+  # post "/friends/search" => "friends/search"
+    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

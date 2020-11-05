@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_211330) do
+ActiveRecord::Schema.define(version: 2020_11_03_211716) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.bigint "requester_id"
+    t.bigint "requested_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["requested_id"], name: "index_friend_requests_on_requested_id"
+    t.index ["requester_id"], name: "index_friend_requests_on_requester_id"
+  end
 
   create_table "friendships", id: :serial, force: :cascade do |t|
     t.string "friendable_type"

@@ -33,11 +33,19 @@
           <div class="col-lg-2 col-md-3 d-none d-md-block">
             <div class="profile-edit-panel">
               <% if @user == current_user %>
-                <button class="edit-btn">edit profile</button>
-              <% elsif !current_user.friends_with?(@user) %>
-                <button class="edit-btn">Add to Network</button>
-              <% else %>
-                <button class="edit-btn">Remove From Network</button>
+                <a class="edit-btn" style="color: white;">edit profile</a>
+              <% elsif @is_friend %>
+                <%= link_to 'Remove Friend', remove_friend_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
+              <% elsif @can_remove %>
+                <%= link_to 'Cancel Request', cancel_request_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
+              <% elsif @can_accept %>
+                <div class="row">
+                  <%= link_to 'Accept', add_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5", style: "background-color: powderblue"  %>
+                  <div class="col-md-1"></div>
+                  <%= link_to 'Reject', reject_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5",  style: "background-color: orangered"  %>
+                </div>
+              <% elsif @can_add %>
+                <%= link_to 'Add to Network', friends_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
               <% end %>
             </div>
           </div>
@@ -50,7 +58,7 @@
           <aside class="widget-area profile-sidebar">
             <!-- widget single item start -->
             <div class="card widget-item">
-              <h4 class="widget-title">kate palson</h4>
+              <h4 class="widget-title"> <%= @user.name %> </h4>
               <div class="widget-body">
                 <div class="about-author">
                   <p>I Don’t know how? But i believe that it is possible one day if i stay with my dream all time</p>

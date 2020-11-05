@@ -5,7 +5,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @pagy, @users = pagy(User.all, items: 10)
+    @recommendations = current_user.strangers
+    @requested_users = current_user.requested_users
   end
 
   def my_inquiries
@@ -16,6 +18,10 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     @inquiries = @user.inquiries
+    @is_friend = current_user.isFriend(@user).exists?
+    @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
+    @can_remove = current_user.requester_users.find_by(requested_id: @user.id)
+    @can_accept = current_user.requested_users.find_by(requester_id: @user.id)
   end
 
   # GET /users/new
