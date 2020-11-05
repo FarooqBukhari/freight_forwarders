@@ -59,7 +59,7 @@ class InquiriesController < ApplicationController
   def destroy
     @inquiry.destroy
     respond_to do |format|
-      format.html { redirect_to inquiries_url, notice: 'Inquiry was successfully destroyed.' }
+      format.html { redirect_to my_inquiries_user_url(current_user), notice: 'Inquiry was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -70,7 +70,7 @@ class InquiriesController < ApplicationController
   end
 
   def set_inquiry
-    @inquiry = Inquiry.eager_load(:inquiry_items).find(params[:id])
+    @inquiry = Inquiry.eager_load(:inquiry_items, :quotes, :selected_quote).find(params[:id])
   end
 
   def inquiry_params

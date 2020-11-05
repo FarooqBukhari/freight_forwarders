@@ -1,27 +1,33 @@
 <div class="card manage-inquiries">
-  <h2>Inquiries Posted By <strong class="goods-ready-dates-bold" ><%= inquiries.first.user.name %></strong> </h2>
-  <div class="post-content">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Source</th>
-          <th>Destination</th>
-          <th>Good Ready By</th>
-          <th colspan="3">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% inquiries.each do |inquiry| %>
-        <tr>
-          <td><%= '( '+ Inquiry.origin_location_types[inquiry.origin_location_type] + ' ) ' + inquiry.origin_address + ', ' + inquiry.origin_country %></td>
-          <td><%= '( '+ Inquiry.destination_location_types[inquiry.destination_location_type] + ' ) ' + inquiry.destination_address + ', ' + inquiry.destination_country %></td>
-          <td><%= inquiry.goods_ready_date %></td>
-          <td><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %></td>
-          <td><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
-          <td><%= link_to '', inquiry, class: 'inquiry-manage-option fa fa-eye' %></td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+  <% if inquiries.present? %>
+    <h2>Inquiries Posted By <strong class="goods-ready-dates-bold" ><%= inquiries.first.user.name %></strong> </h2>
+    <div class="post-content">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Source</th>
+            <th>Destination</th>
+            <th>Good Ready By</th>
+            <th>Status</th>
+            <th colspan="3">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% inquiries.each do |inquiry| %>
+          <tr>
+            <td><%= '( '+ Inquiry.origin_location_types[inquiry.origin_location_type] + ' ) ' + inquiry.origin_address + ', ' + inquiry.origin_country %></td>
+            <td><%= '( '+ Inquiry.destination_location_types[inquiry.destination_location_type] + ' ) ' + inquiry.destination_address + ', ' + inquiry.destination_country %></td>
+            <td><%= inquiry.goods_ready_date %></td>
+            <td><%= inquiry.status %> </td>
+            <td><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %></td>
+            <td><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+            <td><%= link_to '', inquiry, class: 'inquiry-manage-option fa fa-eye' %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <h2 class= "text-center">No <strong class="goods-ready-dates-bold" >Inquiries </strong>Posted Yet</h2>
+  <% end %>
 </div>

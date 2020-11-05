@@ -9,13 +9,13 @@ class UsersController < ApplicationController
   end
 
   def my_inquiries
-    @inquiries = @user.inquiries
+    @inquiries = @user.inquiries.order! 'created_at DESC'
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @inquiries = @user.inquiries
+    @inquiries = Inquiry.not_current_user_inquiries(current_user)
   end
 
   # GET /users/new
