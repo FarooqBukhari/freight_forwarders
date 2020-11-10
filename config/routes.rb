@@ -20,7 +20,11 @@ Rails.application.routes.draw do
       get :my_inquiries
     end
   end
-  resources :inquiries
+  resources :inquiries do
+    collection do
+      get :get_address_suggestions
+    end
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

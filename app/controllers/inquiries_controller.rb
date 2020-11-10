@@ -1,4 +1,5 @@
 class InquiriesController < ApplicationController
+  include Geokit::Geocoders
   before_action :authenticate_user!
   before_action :set_inquiry, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
@@ -64,6 +65,14 @@ class InquiriesController < ApplicationController
     end
   end
 
+  def get_address_suggestions
+    search_query = params['address'] + ', ' + params['country']
+    puts search_query
+    geo = MultiGeocoder.geocode(search_query)
+    address_suggestion = geo.full_address
+    render json: {suggestion: address_suggestion}
+  end
+
   private
   def check_user
     redirect_to root_path if current_user.id != @inquiry.user_id
@@ -75,7 +84,7 @@ class InquiriesController < ApplicationController
 
   def inquiry_params
     params.require(:inquiry).permit(:origin_location_type, :origin_country, :origin_address,
-       :destination_location_type, :destination_country, :destination_address, :goods_ready_date,
-        inquiry_items_attributes: [:id, :commodity, :number_of_units, :length, :width, :heigth, :weight, :_destroy])
+       :destination_location_type, :destination_country, :destination_address, :goods_ready_date, :destination_lat, :destination_lng,
+        :origin_lat, :origin_lng, inquiry_items_attributes: [:id, :commodity, :number_of_units, :length, :width, :heigth, :weight, :_destroy])
   end
 end

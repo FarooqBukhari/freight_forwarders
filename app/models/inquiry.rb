@@ -25,7 +25,6 @@ class Inquiry < ApplicationRecord
   #Callback functions
   private
   def status_change
-    byebug
     if !selected_quote.nil?
       self.selected!
     else

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_114005) do
+ActiveRecord::Schema.define(version: 2020_11_10_114709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,10 @@ ActiveRecord::Schema.define(version: 2020_11_05_114005) do
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
     t.integer "status"
+    t.decimal "origin_lat", precision: 10, scale: 6
+    t.decimal "origin_lng", precision: 10, scale: 6
+    t.decimal "destination_lat", precision: 10, scale: 6
+    t.decimal "destination_lng", precision: 10, scale: 6
     t.index ["deleted_at"], name: "index_inquiries_on_deleted_at"
     t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
