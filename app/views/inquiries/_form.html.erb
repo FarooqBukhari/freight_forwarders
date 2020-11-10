@@ -22,7 +22,7 @@
                                             <%= f.country_select :origin_country, nil, {}, {:class=> "single-field", :id=>"select2-origin-country-location"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address" %>
+                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address", onkeyup: 'get_origin_address_suggestions()' %>
                                           </div>
                                         </div>
                                       </div>
@@ -36,7 +36,7 @@
                                             <%= f.country_select :destination_country, nil, {}, { class: "single-field", :id=>"select2-dest-country-location"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address" %>
+                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address", onkeyup: 'get_dest_address_suggestions()' %>
                                           </div>
                                         </div>
                                       </div>
@@ -46,7 +46,11 @@
                                           <div class="col-md-4"></div>
                                           <div class="col-md-4">
                                             <%= f.label :shipping_date %>
-                                            <%= f.date_field :goods_ready_date, class: "single-field" %>
+                                            <%= f.text_field :goods_ready_date, class: "single-field text-center", data: {provide: "datepicker",
+                                                'date-format': 'dd/mm/yyyy',
+                                                'date-autoclose': 'true',
+                                                'date-today-btn': 'linked',
+                                                'date-today-highlight': 'true'}, placeholder: "Pick Shipping Date" %>
                                           </div>
                                         </div>
                                       </div>
@@ -59,7 +63,8 @@
                                                 <%= render 'inquiry_item_fields', :f => inquiry_item %>
                                               <% end %>
                                               <div class='links'>
-                                                <%= link_to_add_association 'add item', f, :inquiry_items %>
+                                                <hr></hr>
+                                                <%= link_to_add_association '', f, :inquiry_items, class:"fa fa-plus-circle" %>
                                               </div>
                                             </div>
                                           </div>

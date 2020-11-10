@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_211330) do
+ActiveRecord::Schema.define(version: 2020_11_10_114709) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,11 @@ ActiveRecord::Schema.define(version: 2020_10_31_211330) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
+    t.integer "status"
+    t.decimal "origin_lat", precision: 10, scale: 6
+    t.decimal "origin_lng", precision: 10, scale: 6
+    t.decimal "destination_lat", precision: 10, scale: 6
+    t.decimal "destination_lng", precision: 10, scale: 6
     t.index ["deleted_at"], name: "index_inquiries_on_deleted_at"
     t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
@@ -55,6 +60,18 @@ ActiveRecord::Schema.define(version: 2020_10_31_211330) do
     t.datetime "deleted_at"
     t.index ["deleted_at"], name: "index_inquiry_items_on_deleted_at"
     t.index ["inquiry_id"], name: "index_inquiry_items_on_inquiry_id"
+  end
+
+  create_table "quotes", force: :cascade do |t|
+    t.float "price", null: false
+    t.bigint "inquiry_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_quotes_on_deleted_at"
+    t.index ["inquiry_id"], name: "index_quotes_on_inquiry_id"
+    t.index ["user_id"], name: "index_quotes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,4 +108,6 @@ ActiveRecord::Schema.define(version: 2020_10_31_211330) do
 
   add_foreign_key "inquiries", "users"
   add_foreign_key "inquiry_items", "inquiries"
+  add_foreign_key "quotes", "inquiries"
+  add_foreign_key "quotes", "users"
 end

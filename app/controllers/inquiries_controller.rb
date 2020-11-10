@@ -1,4 +1,5 @@
 class InquiriesController < ApplicationController
+  include Geokit::Geocoders
   before_action :authenticate_user!
   before_action :set_inquiry, only: [:show, :edit, :update, :destroy]
   before_action :check_user, only: [:edit, :update, :destroy]
@@ -59,9 +60,17 @@ class InquiriesController < ApplicationController
   def destroy
     @inquiry.destroy
     respond_to do |format|
-      format.html { redirect_to inquiries_url, notice: 'Inquiry was successfully destroyed.' }
+      format.html { redirect_to my_inquiries_user_url(current_user), notice: 'Inquiry was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def get_address_suggestions
+    search_query = params['address'] + ', ' + params['country']
+    puts search_query
+    geo = MultiGeocoder.geocode(search_query)
+    address_suggestion = geo.full_address
+    render json: {suggestion: address_suggestion}
   end
 
   private
@@ -70,12 +79,12 @@ class InquiriesController < ApplicationController
   end
 
   def set_inquiry
-    @inquiry = Inquiry.eager_load(:inquiry_items).find(params[:id])
+    @inquiry = Inquiry.eager_load(:inquiry_items, :quotes, :selected_quote).find(params[:id])
   end
 
   def inquiry_params
     params.require(:inquiry).permit(:origin_location_type, :origin_country, :origin_address,
-       :destination_location_type, :destination_country, :destination_address, :goods_ready_date,
-        inquiry_items_attributes: [:id, :commodity, :number_of_units, :length, :width, :heigth, :weight, :_destroy])
+       :destination_location_type, :destination_country, :destination_address, :goods_ready_date, :destination_lat, :destination_lng,
+        :origin_lat, :origin_lng, inquiry_items_attributes: [:id, :commodity, :number_of_units, :length, :width, :heigth, :weight, :_destroy])
   end
 end

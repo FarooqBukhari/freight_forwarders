@@ -68,6 +68,9 @@
     <p class="pull-right post-desc">
       <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
     </p>
+    <p class="pull-left post-desc">
+      <strong class="goods-ready-dates-bold"> Status: </strong> <%= inquiry.status %>
+    </p>
   </div>
 </div>
 
@@ -95,4 +98,30 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<div class="card inquiry-items">
+  <% if inquiry.quotes.count > 0 %>
+  <h2 class="goods-ready-dates-bold">Received Quotes</h2>
+  <div class="post-content">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Price</th>
+          <th>User</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% inquiry.quotes.each do |quote| %>
+          <tr>
+            <td><%= quote.price %></td>
+            <td><%= quote.user.name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% else %>
+    <h4 class="goods-ready-dates-bold">This Inquiry hasn't received any quotes yet.</h4>
+  <% end %>
 </div>

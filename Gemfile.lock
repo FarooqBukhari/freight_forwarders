@@ -111,6 +111,9 @@ GEM
     execjs (2.7.0)
     ffi (1.13.1)
     geokit (1.13.1)
+    geokit-rails (2.3.1)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     has_friendship (1.1.8)
@@ -263,6 +266,7 @@ DEPENDENCIES
   country-select
   devise
   geokit
+  geokit-rails
   has_friendship
   jbuilder (~> 2.5)
   jquery-rails

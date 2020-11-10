@@ -19,6 +19,22 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+function get_origin_address_suggestions() {
+  let country = $('#select2-select2-origin-country-location-container')[0].getAttribute('title');
+  let address = $('#inquiry_origin_address').val();
+  $.get("/inquiries/get_address_suggestions", {country: country, address: address}, function(data){
+    console.log(data);
+  });
+}
+
+function get_dest_address_suggestions() {
+  let country = $('#select2-select2-dest-country-location-container')[0].getAttribute('title');
+  let address = $('#inquiry_dest_address').val();
+  $.get("/inquiries/get_address_suggestions", {country: country, address: address}, function(data){
+    console.log(data);
+  });
+}
+
 
 
 $( document ).ready(function() {
