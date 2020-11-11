@@ -48,6 +48,12 @@ class User < ApplicationRecord
   has_many :requesters, through: :requested_users
   has_many :requester_users, foreign_key: :requester_id, class_name: 'FriendRequest'
   has_many :requesteds, through: :requester_users
+  has_one_attached :profile_picture
+
+  #chat
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
+
   #Validations
 
 

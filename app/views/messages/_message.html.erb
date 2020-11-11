@@ -1,0 +1,4 @@
+<li class="<%= user.id == message.user_id ? 'text-author' : 'text-friends' %>">
+  <p><%= message.body %></p>
+  <div class="message-time"><%= time_ago_in_words message.created_at %></div>
+</li>

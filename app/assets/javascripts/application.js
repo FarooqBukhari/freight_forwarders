@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 //= require jquery
 //= require jquery_ujs
+//= require cable
 //= require vendor.min
 //= require plugins.min
 //= require bs-stepper.min
@@ -24,6 +25,47 @@
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;
+    $('[data-toggle="tooltip"]').tooltip();
+
+    (function() {
+        $(document).on('click', '.toggle-window', function(e) {
+            e.preventDefault();
+            var panel = $(this).parent().parent();
+            var messages_list = panel.find('.messages-list');
+
+            panel.find('.panel-body').toggle();
+            // panel.attr('class', 'panel panel-default');
+            //
+            // if (panel.find('.panel-body').is(':visible')) {
+            //     var height = messages_list[0].scrollHeight;
+            //     messages_list.scrollTop(height);
+            // }
+        });
+    })();
+
+    $('.users-tabs > li').on('click',function () {
+        $(this).removeClass('user-box-message');
+        var ref = $(this).attr("id");
+        var con_id = ref.substr(ref.lastIndexOf('-')+1);
+        var conversation = $('#conversations-list').find("[data-conversation-id='" + con_id + "']");
+
+        var allConversations = $('#conversations-list > div').addClass("tab-pane fade");
+        // console.log(allConversations);
+        // for (var i = 0, len = allConversations.length; i < len; i++) {
+        //     //work with element
+        //     allConversations[i].addClass("tab-pane fade");
+        // }
+
+        conversation.removeClass("tab-pane fade");
+
+
+        var ul = conversation.find('.commentList');
+        var abc = conversation.find('.commentList li:last');
+
+        jQuery(ul).animate({scrollTop: 1000000 + 30}, "slow");
+    });
+
+
     $('[data-toggle=offcanvas]').click(function() {
         $('.row-offcanvas').toggleClass('active');
     });

@@ -5,7 +5,7 @@ class Inquiry < ApplicationRecord
   belongs_to :user
   has_many :inquiry_items, inverse_of: :inquiry, dependent: :destroy
   accepts_nested_attributes_for :inquiry_items, reject_if: :all_blank, allow_destroy: true
-
+  has_many :conversations
   #Validations
 
   #Enums

@@ -30,4 +30,10 @@ Rails.application.routes.draw do
   # get "/friends/search" => "friends/search"
   # post "/friends/search" => "friends/search"
     # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+  end
+  get 'messages/index'
 end
