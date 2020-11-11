@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_10_114709) do
+ActiveRecord::Schema.define(version: 2020_11_11_180000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_114709) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
-    t.integer "status"
+    t.string "status"
     t.decimal "origin_lat", precision: 10, scale: 6
     t.decimal "origin_lng", precision: 10, scale: 6
     t.decimal "destination_lat", precision: 10, scale: 6
@@ -62,8 +62,22 @@ ActiveRecord::Schema.define(version: 2020_11_10_114709) do
     t.index ["inquiry_id"], name: "index_inquiry_items_on_inquiry_id"
   end
 
+  create_table "quote_items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "item_type", null: false
+    t.float "amount", null: false
+    t.string "routing"
+    t.bigint "quote_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_quote_items_on_deleted_at"
+    t.index ["quote_id"], name: "index_quote_items_on_quote_id"
+  end
+
   create_table "quotes", force: :cascade do |t|
-    t.float "price", null: false
+    t.float "total_price"
+    t.string "status"
     t.bigint "inquiry_id"
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
@@ -108,6 +122,7 @@ ActiveRecord::Schema.define(version: 2020_11_10_114709) do
 
   add_foreign_key "inquiries", "users"
   add_foreign_key "inquiry_items", "inquiries"
+  add_foreign_key "quote_items", "quotes"
   add_foreign_key "quotes", "inquiries"
   add_foreign_key "quotes", "users"
 end

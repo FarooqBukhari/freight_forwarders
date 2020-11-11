@@ -114,7 +114,7 @@
       <tbody>
         <% inquiry.quotes.each do |quote| %>
           <tr>
-            <td><%= quote.price %></td>
+            <td><%= quote.total_price %></td>
             <td><%= quote.user.name %></td>
           </tr>
         <% end %>

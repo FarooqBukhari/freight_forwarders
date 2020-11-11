@@ -1,7 +1,8 @@
 class CreateQuotes < ActiveRecord::Migration[6.0]
   def change
     create_table :quotes do |t|
-      t.float :price, null: false
+      t.float :total_price
+      t.string :status
       t.references :inquiry, foreign_key: true
       t.references :user, foreign_key: true
       t.timestamps
