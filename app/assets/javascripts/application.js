@@ -43,16 +43,7 @@ $( document ).ready(function() {
     $('[data-toggle=offcanvas]').click(function() {
         $('.row-offcanvas').toggleClass('active');
     });
-    $( "#select2-origin-location-type" ).select2({
-        theme: "bootstrap"
-    });
-    $( "#select2-origin-country-location" ).select2({
-        theme: "bootstrap"
-    });
-    $( "#select2-dest-location-type" ).select2({
-        theme: "bootstrap"
-    });
-    $( "#select2-dest-country-location" ).select2({
+    $( ".select2-dropdown" ).select2({
         theme: "bootstrap"
     });
 

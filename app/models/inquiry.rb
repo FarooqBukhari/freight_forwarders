@@ -16,7 +16,7 @@ class Inquiry < ApplicationRecord
   #Enums
   enum origin_location_type: {src_residential: 'Residential', src_factory_warehouse: 'Factory / Warehouse', src_airport_port: 'Port / Airport (FOB)'}
   enum destination_location_type: {dest_residential: 'Residential', dest_factory_warehouse: 'Factory / Warehouse', dest_airport_port: 'Port / Airport (FOB)'}
-  enum status: [:pending, :receiving_quotes, :selected]
+  enum status: {pending: "Pending", receiving_quotes: "Receiving Quotes", closed: "Closed"}
   #Scopes
 
   def self.not_current_user_inquiries(current_user)
@@ -26,10 +26,10 @@ class Inquiry < ApplicationRecord
   private
   def status_change
     if !selected_quote.nil?
-      self.selected!
+      self.closed!
     else
       if quotes.count > 0 && self.pending?
-        self.in_discussion!
+        self.receiving_quotes!
       else if status.nil?
         self.pending!
       end
