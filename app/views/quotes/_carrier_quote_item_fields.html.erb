@@ -1,6 +1,6 @@
 <div class='nested-fields row'>
     <div class="field col-md-4">
-      <%= f.select :name, QuoteItem.carrier_names.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"} %>
+      <%= f.select :name, QuoteItem.carrier_names.map {|key, value| [value, key]}, {}, { :class=> "single-field"} %>
     </div>
     <div class="field col-md-3">
       <%= f.number_field :amount, autocomplete: "Amount", class: "single-field", placeholder: "Amount", step: :any, min: 0.1 %>
