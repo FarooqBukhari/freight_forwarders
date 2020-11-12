@@ -81,3 +81,5 @@ gem 'sprockets'
 gem 'sprockets-es6'
 
 gem 'pg', '>= 0.18', '< 2.0'
+
+gem "redis"
