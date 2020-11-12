@@ -1,0 +1,208 @@
+<main>
+  <div class="main-wrapper">
+    <div class="profile-banner-large bg-img" data-bg="<%= asset_path 'profile-banner' %>">
+    </div>
+    <div class="profile-menu-area secondary-navigation-style bg-white">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-3 col-md-3">
+            <div class="profile-picture-box">
+              <figure class="profile-picture">
+                <a href="#">
+                  <img src="<%= asset_path 'profile-1.jpg' %>" alt="profile picture">
+                </a>
+              </figure>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 offset-lg-1">
+            <div class="profile-menu-wrapper">
+              <div class="main-menu-inner header-top-navigation">
+                <nav>
+                  <ul class="main-menu">
+                    <li class="active"><a href="#">timeline</a></li>
+                    <li><a href="#">about</a></li>
+                    <li><a href="#">photos</a></li>
+                    <li><a href="<%= friends_user_path(id: @user.id) %>">friends</a></li>
+                    <li><a href="#">more</a></li>
+                    <!--                    <li class="d-inline-block d-md-none"><a href="#">edit profile</a></li>-->
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-3 d-none d-md-block">
+            <div class="profile-edit-panel">
+              <% if @user == current_user %>
+                <a class="edit-btn" style="color: white;">edit profile</a>
+              <% elsif @is_friend %>
+                <%= link_to 'Remove Friend', remove_friend_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
+              <% elsif @can_remove %>
+                <%= link_to 'Cancel Request', cancel_request_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
+              <% elsif @can_accept %>
+                <div class="row">
+                  <%= link_to 'Accept', add_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5", style: "background-color: powderblue"  %>
+                  <div class="col-md-1"></div>
+                  <%= link_to 'Reject', reject_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5",  style: "background-color: orangered"  %>
+                </div>
+              <% elsif @can_add %>
+                <%= link_to 'Add to Network', friends_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="secondary-menu-wrapper secondary-menu-2 bg-white">
+              <div class="page-title-inner">
+                <h4 class="page-title">friends (<%= @friends.count %>)</h4>
+              </div>
+<!--                  <div class="filter-menu">-->
+<!--                    <button class="active" data-filter="*">all</button>-->
+<!--                    <button data-filter=".recently">recently</button>-->
+<!--                    <button data-filter=".relative">relative</button>-->
+<!--                    <button data-filter=".collage">collage</button>-->
+<!--                    <button data-filter=".request">request</button>-->
+<!--                  </div>-->
+<!--                  <div class="post-settings-bar">-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                    <span></span>-->
+<!--                    <div class="post-settings arrow-shape">-->
+<!--                      <ul>-->
+<!--                        <li><button>edit profile</button></li>-->
+<!--                        <li><button>activity log</button></li>-->
+<!--                        <li><button>embed adda</button></li>-->
+<!--                      </ul>-->
+<!--                    </div>-->
+<!--                  </div>-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="friends-section ">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <aside class="widget-area profile-sidebar">
+              <!-- widget single item start -->
+              <div class="card widget-item">
+                <h4 class="widget-title"> <%= @user.name %>
+                  <% if @user !=  current_user %>
+                    <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: @user.id, con_type: "User"), method: :post, class: "btn btn-blue" %>
+                  <% end %>
+                </h4>
+                <div class="widget-body">
+                  <div class="about-author">
+                    <p>I Don’t know how? But i believe that it is possible one day if i stay with my dream all time</p>
+                    <ul class="author-into-list">
+                      <li><a href="#"><i class="bi bi-office-bag"></i>Graphic Designer</a></li>
+                      <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li>
+                      <li><a href="#"><i class="bi bi-location-pointer"></i>Pulshar, Melbourne</a></li>
+                      <li><a href="#"><i class="bi bi-heart-beat"></i>Travel, Swimming</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <!-- widget single item end -->
+
+              <!-- widget single item start -->
+              <div class="card widget-item">
+                <h4 class="widget-title">Sweets Memories</h4>
+                <div class="widget-body">
+                  <div class="sweet-galley img-gallery">
+                    <div class="row row-5">
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div class="gallery-tem">
+                          <figure class="post-thumb">
+                            <img src="<%= asset_path 'gallery-1.jpg' %>" alt="sweet memory">
+                          </figure>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </aside>
+          </div>
+
+          <div class="col-md-9">
+            <div class="content-box friends-zone">
+              <div class="row mt-20 friends-list">
+                <% @friends.each do |friend| %>
+                  <div class="col-lg-4 col-sm-6 recently request">
+                    <div class="friend-list-view">
+                      <!-- profile picture end -->
+                      <div class="profile-thumb">
+                        <a href="#">
+                          <figure class="profile-thumb-middle">
+                            <% if friend.other_user(@user).profile_picture.attached?  %>
+                              <img src="<%= url_for friend.other_user(@user).profile_picture %>" alt="profile picture">
+                            <% else %>
+                              <img src="<%= asset_path 'profile-small-3' %>" alt="profile picture">
+                          <% end %>
+                          </figure>
+                        </a>
+                      </div>
+                      <!-- profile picture end -->
+
+                      <div class="posted-author">
+                        <h6 class="author"><a href="<%= user_path(id: friend.other_user(@user).id) %>"><%= friend.other_user(@user).name %></a></h6>
+                        <% if @user == current_user %>
+                          <%= link_to 'Remove', remove_friend_path({id: @user.id}), class: 'btn btn-danger btn-xs', method: :post, style: "color: white;" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>

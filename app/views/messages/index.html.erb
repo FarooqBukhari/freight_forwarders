@@ -51,7 +51,7 @@
 
               <% @conversations.each do |conversation| %>
                 <% op_user = conversation.opposed_user(current_user) %>
-                <div class="tab-pane fade" id="con-<%=conversation.id%>" data-conversation-id="<%= conversation.id %>" >
+                <div class="<%= conversation.id === @id ? '' : "tab-pane fade" %>" id="con-<%=conversation.id%>" data-conversation-id="<%= conversation.id %>" >
                 <div class="selected-user">
                   <span>To: <span class="name"><%= op_user.name %></span></span>
                 </div>
@@ -90,3 +90,14 @@
 </div>
   </div>
 </main>
+
+<script>
+  <% if @id %>
+  var conversations = $('#conversations-list');
+  var conversation = conversations.find("[data-conversation-id='" + "<%= @id %>" + "']");
+  var ul = conversation.find('.commentList');
+  var abc = conversation.find('.commentList li:last');
+
+  jQuery(ul).animate({scrollTop: $(ul).scrollTop() + jQuery(abc).offset().top + 30}, "slow");
+  <% end %>
+</script>

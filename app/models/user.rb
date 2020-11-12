@@ -101,4 +101,8 @@ class User < ApplicationRecord
     @friends = self.my_friends
     @friends.where('friendable_id = ? OR friend_id = ?', user.id, user.id)
   end
+
+  def get_friend_users
+    Friendship.includes(:friended, :friender).where('friendable_id = ? OR friend_id = ?', self.id, self.id)
+  end
 end
