@@ -10,7 +10,7 @@ class Inquiry < ApplicationRecord
   has_many :quotes, inverse_of: :inquiry, dependent: :destroy
   has_one :selected_quote, class_name: "Quote", inverse_of: :inquiry
   accepts_nested_attributes_for :inquiry_items, reject_if: :all_blank, allow_destroy: true
-
+  has_many :conversations
   #Validations
 
   #Enums

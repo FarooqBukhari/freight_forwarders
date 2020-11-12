@@ -1,21 +1,35 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :my_inquiries, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :my_inquiries, :edit, :update, :destroy, :friends]
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @pagy, @users = pagy(User.all, items: 10)
+    @recommendations = current_user.strangers
+    @requested_users = current_user.requested_users
   end
 
   def my_inquiries
     @inquiries = @user.inquiries.order! 'created_at DESC'
   end
 
+  def friends
+    @friends = @user.get_friend_users
+    @is_friend = current_user.isFriend(@user).exists?
+    @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
+    @can_remove = current_user.requester_users.find_by(requested_id: @user.id)
+    @can_accept = current_user.requested_users.find_by(requester_id: @user.id)
+  end
+
   # GET /users/1
   # GET /users/1.json
   def show
     @inquiries = Inquiry.not_current_user_inquiries(current_user)
+    @is_friend = current_user.isFriend(@user).exists?
+    @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
+    @can_remove = current_user.requester_users.find_by(requested_id: @user.id)
+    @can_accept = current_user.requested_users.find_by(requester_id: @user.id)
   end
 
   # GET /users/new

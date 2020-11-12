@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :my_inquiries
+      get :friends
     end
   end
   resources :inquiries do
@@ -27,5 +28,18 @@ Rails.application.routes.draw do
     resources :quotes, except: [:index]
   end
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :friends, only: [:index, :create]
+  post "/friends/add" => "friends/add", as: :add_friend
+  post "/friends/reject" => "friends/reject", as: :reject_friend
+  post "/friends/remove" => "friends/remove", as: :remove_friend
+  post "/friends/cancel" => "friends/cancel", as: :cancel_request
+  # get "/friends/search" => "friends/search"
+  # post "/friends/search" => "friends/search"
+    # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  resources :conversations, only: [:create] do
+    member do
+      post :close
+    end
+  end
+  get 'messages/index'
 end

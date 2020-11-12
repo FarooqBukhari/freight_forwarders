@@ -16,7 +16,7 @@
                   </a>
                 </figure>
                 <div class="profile-desc text-center">
-                  <h6 class="author"><a href="#">Dimbel Lebmid</a></h6>
+                  <h6 class="author"><a href="#"><%= current_user.name %></a></h6>
                   <p>Any one can join with but Social network us if you want Any one can join with us if you want</p>
                 </div>
               </div>
@@ -25,9 +25,10 @@
 
             <!-- widget single item start -->
             <div class="card widget-item">
-              <h4 class="widget-title">page you may like</h4>
+              <h4 class="widget-title">People you may know</h4>
               <div class="widget-body">
                 <ul class="like-page-list-wrapper">
+                  <% @recommendations.each do |user| %>
                   <li class="unorder-list">
                     <!-- profile picture end -->
                     <div class="profile-thumb">
@@ -40,44 +41,20 @@
                     <!-- profile picture end -->
 
                     <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">Travel The World</a></h3>
-                      <p class="list-subtitle"><a href="#">adventure</a></p>
+                      <h3 class="list-title"><a href="<%= user_path(user.id) %>"><%= user.name %></a></h3>
+                      <p class="list-subtitle"><a> <i class="fa fa-address-card" aria-hidden="true"></i> <%= user.job_title %></a></p>
                     </div>
                     <button class="like-button active">
                       <img class="heart" src="<%= asset_path 'heart.png' %>" alt="">
                       <img class="heart-color" src="<%= asset_path 'heart-color.png' %>" alt="">
                     </button>
                   </li>
+                  <% end %>
                 </ul>
               </div>
             </div>
             <!-- widget single item end -->
 
-            <!-- widget single item start -->
-            <div class="card widget-item">
-              <h4 class="widget-title">latest top news</h4>
-              <div class="widget-body">
-                <ul class="like-page-list-wrapper">
-                  <li class="unorder-list">
-                    <!-- profile picture end -->
-                    <div class="profile-thumb">
-                      <a href="#">
-                        <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg'%>" alt="profile picture">
-                        </figure>
-                      </a>
-                    </div>
-                    <!-- profile picture end -->
-
-                    <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="#">Any one can join with us if you want</a></h3>
-                      <p class="list-subtitle">2 min ago</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- widget single item end -->
           </aside>
         </div>
 
@@ -129,109 +106,73 @@
           </div>
           <!-- share box end -->
 
-          <!-- post status start -->
+          <% @users.each do |user| %>
           <div class="card">
-            <!-- post title start -->
             <div class="post-title d-flex align-items-center">
               <!-- profile picture end -->
               <div class="profile-thumb">
                 <a href="#">
-                  <figure class="profile-thumb-middle">
-                    <img src="<%= asset_path 'profile-small-3.jpg'%>" alt="profile picture">
+                  <figure class="profile-thumb-large">
+                    <img src="<%= asset_path 'profile-midle-1.jpg'%>" alt="profile picture">
                   </figure>
                 </a>
               </div>
               <!-- profile picture end -->
-
               <div class="posted-author">
-                <h6 class="author"><a href="#">merry watson</a></h6>
-                <span class="post-time">20 min ago</span>
-              </div>
-
-              <div class="post-settings-bar">
-                <span></span>
-                <span></span>
-                <span></span>
-                <div class="post-settings arrow-shape">
-                  <ul>
-                    <li><button>copy link to adda</button></li>
-                    <li><button>edit post</button></li>
-                    <li><button>embed adda</button></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- post title start -->
-            <div class="post-content">
-              <p class="post-desc">
-                Many desktop publishing packages and web page editors now use Lorem Ipsum as their
-                default model text, and a search for 'lorem ipsum' will uncover many web sites still
-                in their infancy.
-              </p>
-              <div class="post-thumb-gallery">
-                <figure class="post-thumb img-popup">
-                  <img src="<%= asset_path "post-1.jpg" %>" alt="post image">
-                </figure>
-              </div>
-              <div class="post-meta">
-                <button class="post-meta-like">
-                  <i class="bi bi-heart-beat"></i>
-                  <span>You and 201 people like this</span>
-                  <strong>201</strong>
-                </button>
-                <ul class="comment-share-meta">
-                  <li>
-                    <button class="post-comment">
-                      <i class="bi bi-chat-bubble"></i>
-                      <span>41</span>
-                    </button>
-                  </li>
-                  <li>
-                    <button class="post-share">
-                      <i class="bi bi-share"></i>
-                      <span>07</span>
-                    </button>
-                  </li>
-                </ul>
+                <h6 class="author"><a href="<%= user_path(user.id) %>"><%= user.name %></a></h6>
+                <span class="post-time"><i class="fa fa-map-marker" aria-hidden="true"></i> Location</span>
+                <span class="post-time"><i class="fa fa-address-card" aria-hidden="true"></i> <%= user.job_title %></span>
               </div>
             </div>
           </div>
-          <!-- post status end -->
+          <% end %>
+
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4"><%== pagy_bootstrap_nav(@pagy) %></div>
+          </div>
 
         </div>
 
-        <div class="col-lg-3 order-3">
-          <aside class="widget-area">
-            <!-- widget single item start -->
-            <div class="card widget-item">
-              <h4 class="widget-title">Recent Notifications</h4>
-              <div class="widget-body">
-                <ul class="like-page-list-wrapper">
-                  <% current_user.friendships.where(status: 'requested').each do |request| %>
-                    <li class="unorder-list">
-                      <!-- profile picture end -->
-                      <div class="profile-thumb">
-                        <a href="#">
-                          <figure class="profile-thumb-small">
-                            <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
-                          </figure>
-                        </a>
-                      </div>
-                      <!-- profile picture end -->
+        <% if @requested_users.any? %>
+          <div class="col-lg-3 order-3">
+              <aside class="widget-area">
+                <!-- widget single item start -->
+                <div class="card widget-item">
+                  <h4 class="widget-title">Network Requests (<%= @requested_users.count %>)</h4>
+                  <div class="widget-body">
+                    <ul class="like-page-list-wrapper">
+                      <% @requested_users.each do |request| %>
+                        <li class="unorder-list">
+                          <!-- profile picture end -->
+                          <div class="profile-thumb">
+                            <a href="#">
+                              <figure class="profile-thumb-small">
+                                <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+                              </figure>
+                            </a>
+                          </div>
+                          <!-- profile picture end -->
 
-                      <div class="unorder-list-info">
-                        <h3 class="list-title"><a href="#"><strong><a href="<%= user_path(request.friend.id) %>"><%= request.friend.name %></a> </strong> requested to join your network</a></h3>
-                        <p class="list-subtitle">5 min ago</p>
-                      </div>
-                    </li>
-                  <% end %>
-                </ul>
-              </div>
+                          <div class="unorder-list-info">
+                            <h3 class="list-title"><a href="#"><strong><a href="<%= user_path(request.requester.id) %>"><%= request.requester.name %></a> </strong> requested to join your network</a></h3>
+                            <p class="list-subtitle"><%= time_ago_in_words( request.created_at) %> ago</p>
+                            <div class="row">
+                              <%= link_to 'Accept', add_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5", style: "background-color: powderblue"  %>
+                              <div class="col-md-1"></div>
+                              <%= link_to 'Reject', reject_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5",  style: "background-color: orangered"  %>
+                            </div>
+                          </div>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+                <!-- widget single item end -->
+
+              </aside>
             </div>
-            <!-- widget single item end -->
-
-          </aside>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
