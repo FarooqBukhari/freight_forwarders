@@ -69,14 +69,21 @@
       <p class="pull-right post-desc">
         <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
       </p>
-      </br>
       <div class="post-meta pull-left">
         <ul class="comment-share-meta">
           <li>
-            <button class="post-comment">
-              <i class="bi bi-chat-bubble"></i>
-              <span>Show Number of Recieved Quotes here.</span>
-            </button>
+            <% if inquiry.user == current_user %>
+              <button class="post-comment">
+                <i class="bi bi-chat-bubble"></i>
+                <span><%= inquiry.quotes.count %></span>
+              </button>
+            <% else %>
+              <div class="share-content-box w-100">
+                <form class="share-text-box btn-post-inquiry">
+                  <div class="fa fa-pencil"></div><%= link_to "  Give Quote", new_inquiry_quote_path(inquiry), class:'share-give-quote-box' %>
+                </form>
+              </div>
+            <% end %>
           </li>
         </ul>
       </div>

@@ -20,7 +20,21 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+function get_origin_address_suggestions() {
+  let country = $('#select2-select2-origin-country-location-container')[0].getAttribute('title');
+  let address = $('#inquiry_origin_address').val();
+  $.get("/inquiries/get_address_suggestions", {country: country, address: address}, function(data){
+    console.log(data);
+  });
+}
 
+function get_dest_address_suggestions() {
+  let country = $('#select2-select2-dest-country-location-container')[0].getAttribute('title');
+  let address = $('#inquiry_dest_address').val();
+  $.get("/inquiries/get_address_suggestions", {country: country, address: address}, function(data){
+    console.log(data);
+  });
+}
 
 $( document ).ready(function() {
     window.jQuery = $;
@@ -69,17 +83,20 @@ $( document ).ready(function() {
     $('[data-toggle=offcanvas]').click(function() {
         $('.row-offcanvas').toggleClass('active');
     });
-    $( "#select2-origin-location-type" ).select2({
+    $( ".select2-dropdown" ).select2({
         theme: "bootstrap"
     });
-    $( "#select2-origin-country-location" ).select2({
-        theme: "bootstrap"
-    });
-    $( "#select2-dest-location-type" ).select2({
-        theme: "bootstrap"
-    });
-    $( "#select2-dest-country-location" ).select2({
-        theme: "bootstrap"
+
+    $('form').on('cocoon:after-insert', function() {
+      $('.select2-dropdown').each(function (i, obj) {
+          console.log(!$(obj).data('select2'));
+          if (!$(obj).data('select2'))
+          {
+              $(obj).select2({
+                  theme: "bootstrap"
+              });
+          }
+      });
     });
 
     (function ($) {

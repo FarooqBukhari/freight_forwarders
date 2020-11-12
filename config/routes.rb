@@ -21,7 +21,12 @@ Rails.application.routes.draw do
       get :friends
     end
   end
-  resources :inquiries
+  resources :inquiries do
+    collection do
+      get :get_address_suggestions
+    end
+    resources :quotes, except: [:index]
+  end
 
   resources :friends, only: [:index, :create]
   post "/friends/add" => "friends/add", as: :add_friend

@@ -1,0 +1,17 @@
+<div class='nested-fields row'>
+    <div class="field col-md-4">
+      <%= f.select :name, QuoteItem.carrier_names.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"} %>
+    </div>
+    <div class="field col-md-3">
+      <%= f.number_field :amount, autocomplete: "Amount", class: "single-field", placeholder: "Amount", step: :any, min: 0.1 %>
+    </div>
+    <div class="field col-md-4">
+      <%= f.text_field :routing, autocomplete: "routing", class: "single-field", placeholder: "Routing" %>
+    </div>
+    <div class="d-none">
+      <%= f.text_field :item_type , value: QuoteItem.item_types[:carrier]%>
+    </div>
+    <div class="field col-md-1">
+      <%= link_to_remove_association "", f, class:"fa fa-ban" %>
+    </div>
+  </div>

@@ -59,6 +59,15 @@
   color: #dc4734 !important;
 }
 
+.share-give-quote-box {
+  color: #dc4734 !important;
+  font-size: 20px !important;
+}
+
+.share-give-quote-box:hover {
+  text-decoration: underline;
+}
+
 .table > thead > tr > th{
   color: #dc4734;
 }
@@ -75,6 +84,51 @@
 .inquiry-items {
   margin-top: -50px;
   margin-bottom: 100px;
+}
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+  background-color: #ffff00 !important;
+  background-image: linear-gradient(to bottom, #ffff00, #dc4738) !important;
+}
+
+.datepicker table tr td.active:hover,
+.datepicker table tr td.active:hover:hover,
+.datepicker table tr td.active.disabled:hover,
+.datepicker table tr td.active.disabled:hover:hover,
+.datepicker table tr td.active:active,
+.datepicker table tr td.active:hover:active,
+.datepicker table tr td.active.disabled:active,
+.datepicker table tr td.active.disabled:hover:active,
+.datepicker table tr td.active.active,
+.datepicker table tr td.active:hover.active,
+.datepicker table tr td.active.disabled.active,
+.datepicker table tr td.active.disabled:hover.active,
+.datepicker table tr td.active.disabled,
+.datepicker table tr td.active:hover.disabled,
+.datepicker table tr td.active.disabled.disabled,
+.datepicker table tr td.active.disabled:hover.disabled,
+.datepicker table tr td.active[disabled],
+.datepicker table tr td.active:hover[disabled],
+.datepicker table tr td.active.disabled[disabled],
+.datepicker table tr td.active.disabled:hover[disabled] {
+  background-color: #dc4734 !important;
+  background-image: linear-gradient(to bottom, #dc4734, #dc4738) !important;
+}
+
+.datepicker table tr td {
+  padding: 0px 13px;
+}
+
+.fa-plus-circle, .fa-ban{
+  font-size: 30px !important;
+  color: #dc4734 !important;
+}
+
+.fa-pencil {
+  color: #dc4734 !important;
+  font-size: 20px !important;
 }
 /*
  * Off Canvas sidebar at medium breakpoint

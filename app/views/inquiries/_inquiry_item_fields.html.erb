@@ -3,19 +3,21 @@
       <%= f.text_field :commodity, autocomplete: "commodity", class: "single-field", placeholder: "Commodity" %>
     </div>
     <div class="field col-md-2">
-      <%= f.number_field :number_of_units, autocomplete: "number_of_units", class: "single-field", placeholder: "# of Units", step: :any %>
+      <%= f.number_field :number_of_units, autocomplete: "number_of_units", class: "single-field", placeholder: "# of Units", step: :any, min: 1 %>
     </div>
     <div class="field col-md-1">
-      <%= f.number_field :length, autocomplete: "length", class: "single-field", placeholder: "L", step: :any %>
+      <%= f.number_field :length, autocomplete: "length", class: "single-field", placeholder: "L", step: :any, min: 0.1 %>
     </div>
     <div class="field col-md-1">
-      <%= f.number_field :width, autocomplete: "width", class: "single-field", placeholder: "W", step: :any %>
+      <%= f.number_field :width, autocomplete: "width", class: "single-field", placeholder: "W", step: :any, min: 0.1 %>
     </div>
     <div class="field col-md-1">
-      <%= f.number_field :heigth, autocomplete: "heigth", class: "single-field", placeholder: "H", step: :any %>
+      <%= f.number_field :heigth, autocomplete: "heigth", class: "single-field", placeholder: "H", step: :any, min: 0.1 %>
     </div>
     <div class="field col-md-2">
-      <%= f.number_field :weight, autocomplete: "weight", class: "single-field", placeholder: "Weight", step: :any %>
+      <%= f.number_field :weight, autocomplete: "weight", class: "single-field", placeholder: "Weight", step: :any, min: 0.1 %>
     </div>
-    <%= link_to_remove_association "remove item", f %>
+    <div class="field col-md-1">
+      <%= link_to_remove_association "", f, class:"fa fa-ban" %>
+    </div>
   </div>

@@ -6,7 +6,7 @@
                     <div class="row no-gutters">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <div class="signup-form-wrapper">
-                                <h1 class="create-acc text-center">Create An Account</h1>
+                                <h1 class="create-acc text-center">Post An Inquiry</h1>
                                 <div class="signup-inner inquiry-inner text-center">
                                     <%= form_with(model: inquiry, local: true) do |f| %>
                                       <h3 class="title">Where are you shipping from?</h3>
@@ -16,13 +16,13 @@
                                             <%= render "users/shared/error_messages", resource: inquiry %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.select :origin_location_type, Inquiry.origin_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field", :id=>"select2-origin-location-type"} %>
+                                            <%= f.select :origin_location_type, Inquiry.origin_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :origin_country, nil, {}, {:class=> "single-field", :id=>"select2-origin-country-location"} %>
+                                            <%= f.country_select :origin_country, nil, {}, { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address" %>
+                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address", onkeyup: 'get_origin_address_suggestions()' %>
                                           </div>
                                         </div>
                                       </div>
@@ -30,13 +30,13 @@
                                       <div class="signup-inner--form">
                                         <div class="row">
                                           <div class="col-md-4">
-                                            <%= f.select :destination_location_type, Inquiry.destination_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field", :id=> "select2-dest-location-type"}  %>
+                                            <%= f.select :destination_location_type, Inquiry.destination_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"}  %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :destination_country, nil, {}, { class: "single-field", :id=>"select2-dest-country-location"} %>
+                                            <%= f.country_select :destination_country, nil, {}, { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address" %>
+                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address", onkeyup: 'get_dest_address_suggestions()' %>
                                           </div>
                                         </div>
                                       </div>
@@ -46,7 +46,11 @@
                                           <div class="col-md-4"></div>
                                           <div class="col-md-4">
                                             <%= f.label :shipping_date %>
-                                            <%= f.date_field :goods_ready_date, class: "single-field" %>
+                                            <%= f.text_field :goods_ready_date, class: "single-field text-center", data: {provide: "datepicker",
+                                                'date-format': 'dd/mm/yyyy',
+                                                'date-autoclose': 'true',
+                                                'date-today-btn': 'linked',
+                                                'date-today-highlight': 'true'}, placeholder: "Pick Shipping Date" %>
                                           </div>
                                         </div>
                                       </div>
@@ -59,7 +63,8 @@
                                                 <%= render 'inquiry_item_fields', :f => inquiry_item %>
                                               <% end %>
                                               <div class='links'>
-                                                <%= link_to_add_association 'add item', f, :inquiry_items %>
+                                                <hr></hr>
+                                                <%= link_to_add_association '', f, :inquiry_items, class:"fa fa-plus-circle" %>
                                               </div>
                                             </div>
                                           </div>

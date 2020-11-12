@@ -38,7 +38,8 @@ class User < ApplicationRecord
   #Mixins/Plugins through Gems
   acts_as_paranoid
   #Associations
-  has_many :inquiries, dependent: :destroy
+  has_many :inquiries, inverse_of: :user, dependent: :destroy
+  has_many :quotes, inverse_of: :user, dependent: :destroy
 
   has_many :friended_users, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :frienders, through: :friended_users

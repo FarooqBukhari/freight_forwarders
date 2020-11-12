@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def my_inquiries
-    @inquiries = @user.inquiries
+    @inquiries = @user.inquiries.order! 'created_at DESC'
   end
 
   def friends
@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @inquiries = @user.inquiries
+    @inquiries = Inquiry.not_current_user_inquiries(current_user)
     @is_friend = current_user.isFriend(@user).exists?
     @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
     @can_remove = current_user.requester_users.find_by(requested_id: @user.id)

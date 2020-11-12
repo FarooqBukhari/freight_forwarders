@@ -1,0 +1,76 @@
+<main class="bg-transparent">
+    <div class="main-wrapper pb-0 mb-0">
+        <div class="timeline-wrapper">
+            <div class="timeline-page-wrapper">
+                <div class="container-fluid p-0">
+                    <div class="row no-gutters">
+                        <div class="col-12 d-flex align-items-center justify-content-center">
+                            <div class="signup-form-wrapper">
+                                <h1 class="create-acc text-center">Give Quotation on an Inquiry</h1>
+                                <div class="signup-inner inquiry-inner text-center">
+                                    <%= form_for([inquiry, quote], local: true) do |f| %>
+                                      <h3 class="title">Air Freight</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-12">
+                                            <%= render "users/shared/error_messages", resource: quote %>
+                                          </div>
+                                          <div class="col-12">
+                                            <div id='carrier_quote_items'>
+                                              <%= f.fields_for :carrier_quote_items do |carrier_quote_item| %>
+                                                <%= render 'carrier_quote_item_fields', :f => carrier_quote_item %>
+                                              <% end %>
+                                              <div class='links'>
+                                                <hr></hr>
+                                                <%= link_to_add_association '', f, :carrier_quote_items, class:"fa fa-plus-circle" %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h3 class="title">Charges at Origin</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-12">
+                                            <div id='origin_quote_items'>
+                                              <%= f.fields_for :origin_quote_items do |origin_quote_item| %>
+                                                <%= render 'origin_quote_item_fields', :f => origin_quote_item %>
+                                              <% end %>
+                                              <div class='links'>
+                                                <hr></hr>
+                                                <%= link_to_add_association '', f, :origin_quote_items, class:"fa fa-plus-circle" %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h3 class="title">Charges at Destination</h3>
+                                      <div class="signup-inner--form">
+                                        <div class="row">
+                                          <div class="col-12">
+                                            <div id='destination_quote_items'>
+                                              <%= f.fields_for :destination_quote_items do |destination_quote_item| %>
+                                                <%= render 'destination_quote_item_fields', :f => destination_quote_item %>
+                                              <% end %>
+                                              <div class='links'>
+                                                <hr></hr>
+                                                <%= link_to_add_association '', f, :destination_quote_items, class:"fa fa-plus-circle" %>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <div class="col-4"></div>
+                                          <div class="col-4">
+                                            <%= f.submit "Submit Quotation", class: "submit-btn" %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

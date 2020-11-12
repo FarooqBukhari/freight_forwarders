@@ -41,6 +41,7 @@ gem 'jquery-rails'
 gem 'has_friendship'
 gem 'acts_as_paranoid', '~> 0.7.0'
 gem 'geokit'
+gem 'geokit-rails'
 gem "select2-rails"
 gem "cocoon"
 gem "country-select"
