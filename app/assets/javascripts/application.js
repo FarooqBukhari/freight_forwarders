@@ -35,8 +35,6 @@ function get_dest_address_suggestions() {
   });
 }
 
-
-
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;
@@ -45,6 +43,18 @@ $( document ).ready(function() {
     });
     $( ".select2-dropdown" ).select2({
         theme: "bootstrap"
+    });
+
+    $('form').on('cocoon:after-insert', function() {
+      $('.select2-dropdown').each(function (i, obj) {
+          console.log(!$(obj).data('select2'));
+          if (!$(obj).data('select2'))
+          {
+              $(obj).select2({
+                  theme: "bootstrap"
+              });
+          }
+      });
     });
 
     (function ($) {
