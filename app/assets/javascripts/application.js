@@ -36,6 +36,8 @@ function get_dest_address_suggestions() {
   });
 }
 
+ $("input.date_picker").datepicker();
+
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;
@@ -87,15 +89,10 @@ $( document ).ready(function() {
         theme: "bootstrap"
     });
 
-    $('form').on('cocoon:after-insert', function() {
-      $('.select2-dropdown').each(function (i, obj) {
-          console.log(!$(obj).data('select2'));
-          if (!$(obj).data('select2'))
-          {
-              $(obj).select2({
-                  theme: "bootstrap"
-              });
-          }
+    $('#quote-form').on('cocoon:after-insert', function() {
+      let dropdown = $('.select2-dropdown').last();
+      dropdown.select2({
+          theme: "bootstrap"
       });
     });
 

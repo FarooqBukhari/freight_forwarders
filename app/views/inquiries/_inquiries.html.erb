@@ -6,7 +6,7 @@
       <div class="profile-thumb">
         <a href="#">
           <figure class="profile-thumb-middle">
-            <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+            <img src="<%= show_attachment(inquiry.user.profile_picture) %>" alt="profile picture">
           </figure>
         </a>
       </div>
@@ -37,32 +37,32 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Origin Location Type</th>
-            <th>Origin Country</th>
-            <th>Origin Address</th>
+            <th class="col-md-4">Origin Location Type</th>
+            <th class="col-md-4">Origin Country</th>
+            <th class="col-md-4">Origin Address</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
-            <td><%= inquiry.origin_country %></td>
-            <td><%= inquiry.origin_address %></td>
+            <td class="col-md-4"><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
+            <td class="col-md-4"><%= inquiry.origin_country %></td>
+            <td class="col-md-4"><%= inquiry.origin_address %></td>
           </tr>
         </tbody>
       </table>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Destination Location Type</th>
-            <th>Destination Country</th>
-            <th>Destination Address</th>
+            <th class="col-md-4">Destination Location Type</th>
+            <th class="col-md-4">Destination Country</th>
+            <th class="col-md-4">Destination Address</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
-            <td><%= inquiry.destination_country %></td>
-            <td><%= inquiry.destination_address %></td>
+            <td class="col-md-4"><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
+            <td class="col-md-4"><%= inquiry.destination_country %></td>
+            <td class="col-md-4"><%= inquiry.destination_address %></td>
           </tr>
         </tbody>
       </table>

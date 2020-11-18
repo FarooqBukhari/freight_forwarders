@@ -25,7 +25,12 @@ Rails.application.routes.draw do
     collection do
       get :get_address_suggestions
     end
-    resources :quotes, except: [:index]
+    resources :quotes, except: [:index] do
+      member do
+        patch :select_quote
+        patch :deselect_quote
+      end
+    end
   end
 
   resources :friends, only: [:index, :create]

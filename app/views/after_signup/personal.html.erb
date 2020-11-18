@@ -12,7 +12,7 @@
                     <div class="signup-form-wrapper personal-form-wrapper">
                       <div class="signup-inner text-center">
                         <h3 class="title">Personal Information</h3>
-                        <%= form_for(@user, url: wizard_path, html: {class: "signup-inner--form"}) do |f| %>
+                        <%= simple_form_for(@user, url: wizard_path, html: {class: "signup-inner--form"}) do |f| %>
                           <div class="row">
                             <div class="col-12">
                               <%= f.text_field :name, autocomplete: "name", class:"single-field", placeholder: "Full Name" %>

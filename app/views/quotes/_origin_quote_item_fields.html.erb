@@ -1,14 +1,14 @@
 <div class='nested-fields row'>
-    <div class="field col-md-8">
-      <%= f.text_field :name, autocomplete: "name", class: "single-field", placeholder: "Service" %>
-    </div>
-    <div class="field col-md-3">
-      <%= f.number_field :amount, autocomplete: "Amount", class: "single-field", placeholder: "Amount", step: :any, min: 0.1 %>
-    </div>
+  <div class="field col-md-8">
+    <%= f.input :name, label: 'Service Name', input_html: {autocomplete: "name", class: "single-field", placeholder: "Service"} %>
+  </div>
+  <div class="field col-md-3">
+    <%= f.input :amount, input_html: {autocomplete: "Amount", class: "single-field", placeholder: "Amount", step: :any, min: 0.1} %>
+  </div>
     <div class="d-none">
       <%= f.text_field :item_type , value: QuoteItem.item_types[:origin]%>
     </div>
-    <div class="field col-md-1">
+    <div class="field col-md-1 align-self-center">
       <%= link_to_remove_association "", f, class:"fa fa-ban" %>
     </div>
   </div>
