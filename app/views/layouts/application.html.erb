@@ -239,7 +239,7 @@
                     <div class="profile-thumb-small">
                       <a href="javascript:void(0)" class="profile-triger">
                         <figure>
-                          <img src="<%= asset_path "profile-small-3.jpg"%>" alt="profile picture">
+                          <img src="<%= current_user.profile_picture.attached? ? url_for(current_user.profile_picture) : "/" %>" alt="profile picture">
                         </figure>
                       </a>
                       <div class="profile-dropdown">

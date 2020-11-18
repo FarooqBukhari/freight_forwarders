@@ -18,7 +18,7 @@ class InquiriesController < ApplicationController
   # GET /inquiries/new
   def new
     @inquiry = Inquiry.new
-    1.times {@inquiry.inquiry_items.build}
+    1.times {@inquiry.inquiry_items.new}
   end
 
   # GET /inquiries/1/edit

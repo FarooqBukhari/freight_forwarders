@@ -8,58 +8,50 @@
                             <div class="signup-form-wrapper">
                                 <h1 class="create-acc text-center">Post An Inquiry</h1>
                                 <div class="signup-inner inquiry-inner text-center">
-                                    <%= form_with(model: inquiry, local: true) do |f| %>
+                                    <%= simple_form_for inquiry, html: {id: 'inquiry-form'} do |f| %>
                                       <h3 class="title">Where are you shipping from?</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
-                                          <div class="col-12">
-                                            <%= render "users/shared/error_messages", resource: inquiry %>
+                                          <div class="col-md-4">
+                                            <%= f.input :origin_location_type, collection: Inquiry.origin_location_types, label_method: :second, value_method: :first, prompt: "Select origin type", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.select :origin_location_type, Inquiry.origin_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"} %>
+                                            <%= f.input :origin_country, as: :country, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :origin_country, nil, {}, { :class=> "single-field select2-dropdown"} %>
-                                          </div>
-                                          <div class="col-md-4">
-                                            <%= f.text_field :origin_address, autocomplete: "origin_address", class: "single-field", placeholder: "Origin Address", onkeyup: 'get_origin_address_suggestions()' %>
+                                            <%= f.input :origin_address, input_html: { autocomplete: "origin_address", class: "single-field", onkeyup: 'get_origin_address_suggestions()' } %>
                                           </div>
                                         </div>
                                       </div>
                                       <h3 class="title">Where are you shipping to?</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-md-4">
-                                            <%= f.select :destination_location_type, Inquiry.destination_location_types.map {|key, value| [value, key]}, {}, { :class=> "single-field select2-dropdown"}  %>
+                                            <%= f.input :destination_location_type, collection: Inquiry.destination_location_types, label_method: :second, value_method: :first, prompt: "Select destination type", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.country_select :destination_country, nil, {}, { :class=> "single-field select2-dropdown"} %>
+                                            <%= f.input :destination_country, as: :country, prompt: "Select destination country", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.text_field :destination_address, autocomplete: "destination_address", class: "single-field", placeholder: "Destination Address", onkeyup: 'get_dest_address_suggestions()' %>
+                                            <%= f.input :destination_address, error: 'Destination is mandatory, please specify one', input_html: { autocomplete: "destination_address", class: "single-field", onkeyup: 'get_origin_address_suggestions()' } %>
                                           </div>
                                         </div>
                                       </div>
                                       <h3 class="title">When will you be shipping?</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-md-4"></div>
                                           <div class="col-md-4">
-                                            <%= f.label :shipping_date %>
-                                            <%= f.text_field :goods_ready_date, class: "single-field text-center", data: {provide: "datepicker",
-                                                'date-format': 'dd/mm/yyyy',
-                                                'date-autoclose': 'true',
-                                                'date-today-btn': 'linked',
-                                                'date-today-highlight': 'true'}, placeholder: "Pick Shipping Date" %>
+                                            <%= f.input :goods_ready_date, as: :date_picker, input_html: { class: "single-field text-center", placeholder: 'Pick Shipping date' } %>
                                           </div>
                                         </div>
                                       </div>
                                       <h3 class="title">What are you shipping?</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-12">
                                             <div id='inquiry_items'>
-                                              <%= f.fields_for :inquiry_items do |inquiry_item| %>
+                                              <%= f.simple_fields_for :inquiry_items do |inquiry_item| %>
                                                 <%= render 'inquiry_item_fields', :f => inquiry_item %>
                                               <% end %>
                                               <div class='links'>
@@ -70,7 +62,7 @@
                                           </div>
                                           <div class="col-4"></div>
                                           <div class="col-4">
-                                            <%= f.submit "Post Inquiry", class: "submit-btn" %>
+                                            <%= f.button :submit, "Post Inquiry", class: "submit-btn" %>
                                           </div>
                                         </div>
                                       </div>

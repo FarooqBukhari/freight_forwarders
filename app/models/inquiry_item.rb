@@ -5,7 +5,9 @@ class InquiryItem < ApplicationRecord
   belongs_to :inquiry
 
   #Validations
-
+  validates :commodity, presence: true
+  validates :number_of_units, numericality: { only_integer: true }
+  validates :length, :width, :heigth, :weight, numericality: true
   #Scopes
 
 end

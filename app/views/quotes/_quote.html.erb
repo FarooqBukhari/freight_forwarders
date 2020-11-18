@@ -1,0 +1,95 @@
+<div class="card manage-inquiries">
+  <!-- post title start -->
+  <div class="post-title d-flex align-items-center">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <a href="#">
+        <figure class="profile-thumb-middle">
+          <img src="<%= show_attachment(quote.user.profile_picture) %>" alt="profile picture">
+        </figure>
+      </a>
+    </div>
+    <!-- profile picture end -->
+
+    <div class="posted-author">
+      <h6 class="author"><a href="#"><%= quote.user.name %></a></h6>
+      <span class="post-time"><%= time_ago_in_words(quote.updated_at) %></span>
+    </div>
+
+    <% if current_user.id == quote.user_id %>
+      <div class="post-settings-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+        <div class="post-settings arrow-shape">
+          <ul class="inquiry-popup-options">
+            <li><button><%= link_to 'Edit Quote', edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-popup-option' %></button></li>
+            <li><button><%= link_to 'Delete Quote', inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-popup-option' %></button></li>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <!-- post title start -->
+  <div class="post-content">
+    <h2 class="goods-ready-dates-bold">Carrier Charges</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-md-4">Carrier Name</th>
+          <th class="col-md-2">Amount</th>
+          <th class="col-md-6">Routing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% quote.carrier_quote_items.each do |quote_item| %>
+          <tr>
+            <td class="col-md-4"><%= quote_item.name %></td>
+            <td class="col-md-2"><%= quote_item.amount %></td>
+            <td class="col-md-6"><%= quote_item.routing %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h2 class="goods-ready-dates-bold">Origin based Service Charges</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-md-8">Service</th>
+          <th class="col-md-4">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% quote.origin_quote_items.each do |quote_item| %>
+          <tr>
+            <td class="col-md-8"><%= quote_item.name %></td>
+            <td class="col-md-4"><%= quote_item.amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <h2 class="goods-ready-dates-bold">Destination based Service Charges</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th class="col-md-8">Service</th>
+          <th class="col-md-4">Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% quote.destination_quote_items.each do |quote_item| %>
+          <tr>
+            <td class="col-md-8"><%= quote_item.name %></td>
+            <td class="col-md-4"><%= quote_item.amount %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <p class="pull-left post-desc">
+      <strong class="goods-ready-dates-bold"> Total Charges: </strong> <%= quote.total_price %>
+    </p>
+    <p class="pull-right post-desc">
+      <strong class="goods-ready-dates-bold"> Status: </strong> <%= Quote.statuses[quote.status] %>
+    </p>
+  </div>
+</div>
