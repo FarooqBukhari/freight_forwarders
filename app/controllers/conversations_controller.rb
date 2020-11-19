@@ -1,6 +1,6 @@
 class ConversationsController < ApplicationController
   def create
-    @conversation = Conversation.get(current_user.id, params[:user_id], params[:con_type])
+    @conversation = Conversation.get(current_user.id, params[:user_id], params[:con_type], params[:inquiry_id])
 
     add_to_conversations unless conversated?
 

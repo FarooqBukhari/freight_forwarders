@@ -28,6 +28,9 @@
             <li><button><%= link_to 'Delete Inquiry', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-popup-option' %></button></li>
             <% end %>
             <li><button><%= link_to 'Show Full Details', inquiry, class: 'inquiry-popup-option' %></button></li>
+            <% if inquiry.user.id !=  current_user %>
+              <%= link_to "<i class='fa fa-comment'></i> Contact".html_safe ,conversations_path(user_id: inquiry.user.id, con_type: "Inquiry", inquiry_id: inquiry.id), method: :post, class: "btn btn-blue" %>
+            <% end %>
           </ul>
         </div>
       </div>

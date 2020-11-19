@@ -1137,9 +1137,7 @@ ul {
 //NEW CHAT
 
 #frame {
-  width: 95%;
   min-width: 360px;
-  max-width: 1000px;
   height: 92vh;
   min-height: 300px;
   max-height: 720px;
@@ -1157,7 +1155,7 @@ ul {
   max-width: 340px;
   width: 40%;
   height: 100%;
-  background: #2c3e50;
+  background: grey;
   color: #f5f5f5;
   overflow: hidden;
   position: relative;
@@ -1474,7 +1472,7 @@ ul {
 }
 #frame #sidepanel #contacts ul li.contact {
   position: relative;
-  padding: 10px 0 15px 0;
+  padding: 10px 0 25px 0;
   font-size: 0.9em;
   cursor: pointer;
 }
@@ -1487,8 +1485,7 @@ ul {
   background: #32465a;
 }
 #frame #sidepanel #contacts ul li.contact.active {
-  background: #32465a;
-  border-right: 5px solid #435f7a;
+  background: #dc4734;
 }
 #frame #sidepanel #contacts ul li.contact.active span.contact-status {
   border: 2px solid #32465a !important;
@@ -1697,7 +1694,7 @@ ul {
   margin: 6px 8px 0 0;
 }
 #frame .content .messages ul li.sent p {
-  background: #435f7a;
+  background: #dc4734;
   color: #f5f5f5;
 }
 #frame .content .messages ul li.replies img {
@@ -1773,10 +1770,10 @@ ul {
 #frame .content .message-input .wrap button {
   float: right;
   border: none;
-  width: 50px;
+  width: 10%;
   padding: 12px 0;
   cursor: pointer;
-  background: #32465a;
+  background: #dc4734;
   color: #f5f5f5;
 }
 @media screen and (max-width: 735px) {

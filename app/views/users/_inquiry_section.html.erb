@@ -1,0 +1,25 @@
+<div class="card card-small">
+  <div class="share-box-inner">
+    <!-- profile picture end -->
+    <div class="profile-thumb">
+      <a href="#">
+        <figure class="profile-thumb-middle">
+          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+        </figure>
+      </a>
+    </div>
+    <!-- profile picture end -->
+
+    <!-- share content box start -->
+    <div class="share-content-box w-100">
+      <form class="share-text-box">
+        <%= link_to "Post an Inquiry", new_inquiry_path, class:"btn-post-inquiry" %>
+      </form>
+    </div>
+    <div class="share-content-box w-100">
+      <form class="share-text-box">
+        <%= link_to "Manage my Inquiries", my_inquiries_user_path(id: current_user.id), class:"btn-post-inquiry" %>
+      </form>
+    </div>
+  </div>
+</div>

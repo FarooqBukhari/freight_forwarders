@@ -35,9 +35,6 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
                         conversation.find('.panel-body').toggle();
                     }
                 }
-
-
-
             }
         }
         else {

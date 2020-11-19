@@ -7,17 +7,17 @@ class Conversation < ApplicationRecord
   belongs_to :inquiry, foreign_key: :inquiry_id, required: false
   validates :sender_id, uniqueness: { scope: [:recipient_id, :con_type] }
 
-  scope :between, -> (sender_id, recipient_id, con_type) do
-    where(sender_id: sender_id, recipient_id: recipient_id, con_type: con_type).or(
-        where(sender_id: recipient_id, recipient_id: sender_id, con_type: con_type)
+  scope :between, -> (sender_id, recipient_id, con_type, inquiry_id) do
+    where(sender_id: sender_id, recipient_id: recipient_id, con_type: con_type, inquiry_id: inquiry_id).or(
+        where(sender_id: recipient_id, recipient_id: sender_id, con_type: con_type, inquiry_id: inquiry_id)
     )
   end
 
-  def self.get(sender_id, recipient_id, con_type)
-    conversation = between(sender_id, recipient_id, con_type).first
+  def self.get(sender_id, recipient_id, con_type, inquiry_id)
+    conversation = between(sender_id, recipient_id, con_type, inquiry_id).first
     return conversation if conversation.present?
 
-    create(sender_id: sender_id, recipient_id: recipient_id, con_type: con_type)
+    create(sender_id: sender_id, recipient_id: recipient_id, con_type: con_type, inquiry_id: inquiry_id)
   end
 
   def opposed_user(user)
