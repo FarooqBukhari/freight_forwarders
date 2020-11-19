@@ -50,6 +50,7 @@ class User < ApplicationRecord
   has_many :requester_users, foreign_key: :requester_id, class_name: 'FriendRequest'
   has_many :requesteds, through: :requester_users
   has_one_attached :profile_picture
+  has_one_attached :cover_photo
 
   #chat
   has_many :messages

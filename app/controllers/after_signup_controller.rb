@@ -17,6 +17,6 @@ class AfterSignupController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :phone, :website, :job_title)
+    params.require(:user).permit(:name, :phone, :website, :job_title, :profile_picture, :cover_photo)
   end
 end

@@ -1,17 +1,24 @@
-<%= simple_form_for(user, local: true) do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
-
-      <ul>
-        <% user.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <main class="bg-transparent">
+        <div class="main-wrapper pb-0 mb-0">
+          <div class="timeline-wrapper">
+            <div class="timeline-page-wrapper">
+              <div class="container-fluid p-0">
+                <div class="row no-gutters">
+                  <div class="col-6 align-items-center">
+                    <%= render 'users/shared/user_info_form', user: user %>
+                  </div>
+                  <div class="col-6 align-items-center">
+                    <%= render 'users/shared/personal_info_form', user: user, url: user_path(user) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
   </div>
-<% end %>
+</div>

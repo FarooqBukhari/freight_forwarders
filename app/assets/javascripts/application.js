@@ -38,6 +38,42 @@ function get_dest_address_suggestions() {
 
  $("input.date_picker").datepicker();
 
+ $(document).ready(function(){
+    $("#profileImage").click(function(e) {
+        $("#user_profile_picture").click();
+    });
+
+    function fasterPreview( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+            $('#profileImage').attr('src',
+                window.URL.createObjectURL(uploader.files[0]) );
+        }
+    }
+
+    $("#user_profile_picture").change(function(){
+        fasterPreview( this );
+    });
+
+  });
+
+  $(document).ready(function(){
+     $("#coverImage").click(function(e) {
+         $("#user_cover_photo").click();
+     });
+
+     function fasterPreview( uploader ) {
+         if ( uploader.files && uploader.files[0] ){
+             $('#coverImage').attr('src',
+                 window.URL.createObjectURL(uploader.files[0]) );
+         }
+     }
+
+     $("#user_cover_photo").change(function(){
+         fasterPreview( this );
+     });
+
+   });
+
 $( document ).ready(function() {
     window.jQuery = $;
     window.$ = $;

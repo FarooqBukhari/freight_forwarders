@@ -1,6 +1,6 @@
 <main>
   <div class="main-wrapper">
-    <div class="profile-banner-large bg-img" data-bg="<%= asset_path 'profile-banner' %>">
+    <div class="profile-banner-large bg-img" data-bg="<%= show_attachment(@user.cover_photo, 'avatar/cover_default') %>">
     </div>
     <div class="profile-menu-area bg-white">
       <div class="container">
@@ -9,7 +9,7 @@
             <div class="profile-picture-box">
               <figure class="profile-picture">
                 <a href="#">
-                  <img src="<%= asset_path 'profile-1.jpg' %>" alt="profile picture">
+                  <img src="<%= show_attachment(@user.profile_picture, 'avatar/user_default') %>" alt="profile picture">
                 </a>
               </figure>
             </div>
@@ -64,10 +64,8 @@
                 <div class="about-author">
                   <p>I Don’t know how? But i believe that it is possible one day if i stay with my dream all time</p>
                   <ul class="author-into-list">
-                    <li><a href="#"><i class="bi bi-office-bag"></i>Graphic Designer</a></li>
-                    <li><a href="#"><i class="bi bi-home"></i>Melbourne, Australia</a></li>
-                    <li><a href="#"><i class="bi bi-location-pointer"></i>Pulshar, Melbourne</a></li>
-                    <li><a href="#"><i class="bi bi-heart-beat"></i>Travel, Swimming</a></li>
+                    <li><a href="#"><i class="bi bi-office-bag"></i><%=current_user.job_title%></a></li>
+                    <li><a href="#"><i class="bi bi-home"></i><%=current_user.phone%></a></li>
                   </ul>
                 </div>
               </div>
