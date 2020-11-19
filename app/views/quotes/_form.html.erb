@@ -8,16 +8,13 @@
                             <div class="signup-form-wrapper">
                                 <h1 class="create-acc text-center">Give Quotation on an Inquiry</h1>
                                 <div class="signup-inner inquiry-inner text-center">
-                                    <%= form_for([inquiry, quote], local: true) do |f| %>
+                                    <%= simple_form_for [inquiry, quote], html: {id: 'quote-form'} do |f| %>
                                       <h3 class="title">Air Freight</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-12">
-                                            <%= render "users/shared/error_messages", resource: quote %>
-                                          </div>
-                                          <div class="col-12">
                                             <div id='carrier_quote_items'>
-                                              <%= f.fields_for :carrier_quote_items do |carrier_quote_item| %>
+                                              <%= f.simple_fields_for :carrier_quote_items do |carrier_quote_item| %>
                                                 <%= render 'carrier_quote_item_fields', :f => carrier_quote_item %>
                                               <% end %>
                                               <div class='links'>
@@ -29,11 +26,11 @@
                                         </div>
                                       </div>
                                       <h3 class="title">Charges at Origin</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-12">
                                             <div id='origin_quote_items'>
-                                              <%= f.fields_for :origin_quote_items do |origin_quote_item| %>
+                                              <%= f.simple_fields_for :origin_quote_items do |origin_quote_item| %>
                                                 <%= render 'origin_quote_item_fields', :f => origin_quote_item %>
                                               <% end %>
                                               <div class='links'>
@@ -45,11 +42,11 @@
                                         </div>
                                       </div>
                                       <h3 class="title">Charges at Destination</h3>
-                                      <div class="signup-inner--form">
+                                      <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-12">
                                             <div id='destination_quote_items'>
-                                              <%= f.fields_for :destination_quote_items do |destination_quote_item| %>
+                                              <%= f.simple_fields_for :destination_quote_items do |destination_quote_item| %>
                                                 <%= render 'destination_quote_item_fields', :f => destination_quote_item %>
                                               <% end %>
                                               <div class='links'>
@@ -60,7 +57,7 @@
                                           </div>
                                           <div class="col-4"></div>
                                           <div class="col-4">
-                                            <%= f.submit "Submit Quotation", class: "submit-btn" %>
+                                            <%= f.button :submit, "Submit Quotation", class: "submit-btn" %>
                                           </div>
                                         </div>
                                       </div>

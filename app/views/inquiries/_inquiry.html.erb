@@ -5,7 +5,7 @@
     <div class="profile-thumb">
       <a href="#">
         <figure class="profile-thumb-middle">
-          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+          <img src="<%= show_attachment(inquiry.user.profile_picture) %>" alt="profile picture">
         </figure>
       </a>
     </div>
@@ -16,52 +16,51 @@
       <span class="post-time"><%= time_ago_in_words(inquiry.updated_at) %></span>
     </div>
 
-    <div class="post-settings-bar">
-      <span></span>
-      <span></span>
-      <span></span>
-      <div class="post-settings arrow-shape">
-        <ul class="inquiry-popup-options">
-          <% if current_user.id == inquiry.user.id %>
-          <li><button><%= link_to 'Edit Inquiry', edit_inquiry_path(inquiry), class: 'inquiry-popup-option' %></button></li>
-          <li><button><%= link_to 'Delete Inquiry', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-popup-option' %></button></li>
-          <% end %>
-          <li><button><%= link_to 'Show Full Details', inquiry, class: 'inquiry-popup-option' %></button></li>
-        </ul>
+    <% if current_user.id == inquiry.user.id %>
+      <div class="post-settings-bar">
+        <span></span>
+        <span></span>
+        <span></span>
+        <div class="post-settings arrow-shape">
+          <ul class="inquiry-popup-options">
+            <li><button><%= link_to 'Edit Inquiry', edit_inquiry_path(inquiry), class: 'inquiry-popup-option' %></button></li>
+            <li><button><%= link_to 'Delete Inquiry', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-popup-option' %></button></li>
+          </ul>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   <!-- post title start -->
   <div class="post-content">
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Origin Location Type</th>
-          <th>Origin Country</th>
-          <th>Origin Address</th>
+          <th class="col-md-4">Origin Location Type</th>
+          <th class="col-md-4">Origin Country</th>
+          <th class="col-md-4">Origin Address</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
-          <td><%= inquiry.origin_country %></td>
-          <td><%= inquiry.origin_address %></td>
+          <td class="col-md-4"><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
+          <td class="col-md-4"><%= country_name(inquiry.origin_country) %></td>
+          <td class="col-md-4"><%= inquiry.origin_address %></td>
         </tr>
       </tbody>
     </table>
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Destination Location Type</th>
-          <th>Destination Country</th>
-          <th>Destination Address</th>
+          <th class="col-md-4">Destination Location Type</th>
+          <th class="col-md-4">Destination Country</th>
+          <th class="col-md-4">Destination Address</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
-          <td><%= inquiry.destination_country %></td>
-          <td><%= inquiry.destination_address %></td>
+          <td class="col-md-4"><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
+          <td class="col-md-4"><%= country_name(inquiry.destination_country) %></td>
+          <td class="col-md-4"><%= inquiry.destination_address %></td>
         </tr>
       </tbody>
     </table>
@@ -69,7 +68,7 @@
       <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
     </p>
     <p class="pull-left post-desc">
-      <strong class="goods-ready-dates-bold"> Status: </strong> <%= inquiry.status %>
+      <strong class="goods-ready-dates-bold"> Status: </strong> <%= Inquiry.statuses[inquiry.status] %>
     </p>
   </div>
 </div>
@@ -80,19 +79,19 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Commodity</th>
-          <th>No. of Units</th>
-          <th>Dimensions <span>L*W*H</span></th>
-          <th>Total Weight</th>
+          <th class="col-md-4">Commodity</th>
+          <th class="col-md-2">No. of Units</th>
+          <th class="col-md-4">Dimensions <span>L*W*H</span></th>
+          <th class="col-md-2">Total Weight</th>
         </tr>
       </thead>
       <tbody>
         <% inquiry.inquiry_items.each do |item| %>
           <tr>
-            <td><%= item.commodity %></td>
-            <td><%= item.number_of_units %></td>
-            <td><%= item.length.to_s + '*' + item.width.to_s + '*' + item.heigth.to_s %></td>
-            <td><%= item.weight %></td>
+            <td class="col-md-4"><%= item.commodity %></td>
+            <td class="col-md-2"><%= item.number_of_units %></td>
+            <td class="col-md-4"><%= item.length.to_s + '*' + item.width.to_s + '*' + item.heigth.to_s %></td>
+            <td class="col-md-2"><%= item.weight %></td>
           </tr>
         <% end %>
       </tbody>
@@ -100,28 +99,69 @@
   </div>
 </div>
 
-<div class="card inquiry-items">
-  <% if inquiry.quotes.count > 0 %>
-  <h2 class="goods-ready-dates-bold">Received Quotes</h2>
-  <div class="post-content">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Price</th>
-          <th>User</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% inquiry.quotes.each do |quote| %>
+<% if inquiry.selected_quote.present? %>
+  <div class="card inquiry-items">
+    <h2 class="goods-ready-dates-bold">Selected Quote</h2>
+    <div class="post-content">
+      <table class="table table-striped">
+        <thead>
           <tr>
-            <td><%= quote.total_price %></td>
-            <td><%= quote.user.name %></td>
+            <th>Price</th>
+            <th>User</th>
+            <th colspan=2 >Actions</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= inquiry.selected_quote.total_price %></td>
+            <td><%= inquiry.selected_quote.user.name %></td>
+            <% if current_user == inquiry.user %>
+              <td><%= link_to '',  deselect_quote_inquiry_quote_path(inquiry, inquiry.selected_quote), method: :patch, data: { confirm: 'Do you want to deselect this Quote?' }, class: 'inquiry-manage-option fa fa-ban' %></td>
+            <% end %>
+            <td><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
+            <% if current_user == inquiry.selected_quote.user %>
+              <td><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <% else %>
+<% end %>
+
+<% if inquiry.quotes.count > 0 %>
+<div class="card inquiry-items">
+    <h2 class="goods-ready-dates-bold">Received Quotes</h2>
+    <div class="post-content">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Price</th>
+            <th>User</th>
+            <th colspan=3 >Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% inquiry.quotes.each do |quote| %>
+            <tr>
+              <td><%= quote.total_price %></td>
+              <td><%= quote.user.name %></td>
+              <% if current_user == inquiry.user && inquiry.selected_quote.nil? %>
+                <td><%= link_to '',  select_quote_inquiry_quote_path(inquiry, quote), method: :patch, data: { confirm: 'Do you want to select this Quote?' }, class: 'inquiry-manage-option fa fa-check' %></td>
+              <% end %>
+              <td><%= link_to '',  inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
+              <% if current_user == quote.user %>
+                <td><%= link_to '',  edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-pencil' %></td>
+                <td><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+              <% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+<% elsif inquiry.selected_quote.nil? %>
+  <div class="card inquiry-items">
     <h4 class="goods-ready-dates-bold">This Inquiry hasn't received any quotes yet.</h4>
-  <% end %>
-</div>
+  </div>
+<% end %>

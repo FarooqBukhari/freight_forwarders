@@ -44,10 +44,11 @@ gem 'geokit'
 gem 'geokit-rails'
 gem "select2-rails"
 gem "cocoon"
-gem "country-select"
+gem "country_select"
 gem 'bootstrap-datepicker-rails'
 gem 'pagy'
 gem 'bootstrap-sass'
+gem 'simple_form'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

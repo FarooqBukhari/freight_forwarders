@@ -1,8 +1,8 @@
 class QuotesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_inquiry, only: [:show, :new, :create, :edit, :update, :destroy]
+  before_action :set_inquiry, only: [:show, :new, :create, :edit, :update, :destroy, :select_quote, :deselect_quote]
+  before_action :set_quote, only: [:show, :edit, :update, :destroy, :select_quote, :deselect_quote]
   before_action :check_user, only: [:edit, :update, :destroy]
-  before_action :set_quote, only: [:show, :edit, :update, :destroy]
 
   # GET /quotes/1
   # GET /quotes/1.json
@@ -12,9 +12,9 @@ class QuotesController < ApplicationController
   # GET /quotes/new
   def new
     @quote = Quote.new
-    1.times {@quote.carrier_quote_items.build}
-    1.times {@quote.origin_quote_items.build}
-    1.times {@quote.destination_quote_items.build}
+    1.times {@quote.carrier_quote_items.new}
+    1.times {@quote.origin_quote_items.new}
+    1.times {@quote.destination_quote_items.new}
   end
 
   # GET /quotes/1/edit
@@ -59,6 +59,30 @@ class QuotesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @inquiry, notice: 'Quote was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def select_quote
+    respond_to do |format|
+      if @quote.update(status: Quote.statuses[:selected])
+        format.html { redirect_to @inquiry, notice: 'Quote was successfully selected.' }
+        format.json { render :show, status: :ok, location: @quote }
+      else
+        format.html { redirect_to @inquiry, error: 'Something went wrong while selecting Quote' }
+        format.json { render json: @quote.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def deselect_quote
+    respond_to do |format|
+      if @quote.update(status: Quote.statuses[:posted])
+        format.html { redirect_to @inquiry, notice: 'Quote was successfully selected.' }
+        format.json { render :show, status: :ok, location: @quote }
+      else
+        format.html { redirect_to @inquiry, error: 'Something went wrong while selecting Quote' }
+        format.json { render json: @quote.errors, status: :unprocessable_entity }
+      end
     end
   end
 

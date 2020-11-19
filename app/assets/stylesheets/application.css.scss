@@ -50,22 +50,18 @@
   color: #dc4734 !important;
 }
 
-.inquiry-manage-option {
-  color: #000 !important;
-}
-
-.inquiry-manage-option:hover {
-  text-decoration: underline;
-  color: #dc4734 !important;
-}
-
 .share-give-quote-box {
   color: #dc4734 !important;
-  font-size: 20px !important;
+  font-size: 15px !important;
 }
 
 .share-give-quote-box:hover {
   text-decoration: underline;
+}
+
+.post-meta {
+  padding: 0px !important;
+  margin-top: 0px !important;
 }
 
 .table > thead > tr > th{
@@ -128,7 +124,34 @@
 
 .fa-pencil {
   color: #dc4734 !important;
-  font-size: 20px !important;
+  font-size: 15px !important;
+}
+
+.inquiry-manage-option {
+  color: #000 !important;
+}
+
+.inquiry-manage-option:hover {
+  text-decoration: underline;
+  color: #dc4734 !important;
+}
+
+.select2-container{ width: 100% !important; }
+
+.less-spacing-form-part .single-field {
+  margin-bottom: 0px !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 /*
  * Off Canvas sidebar at medium breakpoint
@@ -1098,6 +1121,3 @@ ul {
   width: 100%;
   color: white;
 }
-
-
-
