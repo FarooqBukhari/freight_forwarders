@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @inquiries = Inquiry.not_current_user_inquiries(current_user)
+    @inquiries = Inquiry.current_user_friends_inquiries(current_user)
     @is_friend = current_user.isFriend(@user).exists?
     @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
     @can_remove = current_user.requester_users.find_by(requested_id: @user.id)
@@ -84,6 +84,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.fetch(:user, {})
+      params.require(:user).permit(:name, :phone, :website, :job_title, :profile_picture, :cover_photo)
     end
 end

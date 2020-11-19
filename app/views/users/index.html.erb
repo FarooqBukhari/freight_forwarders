@@ -9,15 +9,16 @@
               <div class="profile-banner">
                 <figure class="profile-banner-small">
                   <a href="#">
-                    <img src="<%= asset_path 'banner-small' %>" alt="">
+                    <img src="<%= show_attachment(current_user.cover_photo, 'banner-small') %>" alt="">
                   </a>
                   <a href="#" class="profile-thumb-2">
-                    <img src="<%= asset_path 'profile-midle-1.jpg' %>" alt="">
+                    <img src="<%= show_attachment(current_user.profile_picture, 'avatar/user_default') %>" alt="">
                   </a>
                 </figure>
                 <div class="profile-desc text-center">
-                  <h6 class="author"><a href="#"><%= current_user.name %></a></h6>
-                  <p>Any one can join with but Social network us if you want Any one can join with us if you want</p>
+                  <h5 class="author"><a href="#"><%= current_user.name %></a></h5>
+                  <p><strong class="goods-ready-dates-bold"><%=current_user.job_title%></strong></p>
+                  <span><%=current_user.phone%></span>
                 </div>
               </div>
             </div>
@@ -34,7 +35,7 @@
                     <div class="profile-thumb">
                       <a href="#">
                         <figure class="profile-thumb-small">
-                          <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+                          <img src="<%= show_attachment(user.profile_picture, 'avatar/user_default') %>" alt="profile picture">
                         </figure>
                       </a>
                     </div>
@@ -68,7 +69,7 @@
               <div class="profile-thumb">
                 <a href="#">
                   <figure class="profile-thumb-large">
-                    <img src="<%= asset_path 'profile-midle-1.jpg'%>" alt="profile picture">
+                    <img src="<%= show_attachment(user.profile_picture, 'avatar/user_default') %>" alt="profile picture">
                   </figure>
                 </a>
               </div>
@@ -103,7 +104,7 @@
                           <div class="profile-thumb">
                             <a href="#">
                               <figure class="profile-thumb-small">
-                                <img src="<%= asset_path 'profile-small-3.jpg' %>" alt="profile picture">
+                                <img src="<%= show_attachment(request.requester.profile_picture, 'avatar/user_default') %>" alt="profile picture">
                               </figure>
                             </a>
                           </div>

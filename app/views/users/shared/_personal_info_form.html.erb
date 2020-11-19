@@ -1,0 +1,38 @@
+<div class="signup-form-wrapper personal-form-wrapper">
+  <div class="signup-inner text-center">
+    <h3 class="title">Personal Information</h3>
+    <%= simple_form_for(user, url: url, html: {class: "signup-inner--form"}) do |f| %>
+      <div class="row">
+        <div class="col-12 mb-5">
+          <label class="string optional" for="profile_picture">Profile Picture</label>
+          <div id="profile-container" style="text-align: center !important;display:block; margin:auto;">
+            <img style="text-align: center !important; align-items: center !important;" id="profileImage" src="<%=image_path 'avatar/user_default' %>" />
+            <%= f.input :profile_picture, as: :file, input_html: {class:"profile-container file", accept:"image/*"} %>
+          </div>
+        </div>
+        <div class="col-12 mb-5">
+          <label class="string optional" for="profile_picture">Cover Photo</label>
+          <div id="cover-container" style="text-align: center !important;display:block; margin:auto;">
+            <img style="text-align: center !important; align-items: center !important;" id="coverImage" src="<%=image_path 'avatar/cover_default' %>" />
+            <%= f.input :cover_photo, as: :file, input_html: {class:"profile-container file", accept:"image/*"} %>
+          </div>
+        </div>
+        <div class="col-12">
+          <%= f.input :name, input_html: {autocomplete: "name", class:"single-field", placeholder: "Full Name"} %>
+        </div>
+        <div class="col-12">
+          <%= f.input :phone, as: :tel, input_html: {autocomplete: "phone", class:"single-field", placeholder: "Phone Number"} %>
+        </div>
+        <div class="col-12">
+          <%= f.input :website, as: :url, input_html: {autocomplete: "website", class:"single-field", placeholder: "Company Website Url"} %>
+        </div>
+        <div class="col-12">
+          <%= f.input :job_title, input_html: {autocomplete: "job_title", class:"single-field", placeholder: "Job Title"} %>
+        </div>
+        <div class="col-12">
+          <%= f.button :submit, "Update", class: "submit-btn" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
