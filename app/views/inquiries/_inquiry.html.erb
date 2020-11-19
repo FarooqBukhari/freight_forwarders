@@ -116,7 +116,7 @@
             <td><%= inquiry.selected_quote.total_price %></td>
             <td><%= inquiry.selected_quote.user.name %></td>
             <% if current_user == inquiry.user %>
-              <td><%= link_to '',  deselect_quote_inquiry_quote_path(inquiry, inquiry.selected_quote), method: :patch, data: { confirm: 'Do you want to deselect this Quote?' }, class: 'inquiry-manage-option fa fa-ban' %></td>
+              <td><%= link_to '',  deselect_quote_inquiry_quote_path(inquiry, inquiry.selected_quote), method: :patch, data: { confirm: 'Do you want to deselect this Quote?' }, class: 'inquiry-manage-option fa fa-trash' %></td>
             <% end %>
             <td><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
             <% if current_user == inquiry.selected_quote.user %>
