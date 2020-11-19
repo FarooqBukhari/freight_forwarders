@@ -64,15 +64,17 @@ $( document ).ready(function() {
         var ref = $(this).attr("id");
         var con_id = ref.substr(ref.lastIndexOf('-')+1);
         var conversation = $('#conversations-list').find("[data-conversation-id='" + con_id + "']");
+        $('.users-tabs > li').removeClass("active show");
 
-        var allConversations = $('#conversations-list > div').addClass("tab-pane fade");
+
+        var allConversations = $('#conversations-list > div').removeClass("show");
         // console.log(allConversations);
         // for (var i = 0, len = allConversations.length; i < len; i++) {
         //     //work with element
         //     allConversations[i].addClass("tab-pane fade");
         // }
 
-        conversation.removeClass("tab-pane fade");
+        //conversation.removeClass("tab-pane fade");
 
 
         var ul = conversation.find('.commentList');

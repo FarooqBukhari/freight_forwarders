@@ -1,95 +1,89 @@
 <main>
   <div class="main-wrapper pt-80">
-
     <div class="container">
-
-  <!-- Content wrapper start -->
-  <div class="content-wrapper">
-
-    <!-- Row start -->
-    <div class="row gutters">
-
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-
-        <div class="card m-0">
-
-          <!-- Row start -->
-          <div class="row no-gutters">
-            <div class="col-xs-4 col-lg-4 col-md-4 col-sm-3 col-3">
-              <div class="users-container">
-                <div class="chat-search-box">
-                  <div class="input-group">
-                    <input class="form-control" placeholder="Search">
-                    <div class="input-group-btn">
-                      <button type="button" class="btn btn-info">
-                        <i class="fa fa-search"></i>
-                      </button>
+      <div id="frame">
+        <div id="sidepanel">
+          <div id="profile">
+            <div class="wrap">
+              <% if current_user.profile_picture.attached? %>
+                <%= image_tag url_for(current_user.profile_picture), class:"online" %>
+              <% else %>
+                <%= image_tag "profile-small-3.jpg", class:"online"%>
+              <% end %>
+              <p><%= current_user.name %></p>
+            </div>
+          </div>
+          <div id="search">
+            <label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+            <input type="text" placeholder="Search contacts..." />
+          </div>
+          <div id="contacts">
+            <ul class=" tabs users-tabs">
+              <% @conversations.each do |conversation| %>
+                <li class="contact" data-chat="person1" data-toggle="tab" href="#con-<%=conversation.id%>" id="user-box-<%=conversation.id%>">
+                  <div class="wrap">
+                    <% op_user = conversation.opposed_user(current_user) %>
+                    <% if op_user.profile_picture.attached? %>
+                      <%= image_tag url_for(op_user.profile_picture)%>
+                    <% else %>
+                      <%= image_tag "profile-small-3.jpg"%>
+                    <% end %>
+                    <div class="meta">
+                      <% if conversation.inquiry_id != nil %>
+                        <p class="name"><%= op_user.name  %> (Inquiry)</p>
+                      <% else %>
+                        <p class="name"><%= op_user.name %></p>
+                      <% end %>
                     </div>
                   </div>
-                </div>
-                <ul class="users tabs users-tabs">
-                  <% @conversations.each do |conversation| %>
-                    <li class="person active" data-chat="person1" data-toggle="tab" href="#con-<%=conversation.id%>" id="user-box-<%=conversation.id%>">
-                      <div class="user">
-                        <% op_user = conversation.opposed_user(current_user) %>
-                        <% if op_user.profile_picture.attached? %>
-                          <%= image_tag url_for(op_user.profile_picture)%>
-                        <% else %>
-                          <%= image_tag "profile-small-3.jpg"%>
-                        <% end %>
-                      </div>
-                      <p class="name-time">
-                        <span class="name"><%= op_user.name %></span>
-                      </p>
-                    </li>
-                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+
+          </div>
+          <div id="bottom-bar">
+<!--            <button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>-->
+<!--            <button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>-->
+          </div>
+        </div>
+
+        <div class="tab-content" id="conversations-list">
+          <% @conversations.each do |conversation| %>
+            <% op_user = conversation.opposed_user(current_user) %>
+            <div class="content <%= conversation.id === @id ? 'tab-pane active show' : "tab-pane" %>" id="con-<%=conversation.id%>" data-conversation-id="<%= conversation.id %>">
+              <div class="contact-profile">
+                <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                <p><%= op_user.name %></p>
+              </div>
+
+              <div class="messages panel-body" id="panel-body-<%=conversation.id%>">
+                <div class="chat-container messages-list message-list-inner" >
+                <ul class="commentList message-list custom-scroll" style="min-height: 450px; max-height: 450px">
+                  <%= render 'conversations/conversation_content', messages: conversation.messages, user: current_user %>
                 </ul>
               </div>
-            </div>
-
-            <div class="tab-content col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9" id="conversations-list">
-
-              <% @conversations.each do |conversation| %>
-                <% op_user = conversation.opposed_user(current_user) %>
-                <div class="<%= conversation.id === @id ? '' : "tab-pane fade" %>" id="con-<%=conversation.id%>" data-conversation-id="<%= conversation.id %>" >
-                <div class="selected-user">
-                  <span>To: <span class="name"><%= op_user.name %></span></span>
-                </div>
-
-                <div class="panel-body" style="display: block;" id="panel-body-<%=conversation.id%>">
-
-                <div class="chat-container messages-list message-list-inner" >
-                  <ul class="commentList message-list custom-scroll">
-                    <%= render 'conversations/conversation_content', messages: conversation.messages, user: current_user %>
-                  </ul>
-                </div>
-                <div class="form-group mt-3 mb-0">
+              <div class="message-input">
+                <div class="">
                   <form class="new_message">
                     <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
                     <input name="user_id" type="hidden" value="<%= current_user.id %>">
-                    <textarea name="body" style="width: 70%; resize: none; height: inherit" placeholder="Type your message here..."></textarea>
-                    <input type="submit" class="btn btn-primary" style="margin-bottom: 5%" value="Send">
+                    <input name="body" type="text" placeholder="Write your message..." style="width: 80%;border: none;font-size: large;" />
+                    <button type="submit" value="Send" class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                   </form>
                 </div>
-                </div>
               </div>
-              <% end %>
             </div>
-          </div>
-          <!-- Row end -->
+              </div>
+          <% end %>
         </div>
 
+
       </div>
-
     </div>
-    <!-- Row end -->
-
-  </div>
-  <!-- Content wrapper end -->
-
-</div>
   </div>
 </main>
+
+
 
 <script>
   <% if @id %>

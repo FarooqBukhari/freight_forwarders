@@ -1,4 +1,4 @@
-<li class="<%= user.id == message.user_id ? 'text-author' : 'text-friends' %>">
+<li  class="<%= user.id == message.user_id ? 'replies' : 'sent' %>" >
   <p><%= message.body %></p>
-  <div class="message-time"><%= time_ago_in_words message.created_at %></div>
+<!--  <div class="message-time"><%#= time_ago_in_words message.created_at %></div>-->
 </li>
