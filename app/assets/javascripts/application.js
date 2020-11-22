@@ -11,6 +11,8 @@
 //= require cocoon
 //= require select2
 //= require bootstrap-datepicker
+//= require chartkick
+//= require Chart.bundle
 //= require_self
 
 // Uncomment to copy all static images under ../images to the output folder and reference

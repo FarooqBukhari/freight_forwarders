@@ -28,6 +28,7 @@
 #  job_title              :string           default(""), not null
 #
 class User < ApplicationRecord
+  acts_as_reader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -55,6 +56,11 @@ class User < ApplicationRecord
   #chat
   has_many :messages
   has_many :conversations, foreign_key: :sender_id
+
+  #chart
+  # has_many :carts
+  # has_many :line_items, through: :carts
+  # has_many :products, -> { distinct },  through: :line_items
 
   #Validations
 
@@ -107,4 +113,17 @@ class User < ApplicationRecord
   def get_friend_users
     Friendship.includes(:friended, :friender).where('friendable_id = ? OR friend_id = ?', self.id, self.id)
   end
+
+  def get_friends_users_array
+    users = []
+    get_friend_users.each do |friendship|
+      users << friendship.other_user(self)
+    end
+    users
+  end
+
+  def friendships
+    Friendship.where("friendable_id = ? OR friend_id = ?", self.id, self.id)
+  end
+
 end
