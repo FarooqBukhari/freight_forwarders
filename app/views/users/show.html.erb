@@ -53,15 +53,7 @@
                   <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: @user.id, con_type: "User"), method: :post, class: "btn btn-blue" %>
                 <% end %>
               </h4>
-              <div class="widget-body">
-                <div class="about-author">
-                  <p>I Don’t know how? But i believe that it is possible one day if i stay with my dream all time</p>
-                  <ul class="author-into-list">
-                    <li><a href="#"><i class="bi bi-office-bag"></i><%=current_user.job_title%></a></li>
-                    <li><a href="#"><i class="bi bi-home"></i><%=current_user.phone%></a></li>
-                  </ul>
-                </div>
-              </div>
+              <%= render 'users/shared/side_widget', user: @user %>
             </div>
           </aside>
         </div>
