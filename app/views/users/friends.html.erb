@@ -1,18 +1,11 @@
 <main>
   <div class="main-wrapper">
-    <div class="profile-banner-large bg-img" data-bg="<%= asset_path 'profile-banner' %>">
-    </div>
+    <%= render 'users/shared/cover_photo', user: @user %>
     <div class="profile-menu-area secondary-navigation-style bg-white">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-3">
-            <div class="profile-picture-box">
-              <figure class="profile-picture">
-                <a href="#">
-                  <img src="<%= asset_path 'profile-1.jpg' %>" alt="profile picture">
-                </a>
-              </figure>
-            </div>
+            <%= render 'users/shared/profile_picture', user: @user %>
           </div>
           <div class="col-lg-6 col-md-6 offset-lg-1">
             <div class="profile-menu-wrapper">
@@ -189,9 +182,9 @@
                       <!-- profile picture end -->
 
                       <div class="posted-author">
-                        <h6 class="author"><a href="<%= user_path(id: friend.other_user(@user).id) %>"><%= friend.other_user(@user).name %></a></h6>
+                        <h6 class="author pull-left"><a href="<%= user_path(id: friend.other_user(@user).id) %>"><%= friend.other_user(@user).name %></a></h6>
                         <% if @user == current_user %>
-                          <%= link_to 'Remove', remove_friend_path({id: @user.id}), class: 'btn btn-danger btn-xs', method: :post, style: "color: white;" %>
+                          <%= link_to '', remove_friend_path({id: @user.id}), class: 'btn btn-danger btn-sm pull-right fa fa-times', method: :post, style: "color: white;" %>
                         <% end %>
                       </div>
                     </div>
