@@ -83,5 +83,5 @@ test:
 production:
   <<: *default
   database: freight_forwarders_production
-  username: freight_forwarders
-  password: <%= ENV['FREIGHT_FORWARDERS_DATABASE_PASSWORD'] %>
+#  username: freight_forwarders
+#  password: <%#= ENV['FREIGHT_FORWARDERS_DATABASE_PASSWORD'] %>
