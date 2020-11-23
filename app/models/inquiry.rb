@@ -43,7 +43,6 @@ class Inquiry < ApplicationRecord
 
   def send_email
     users_arry = User.current_user.get_friends_users_array
-
     users_arry.each do |user|
       UserNotifierMailer.send_inquiry_email(user,self).deliver
     end
