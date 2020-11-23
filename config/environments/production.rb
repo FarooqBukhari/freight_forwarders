@@ -99,8 +99,8 @@ Rails.application.configure do
       address: 'smtp.sendgrid.net',
       port: 587,
       domain: 'https://send2world.herokuapp.com/',
-      user_name: "crickethowzat7@gmail.com",
-      password: "haris03468578686",
+      user_name: "apikey",
+      password: "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",
       authentication: :login,
       enable_starttls_auto: true
   }
