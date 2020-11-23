@@ -38,5 +38,4 @@ class Inquiry < ApplicationRecord
   end
 
   #Callback functions
-
 end
