@@ -126,4 +126,15 @@ class User < ApplicationRecord
     Friendship.where("friendable_id = ? OR friend_id = ?", self.id, self.id)
   end
 
+
+
+  class << self
+    def current_user=(user)
+      Thread.current[:current_user] = user
+    end
+
+    def current_user
+      Thread.current[:current_user]
+    end
+  end
 end

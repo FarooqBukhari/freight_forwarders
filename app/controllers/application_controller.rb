@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
   #     @conversations = Conversation.where(recipient_id: current_user).or( Conversation.where(sender_id: current_user) )
   #   end
   # end
+  #
+  before_action :set_current_user
+
+  def set_current_user
+    User.current_user = current_user
+  end
 end
