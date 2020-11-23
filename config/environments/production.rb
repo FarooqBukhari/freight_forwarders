@@ -93,7 +93,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = {:host => "https://send2world.herokuapp.com/"}
+  config.action_mailer.default_url_options = { host: 'www.send2world.herokuapp.com', protocol: 'https://' }
+
   ActionMailer::Base.smtp_settings = {
       address: 'smtp.sendgrid.net',
       port: 587,
