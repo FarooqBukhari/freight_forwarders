@@ -131,6 +131,7 @@
               <th>Destination Location Type</th>
               <th>Destination Country</th>
               <th>Status</th>
+              <th>Created Date</th>
               <th>Show</th>
               <th>Edit</th>
             </tr>
@@ -143,8 +144,9 @@
               <td><%= inquiry.destination_location_type.split('_').map(&:capitalize).join(' ') %></td>
               <td><%= inquiry.destination_country %></td>
               <td><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></td>
-              <td><%= link_to "Show", inquiry_path(inquiry) %></td>
-              <td><%= link_to "Edit", edit_inquiry_path(inquiry) %></td>
+              <td><%=  time_ago_in_words inquiry.created_at %></td>
+              <td><%= link_to "<i class='fa fa-eye'> <i/>".html_safe, inquiry_path(inquiry) %></td>
+              <td><%= link_to "<i class='fa fa-pencil'> <i/>".html_safe, edit_inquiry_path(inquiry) %></td>
             </tr>
             <% end %>
             </tbody>

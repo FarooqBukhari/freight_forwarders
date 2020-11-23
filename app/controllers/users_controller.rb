@@ -25,7 +25,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @inquiries = Inquiry.current_user_friends_inquiries(current_user)
+    if current_user == @user
+      @inquiries = Inquiry.current_user_friends_inquiries(current_user)
+    else
+      @inquiries = @user.inquiries
+    end
     @is_friend = current_user.isFriend(@user).exists?
     @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
     @can_remove = current_user.requester_users.find_by(requested_id: @user.id)
