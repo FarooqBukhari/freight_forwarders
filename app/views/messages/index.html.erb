@@ -49,6 +49,21 @@
         </div>
 
         <div class="tab-content" id="conversations-list">
+          <div id="no-conversation">
+            <% if @conversations.blank? %>
+              <div class="row">
+                <div class="col-12 align-self-center">
+                  <h2 class="goods-ready-dates-bold text-center">Your inbox is empty</h2>
+                </div>
+              </div>
+            <% else %>
+            <div class="row">
+              <div class="col-12 align-self-center">
+                <h2 class="goods-ready-dates-bold text-center">Select any user to open chat</h2>
+              </div>
+            </div>
+            <% end %>
+          </div>
           <% @conversations.each do |conversation| %>
             <% op_user = conversation.opposed_user(current_user) %>
             <div class="content <%= conversation.id === @id ? 'tab-pane active show' : "tab-pane" %>" id="con-<%=conversation.id%>" data-conversation-id="<%= conversation.id %>">
@@ -67,9 +82,9 @@
 
               <div class="messages panel-body" id="panel-body-<%=conversation.id%>">
                 <div class="chat-container messages-list message-list-inner" >
-                <ul class="commentList message-list custom-scroll" style="min-height: 450px; max-height: 450px">
-                  <%= render 'conversations/conversation_content', messages: conversation.messages, user: current_user %>
-                </ul>
+                  <ul class="commentList message-list custom-scroll" style="min-height: 450px; max-height: 450px">
+                    <%= render 'conversations/conversation_content', messages: conversation.messages, user: current_user %>
+                  </ul>
               </div>
               <div class="message-input" style="position: relative !important;">
                 <div class="wrap">
@@ -85,8 +100,6 @@
               </div>
           <% end %>
         </div>
-
-
       </div>
     </div>
   </div>
@@ -100,6 +113,7 @@
   var conversation = conversations.find("[data-conversation-id='" + "<%= @id %>" + "']");
   var ul = conversation.find('.commentList');
   var abc = conversation.find('.commentList li:last');
+  //$('#no-conversation').empty();
 
   jQuery(ul).animate({scrollTop: $(ul).scrollTop() + jQuery(abc).offset().top + 30}, "slow");
   <% end %>

@@ -213,6 +213,10 @@
   margin-bottom: 0px !important;
 }
 
+.widget-title {
+  margin-bottom:  10px !important;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -1226,8 +1230,8 @@ ul {
   max-width: 340px;
   width: 40%;
   height: 100%;
-  background: grey;
-  color: #f5f5f5;
+  background: #f5f5f5;
+  color: #000000;
   overflow: hidden;
   position: relative;
 }

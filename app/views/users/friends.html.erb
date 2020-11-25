@@ -22,7 +22,7 @@
           <div class="col-lg-2 col-md-3 d-none d-md-block">
             <div class="profile-edit-panel">
               <% if @user == current_user %>
-                <a class="edit-btn" style="color: white;">edit profile</a>
+                <a class="edit-btn" style="color: white;" href="<%= edit_user_path(id: @user) %>">edit profile</a>
               <% elsif @is_friend %>
                 <%= link_to 'Remove Friend', remove_friend_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
               <% elsif @can_remove %>
