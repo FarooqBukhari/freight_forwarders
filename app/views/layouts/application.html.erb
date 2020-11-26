@@ -52,7 +52,7 @@
                   <nav>
                     <ul>
                       <li class="active"><a href="<%= root_path %>">home</a></li>
-                      <li><a href="<%= messages_index_path %>">Messages</a></li>
+                      <li><a href="<%= messages_path %>">Messages</a></li>
                       <li><a href="<%= users_path %>">Network</a></li>
                       <li><a href="<%= my_inquiries_user_path(current_user) %>">Inquiries</a></li>
                     </ul>
@@ -89,7 +89,7 @@
                         <div class="profile-body">
                           <ul>
                             <li><a href="<%= user_path(id: current_user.id) %>"><i class="flaticon-user"></i>Profile</a></li>
-                            <li><a href="<%= messages_index_path %>"><i class="flaticon-message"></i>Inbox</a></li>
+                            <li><a href="<%= messages_path %>"><i class="flaticon-message"></i>Inbox</a></li>
                             <li><a href="<%= my_inquiries_user_path(id: current_user.id) %>"><i class="flaticon-document"></i>Inquiries</a></li>
                           </ul>
                           <ul>
@@ -133,7 +133,7 @@
                   </a>
                 </li>
                 <li>
-                  <a href="<%= messages_index_path %>" class="chat-trigger notification"><i class="flaticon-chats"></i>
+                  <a href="<%= messages_path %>" class="chat-trigger notification"><i class="flaticon-chats"></i>
 
                   </a>
                 </li>
@@ -155,7 +155,7 @@
                   <div class="profile-body">
                     <ul>
                       <li><a href="<%= user_path(id: current_user.id) %>"><i class="flaticon-user"></i>Profile</a></li>
-                      <li><a href="<%= messages_index_path %>"><i class="flaticon-message"></i>Inbox</a></li>
+                      <li><a href="<%= messages_path %>"><i class="flaticon-message"></i>Inbox</a></li>
                       <li><a href="<%= my_inquiries_user_path(id: current_user.id) %>"><i class="flaticon-document"></i>Inquiries</a></li>
                     </ul>
                     <ul>

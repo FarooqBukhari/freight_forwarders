@@ -134,7 +134,9 @@ class User < ApplicationRecord
     count = 0
     all_conversations.each do |convo|
       convo.messages.each do |msg|
-        all << msg
+        if msg.user_id != self.id
+          all << msg
+        end
       end
     end
     all.each do |msg|

@@ -21,23 +21,26 @@
           <div id="contacts">
             <ul class=" tabs users-tabs">
               <% @conversations.each do |conversation| %>
-                <li class="contact" data-chat="person1" data-toggle="tab" href="#con-<%=conversation.id%>" id="user-box-<%=conversation.id%>">
-                  <div class="wrap">
-                    <% op_user = conversation.opposed_user(current_user) %>
-                    <% if op_user.profile_picture.attached? %>
-                      <%= image_tag url_for(op_user.profile_picture)%>
-                    <% else %>
-                      <%= image_tag "profile-small-3.jpg"%>
-                    <% end %>
-                    <div class="meta">
-                      <% if conversation.inquiry_id != nil %>
-                        <p class="name"><%= op_user.name  %> (Inquiry)</p>
+                <%= form_tag read_message_path(id: conversation.id), id: "form-"+conversation.id.to_s, authenticity_token: true, remote: true do |f| %>
+                  <li class="contact" data-chat="person1" data-toggle="tab" href="#con-<%=conversation.id%>" id="user-box-<%=conversation.id%>">
+                    <div class="wrap">
+                      <% op_user = conversation.opposed_user(current_user) %>
+                      <% if op_user.profile_picture.attached? %>
+                        <%= image_tag url_for(op_user.profile_picture)%>
                       <% else %>
-                        <p class="name"><%= op_user.name %></p>
+                        <%= image_tag "profile-small-3.jpg"%>
                       <% end %>
+                      <div class="meta">
+                        <% if conversation.inquiry_id != nil %>
+                          <p class="name"><%= op_user.name  %> (Inquiry)</p>
+                        <% else %>
+                          <p class="name"><%= op_user.name %></p>
+                        <% end %>
+                      </div>
                     </div>
-                  </div>
-                </li>
+                  </li>
+
+                <% end %>
               <% end %>
             </ul>
 

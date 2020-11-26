@@ -48,7 +48,7 @@
           <aside class="widget-area profile-sidebar">
             <!-- widget single item start -->
             <div class="card widget-item">
-              <h4 class="widget-title"> <%= @user.name %>
+              <h4 class="widget-title" style="margin-bottom:  10px !important;"> <%= @user.name %>
                 <% if @user !=  current_user %>
                   <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: @user.id, con_type: "User"), method: :post, class: "btn btn-blue" %>
                 <% end %>

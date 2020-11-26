@@ -97,12 +97,12 @@ $( document ).ready(function() {
         });
     })();
 
-    $('.users-tabs > li').on('click',function () {
+    $('.users-tabs > form > li').on('click',function () {
         $(this).removeClass('user-box-message');
         var ref = $(this).attr("id");
         var con_id = ref.substr(ref.lastIndexOf('-')+1);
         var conversation = $('#conversations-list').find("[data-conversation-id='" + con_id + "']");
-        $('.users-tabs > li').removeClass("active show");
+        $('.users-tabs > form > li').removeClass("active show");
 
 
         var allConversations = $('#conversations-list > div').removeClass("show");
@@ -121,6 +121,8 @@ $( document ).ready(function() {
         jQuery(ul).animate({scrollTop: 1000000 + 30}, "slow");
 
         $('#no-conversation').empty();
+        id = "#form-"+con_id;
+        $(id).submit();
     });
 
 
