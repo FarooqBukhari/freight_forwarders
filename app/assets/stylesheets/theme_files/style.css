@@ -1257,7 +1257,7 @@ textarea:focus {
   width: 80px;
   height: 100%;
   text-align: center;
-  background-color: #dc4734;
+
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1299,7 +1299,7 @@ textarea:focus {
 }
 
 .mobile-menu ul li:hover i {
-  color: #dc4734;
+
 }
 
 .notification {

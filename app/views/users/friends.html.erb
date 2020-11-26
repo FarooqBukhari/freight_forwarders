@@ -89,7 +89,7 @@
                       <div class="posted-author">
                         <h6 class="author pull-left"><a href="<%= user_path(id: friend.other_user(@user).id) %>"><%= friend.other_user(@user).name %></a></h6>
                         <% if @user == current_user %>
-                          <%= link_to '', remove_friend_path({id: @user.id}), class: 'btn btn-danger btn-sm pull-right fa fa-times', method: :post, style: "color: white;" %>
+                          <%= link_to '', remove_friend_path({id: friend.other_user(@user).id}), class: 'btn btn-danger btn-sm pull-right fa fa-times', method: :post, style: "color: white;" %>
                         <% end %>
                       </div>
                     </div>

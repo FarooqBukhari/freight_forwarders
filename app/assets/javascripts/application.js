@@ -119,6 +119,8 @@ $( document ).ready(function() {
         var abc = conversation.find('.commentList li:last');
 
         jQuery(ul).animate({scrollTop: 1000000 + 30}, "slow");
+
+        $('#no-conversation').empty();
     });
 
 
