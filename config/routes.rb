@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     member do
       get :my_inquiries
       get :friends
+      get :my_calender
     end
   end
   resources :inquiries do

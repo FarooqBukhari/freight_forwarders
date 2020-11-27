@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :my_inquiries, :edit, :update, :destroy, :friends]
+  before_action :set_user, only: [:show, :my_inquiries, :my_calender, :edit, :update, :destroy, :friends]
 
   # GET /users
   # GET /users.json
@@ -12,6 +12,10 @@ class UsersController < ApplicationController
 
   def my_inquiries
     @inquiries = @user.inquiries.order! 'created_at DESC'
+  end
+
+  def my_calender
+    @inquiries = Inquiry.all
   end
 
   def friends

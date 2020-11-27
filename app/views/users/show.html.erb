@@ -12,9 +12,9 @@
               <div class="main-menu-inner header-top-navigation">
                 <nav>
                   <ul class="main-menu">
-                    <li class="active"><a href="#">timeline</a></li>
+                    <li class="active"><a href="<%= user_path(@user) %>">timeline</a></li>
                     <li><a href="<%= friends_user_path(id: @user.id) %>">friends</a></li>
-                    <!--                    <li class="d-inline-block d-md-none"><a href="#">edit profile</a></li>-->
+                    <li><a href="<%= my_calender_user_path(id: @user.id)%>">calender</a></li>
                   </ul>
                 </nav>
               </div>
