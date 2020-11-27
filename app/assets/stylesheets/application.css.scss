@@ -229,7 +229,11 @@
   .wday-5 {}
   .wday-6 {}
 
-  .today {}
+  .today {
+    a {
+      color: #dc4734 !important;
+    }
+  }
   .past {}
   .future {}
 
@@ -237,10 +241,15 @@
 
   .prev-month {}
   .next-month { }
-  .current-month {}
+  .current-month {
+    margin: 0px 20px;
+  }
 
   .has-events {
-    color: #dc4734; 
+    background-color: #dc4734;
+    a {
+      color: #ffffff;
+    }
   }
 }
 

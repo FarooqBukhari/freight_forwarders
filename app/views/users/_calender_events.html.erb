@@ -1,9 +1,11 @@
 <div class="card">
-  <%= month_calendar(attribute: :goods_ready_date, events: inquiries) do |date, inquiry_events| %>
+  <%= month_calendar(attribute: :goods_ready_date, events: inquiries, previous_link: events_ajax_previous_link(@user.id), next_link: events_ajax_next_link(@user.id)) do |date, inquiry_events| %>
     <%= date %>
     <% inquiry_events.each do |inquiry| %>
     <div>
-      <%= inquiry.origin_country %> to <%= inquiry.destination_country %>
+      <a href="<%= inquiry_path(inquiry) %>">
+        <%= inquiry.origin_country %> to <%= inquiry.destination_country %>
+      </a>
     </div>
     <% end %>
   <% end %>

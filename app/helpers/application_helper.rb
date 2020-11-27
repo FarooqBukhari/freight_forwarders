@@ -9,4 +9,12 @@ module ApplicationHelper
     country = ISO3166::Country[country_code]
     country.translations[I18n.locale.to_s] || country.name
   end
+
+  def events_ajax_previous_link(user_id)
+    ->(param, date_range) { link_to my_calender_user_path(id: user_id), {param => date_range.first - 1.day}, remote: :true}
+  end
+
+  def events_ajax_next_link(user_id)
+    ->(param, date_range) { link_to my_calender_user_path(id: user_id), {param => date_range.last + 1.day}, remote: :true}
+  end
 end
