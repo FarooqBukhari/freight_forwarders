@@ -6,7 +6,7 @@ class ConversationsController < ApplicationController
 
     respond_to do |format|
       format.js
-      format.html { redirect_to messages_index_path( id: @conversation.id ) }
+      format.html { redirect_to messages_path( id: @conversation.id ) }
     end
   end
 

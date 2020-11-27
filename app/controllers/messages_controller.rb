@@ -9,6 +9,17 @@ class MessagesController < ApplicationController
     @id = @id.to_i
   end
 
+  def read
+    @id = params[:id]
+    @conversation = Conversation.find(@id)
+    @messages = @conversation.messages
+    @messages.each do |msg|
+      if msg.user_id != current_user.id
+        msg.mark_as_read! for: current_user
+      end
+    end
+  end
+
   private
 
   def message_params

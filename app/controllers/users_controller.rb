@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @pagy, @users = pagy(User.all, items: 10)
+    users_to_remove = current_user.get_friends_users_array
+    users_to_remove << current_user
+    users_to_remove = users_to_remove.pluck(:id)
+    @pagy, @users = pagy(User.where.not(id: users_to_remove), items: 10)
     @recommendations = current_user.strangers
     @requested_users = current_user.requested_users
   end

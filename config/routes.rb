@@ -47,5 +47,9 @@ Rails.application.routes.draw do
       post :close
     end
   end
-  get 'messages/index'
+  resources :messages, only: [:index] do
+    member do
+      post :read
+    end
+  end
 end

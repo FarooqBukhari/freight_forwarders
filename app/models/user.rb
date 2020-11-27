@@ -54,9 +54,8 @@ class User < ApplicationRecord
   has_one_attached :cover_photo
 
   #chat
-  has_many :messages
   has_many :conversations, foreign_key: :sender_id
-
+  has_many :messages, through: :conversations
   #chart
   # has_many :carts
   # has_many :line_items, through: :carts
@@ -124,6 +123,28 @@ class User < ApplicationRecord
 
   def friendships
     Friendship.where("friendable_id = ? OR friend_id = ?", self.id, self.id)
+  end
+
+  def all_conversations
+    Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+  end
+
+  def unread_messages_count
+    all = []
+    count = 0
+    all_conversations.each do |convo|
+      convo.messages.each do |msg|
+        if msg.user_id != self.id
+          all << msg
+        end
+      end
+    end
+    all.each do |msg|
+      if msg.unread?(self)
+        count+=1
+      end
+    end
+    count
   end
 
 
