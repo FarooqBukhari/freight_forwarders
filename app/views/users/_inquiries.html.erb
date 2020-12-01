@@ -20,7 +20,7 @@
             <td><%= inquiry.goods_ready_date %></td>
             <td><%= inquiry.status %> </td>
             <td><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %></td>
-            <td><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+            <td><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-trash' %></td>
             <td><%= link_to '', inquiry, class: 'inquiry-manage-option fa fa-eye' %></td>
           </tr>
           <% end %>
@@ -28,6 +28,13 @@
       </table>
     </div>
   <% else %>
-    <h2 class= "text-center">No <strong class="goods-ready-dates-bold" >Inquiries </strong>Posted Yet</h2>
+    <div class="row justify-content-center align-items-center">
+      <h2 class= "text-center">No <strong class="goods-ready-dates-bold" >Inquiries </strong>Posted Yet</h2>
+    </div>
+    <div class="row justify-content-center align-items-center">
+      <button class="login-redirect-btn" onclick="location.href='<%= new_inquiry_path %>'" type="button">
+        Post an Inquiry
+      </button>
+    </div>
   <% end %>
 </div>

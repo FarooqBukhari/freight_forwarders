@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>FreightForwarders</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="<%= asset_path "favicon.ico" %>">
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <% if notice %>
+      <div class="alert alert-success alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong><%= notice %></strong>
+      </div>
+
+    <% end %>
+    <% if alert %>
+    <div class="alert alert-danger alert-dismissible">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <strong><%= alert %></strong>
+    </div>
+
+    <% end %>
+
+    <!-- header area start -->
+    <header>
+      <div class="header-top sticky bg-white d-none d-lg-block">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-5">
+              <!-- header top navigation start -->
+              <div class="header-top-navigation">
+                <nav>
+                  <ul>
+                    <li class="active"><a href="<%= root_path %>">home</a></li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- header top navigation start -->
+            </div>
+
+            <div class="col-md-2">
+              <!-- brand logo start -->
+              <div class="brand-logo text-center">
+                <a href="<%= root_path %>">
+                  <img src="<%= asset_path "logo.png" %>" alt="brand logo">
+                </a>
+              </div>
+              <!-- brand logo end -->
+            </div>
+
+            <div class="col-md-5">
+              <div class="header-top-right d-flex align-items-center justify-content-end">
+                <nav>
+                  <ul>
+                    <li>
+                      <button class="login-redirect-btn" onclick="location.href='<%= new_user_session_path %>'" type="button">
+                        Login/Register
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header area end -->
+    <!-- header area start -->
+    <header>
+      <div class="mobile-header-wrapper sticky d-block d-lg-none">
+        <div class="mobile-header position-relative ">
+          <div class="mobile-logo">
+            <a href="<%= root_path %>">
+              <img src="<%= asset_path "logo.png" %>" alt="logo">
+            </a>
+          </div>
+          <div class="mobile-menu w-100">
+            <ul>
+              <li>
+                <a href="<%= root_path %>" class="notification request-trigger"><i class="flaticon-home"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="mobile-header-profile">
+            <div class="profile-thumb profile-setting-box">
+              <a href="javascript:void(0)" class="profile-triger">
+                <figure class="profile-thumb-middle">
+                  <img src="<%= asset_path "users.png" %>" alt="profile picture">
+                </figure>
+              </a>
+              <div class="profile-dropdown text-left">
+                <div class="profile-body">
+                  <ul>
+                    <li><a href="<%= new_user_session_path %>"><i class="flaticon-user"></i>Login/Register</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- header area end -->
+
+    <%= yield %>
+
+
+  </body>
+</html>

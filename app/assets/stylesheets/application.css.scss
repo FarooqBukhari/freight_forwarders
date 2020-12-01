@@ -32,6 +32,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+
+.login-redirect-btn {
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #dc4734;
+  line-height: 1;
+  padding: 12px 32px;
+  display: inline-block;
+  border: 1px solid transparent;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.login-redirect-btn:hover {
+  background-color: #333333;
+}
+
 #imageUpload {
     display: none;
 }
@@ -188,9 +205,17 @@
   padding: 0px 13px;
 }
 
-.fa-plus-circle, .fa-ban{
+#chat-with-friends {
+  margin-top: 50px;
+}
+
+.fa-plus-circle, .fa-times{
   font-size: 30px !important;
   color: #dc4734 !important;
+}
+
+.fa-envelope {
+  font-size: 200px !important;
 }
 
 .fa-pencil {
