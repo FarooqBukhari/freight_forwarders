@@ -31,7 +31,9 @@
                         <%= image_tag "profile-small-3.jpg"%>
                       <% end %>
                       <div class="meta">
-                        <% if conversation.inquiry_id != nil %>
+                        <% if conversation.inquiry_id != nil && conversation.quote_id != nil %>
+                          <p class="name"><%= op_user.name  %> (Quote)</p>
+                        <% elsif conversation.inquiry_id != nil %>
                           <p class="name"><%= op_user.name  %> (Inquiry)</p>
                         <% else %>
                           <p class="name"><%= op_user.name %></p>
@@ -52,7 +54,7 @@
         </div>
 
         <div class="tab-content" id="conversations-list">
-          <div id="no-conversation align-middle">
+          <div id="no-conversation" class="align-middle">
             <% if @conversations.blank? %>
               <div class="row">
                 <div class="col-12 align-self-center justify-content-center">
@@ -86,8 +88,10 @@
                 <% else %>
                   <%= image_tag "profile-small-3.jpg"%>
                 <% end %>
-                <% if conversation.inquiry_id != nil %>
-                  <p class="name"><%= op_user.name  %> (Inquiry)</p>
+                <% if conversation.inquiry_id != nil && conversation.quote_id != nil %>
+                  <p class="name"><%= op_user.name  %> ( <a target="_blank" href="<%= inquiry_quote_path(inquiry_id: conversation.inquiry_id, id: conversation.quote_id) %>">Quote</a> )</p>
+                <% elsif conversation.inquiry_id != nil %>
+                    <p class="name"><%= op_user.name  %> ( <a target="_blank" href="<%= inquiry_path(id: conversation.inquiry_id) %>">Inquiry</a> )</p>
                 <% else %>
                   <p class="name"><%= op_user.name %></p>
                 <% end %>

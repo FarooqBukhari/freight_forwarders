@@ -153,7 +153,9 @@
               <% if current_user == quote.user %>
                 <td><%= link_to '',  edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-pencil' %></td>
                 <td><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
-              <% end %>
+              <% else %>
+                <td> <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: quote.user.id, con_type: "Quote", inquiry_id: inquiry.id, quote_id: quote.id), method: :post, class: "btn btn-blue" %></td>
+            <% end %>
             </tr>
           <% end %>
         </tbody>
