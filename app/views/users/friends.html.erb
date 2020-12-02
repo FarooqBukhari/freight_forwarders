@@ -30,7 +30,7 @@
                 <%= link_to 'Cancel Request', cancel_request_path({id: @user.id}), class: 'edit-btn', method: :post, style: "color: white;" %>
               <% elsif @can_accept %>
                 <div class="row">
-                  <%= link_to 'Accept', add_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5", style: "background-color: powderblue"  %>
+                  <%= link_to 'Accept', add_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5" %>
                   <div class="col-md-1"></div>
                   <%= link_to 'Reject', reject_friend_path(id: @user.id), method: :post, class: "btn btn-primary col-md-5",  style: "background-color: orangered"  %>
                 </div>

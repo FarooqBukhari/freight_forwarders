@@ -76,7 +76,7 @@
           <div class="card-header">
             <i class="fa fa-area-chart"></i> Inquiries Generated Per Month</div>
           <div class="card-body">
-            <%= line_chart current_user.inquiries.group_by_month_of_year(:created_at).count %>
+            <%= line_chart current_user.inquiries.group_by_month_of_year(:created_at).count, colors: ['#dc4734'] %>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@
           <div class="card-header">
             <i class="fa fa-area-chart"></i> Quotations Received Per Month</div>
           <div class="card-body">
-            <%= line_chart current_user.quotes.group_by_month_of_year(:created_at).count %>
+            <%= line_chart current_user.quotes_received.group_by_month_of_year(:created_at).count, colors: ['#dc4734'] %>
           </div>
         </div>
       </div>

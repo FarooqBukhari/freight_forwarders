@@ -8,7 +8,7 @@
               <% if current_user.profile_picture.attached? %>
                 <%= image_tag url_for(current_user.profile_picture), class:"online" %>
               <% else %>
-                <%= image_tag "profile-small-3.jpg", class:"online"%>
+                <%= image_tag "avatar/user_default", class:"online"%>
               <% end %>
               <p><%= current_user.name %></p>
             </div>
@@ -28,7 +28,7 @@
                       <% if op_user.profile_picture.attached? %>
                         <%= image_tag url_for(op_user.profile_picture)%>
                       <% else %>
-                        <%= image_tag "profile-small-3.jpg"%>
+                        <%= image_tag "avatar/user_default"%>
                       <% end %>
                       <div class="meta">
                         <% if conversation.inquiry_id != nil && conversation.quote_id != nil %>
@@ -86,12 +86,12 @@
                 <% if op_user.profile_picture.attached? %>
                   <%= image_tag url_for(op_user.profile_picture)%>
                 <% else %>
-                  <%= image_tag "profile-small-3.jpg"%>
+                  <%= image_tag "avatar/user_default"%>
                 <% end %>
                 <% if conversation.inquiry_id != nil && conversation.quote_id != nil %>
-                  <p class="name"><%= op_user.name  %> ( <a target="_blank" href="<%= inquiry_quote_path(inquiry_id: conversation.inquiry_id, id: conversation.quote_id) %>">Quote</a> )</p>
+                  <p class="name"><%= op_user.name  %> <a target="_blank" class="label label-danger" href="<%= inquiry_quote_path(inquiry_id: conversation.inquiry_id, id: conversation.quote_id) %>">Quote</a> </p>
                 <% elsif conversation.inquiry_id != nil %>
-                    <p class="name"><%= op_user.name  %> ( <a target="_blank" href="<%= inquiry_path(id: conversation.inquiry_id) %>">Inquiry</a> )</p>
+                    <p class="name"><%= op_user.name  %> <a target="_blank" class="label label-primary" href="<%= inquiry_path(id: conversation.inquiry_id) %>">Inquiry</a> </p>
                 <% else %>
                   <p class="name"><%= op_user.name %></p>
                 <% end %>
@@ -108,7 +108,7 @@
                   <form class="new_message">
                     <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
                     <input name="user_id" type="hidden" value="<%= current_user.id %>">
-                    <input name="body" type="text" placeholder="Write your message..." style="width: 90%;border: none;font-size: medium; padding-left: 10px " />
+                    <input name="body" type="text" placeholder="Write your message..." style="width: 90%;box-sizing: border-box;border: 3px solid #ccc; ;font-size: small; padding-left: 10px " />
                     <button type="submit" value="Send" class="submit" ><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                   </form>
                 </div>
@@ -123,15 +123,16 @@
 </main>
 
 
-
+<% if @id != nil %>
 <script>
-  <% if @id %>
   var conversations = $('#conversations-list');
-  var conversation = conversations.find("[data-conversation-id='" + "<%= @id %>" + "']");
+  var id = <%= @id %>
+  var conversation = conversations.find("[data-conversation-id='" + id + "']");
   var ul = conversation.find('.commentList');
   var abc = conversation.find('.commentList li:last');
-  //$('#no-conversation').empty();
-
+  if (id !== 0) {
+      $('#no-conversation').empty();
+  }
   jQuery(ul).animate({scrollTop: $(ul).scrollTop() + jQuery(abc).offset().top + 30}, "slow");
-  <% end %>
 </script>
+<% end %>

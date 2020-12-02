@@ -41,6 +41,7 @@ class User < ApplicationRecord
   #Associations
   has_many :inquiries, inverse_of: :user, dependent: :destroy
   has_many :quotes, inverse_of: :user, dependent: :destroy
+  has_many :quotes_received, through: :inquiries, source: :quotes
 
   has_many :friended_users, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :frienders, through: :friended_users
@@ -83,17 +84,17 @@ class User < ApplicationRecord
   end
 
   def remove_friend(user)
-    Friendship.where(' (friendable_id = ? AND friend_id = ?) OR (friendable_id = ? AND friend_id = ?)',self.id, user.id, user.id, self.id).first.destroy
+    Friendship.where(' (friendable_id = ? AND friend_id = ?) OR (friendable_id = ? AND friend_id = ?)',id, user.id, user.id, id).first.destroy
   end
 
   def strangers
     users = []
     User.all.each do |user|
 
-      if(self.friends_with?(user) != true &&
+      if(friends_with?(user) != true &&
           self != user &&
-          self.isFriend(user).exists? != true &&
-          self.requester_users.find_by(requested_id: user.id) == nil)
+          isFriend(user).exists? != true &&
+          requester_users.find_by(requested_id: user.id) == nil)
         users << user
       end
     end
@@ -101,16 +102,16 @@ class User < ApplicationRecord
   end
 
   def my_friends
-    Friendship.where('friendable_id = ? OR friend_id = ?', self.id, self.id)
+    Friendship.where('friendable_id = ? OR friend_id = ?', id, id)
   end
 
   def isFriend(user)
-    @friends = self.my_friends
+    @friends = my_friends
     @friends.where('friendable_id = ? OR friend_id = ?', user.id, user.id)
   end
 
   def get_friend_users
-    Friendship.includes(:friended, :friender).where('friendable_id = ? OR friend_id = ?', self.id, self.id)
+    Friendship.includes(:friended, :friender).where('friendable_id = ? OR friend_id = ?', id, id)
   end
 
   def get_friends_users_array
@@ -122,11 +123,11 @@ class User < ApplicationRecord
   end
 
   def friendships
-    Friendship.where("friendable_id = ? OR friend_id = ?", self.id, self.id)
+    Friendship.where("friendable_id = ? OR friend_id = ?", id, id)
   end
 
   def all_conversations
-    Conversation.where("sender_id = ? OR recipient_id = ?", self.id, self.id)
+    Conversation.where("sender_id = ? OR recipient_id = ?", id, id)
   end
 
   def unread_messages_count
@@ -134,7 +135,7 @@ class User < ApplicationRecord
     count = 0
     all_conversations.each do |convo|
       convo.messages.each do |msg|
-        if msg.user_id != self.id
+        if msg.user_id != id
           all << msg
         end
       end
@@ -146,7 +147,6 @@ class User < ApplicationRecord
     end
     count
   end
-
 
 
   class << self

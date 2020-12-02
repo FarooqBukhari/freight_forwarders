@@ -59,8 +59,8 @@
           </aside>
         </div>
 
-        <div class="col-lg-6 order-1 order-lg-2">
-          <%= render 'users/inquiry_section' %>
+        <div class="col-lg-6 order-1 order-lg-2 mt-5">
+          <%#= render 'users/inquiry_section' %>
 
           <% @users.each do |user| %>
           <div class="card">
@@ -114,7 +114,7 @@
                             <h3 class="list-title"><a href="#"><strong><a href="<%= user_path(request.requester.id) %>"><%= request.requester.name %></a> </strong> requested to join your network</a></h3>
                             <p class="list-subtitle"><%= time_ago_in_words( request.created_at) %> ago</p>
                             <div class="row">
-                              <%= link_to 'Accept', add_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5", style: "background-color: powderblue"  %>
+                              <%= link_to 'Accept', add_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5"  %>
                               <div class="col-md-1"></div>
                               <%= link_to 'Reject', reject_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5",  style: "background-color: orangered"  %>
                             </div>
