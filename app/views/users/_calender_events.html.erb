@@ -1,6 +1,6 @@
 <div class="card">
   <%= month_calendar(attribute: :goods_ready_date, events: inquiries, previous_link: events_ajax_previous_link(@user.id), next_link: events_ajax_next_link(@user.id)) do |date, inquiry_events| %>
-    <%= date %>
+    <%= date.strftime('%d-%B-%y') %>
     <% inquiry_events.each do |inquiry| %>
     <div>
       <a href="<%= inquiry_path(inquiry) %>">

@@ -98,7 +98,7 @@ class User < ApplicationRecord
         users << user
       end
     end
-    users.to(5)
+    users.sample(5)
   end
 
   def my_friends
