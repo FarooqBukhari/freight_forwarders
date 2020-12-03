@@ -67,7 +67,7 @@
     <p class="pull-right post-desc">
       <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
     </p>
-    <p class="pull-left post-desc">
+    <p class="pull-left post-desc status-<%= inquiry.status %>">
       <strong class="goods-ready-dates-bold"> Status: </strong> <%= Inquiry.statuses[inquiry.status] %>
     </p>
   </div>
@@ -152,7 +152,7 @@
               <td><%= link_to '',  inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
               <% if current_user == quote.user %>
                 <td><%= link_to '',  edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-pencil' %></td>
-                <td><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+                <td><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-eraser' %></td>
               <% else %>
                 <td> <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: quote.user.id, con_type: "Quote", inquiry_id: inquiry.id, quote_id: quote.id), method: :post, class: "btn btn-blue" %></td>
             <% end %>

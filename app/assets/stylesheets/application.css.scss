@@ -100,8 +100,8 @@
 }
 
 .profile-thumb-large {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   text-align: center;
   horiz-align: center;
   overflow: hidden;
@@ -114,8 +114,8 @@
 }
 
 .profile-thumb-large img {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   /*border: 2px solid #1e1e25 !important;*/
   text-align: center;
   horiz-align: center;
@@ -242,6 +242,26 @@
 
 }
 
+.status-pending {
+  color: orange;
+}
+
+.status-receiving_quotes {
+  color: darkgreen;
+}
+
+.status-closed {
+  color: red;
+}
+
+.status-posted {
+  color: orange;
+}
+
+.status-selected {
+  color: darkgreen;
+}
+
 /* Calender Styling */
 .simple-calendar {
   .day {}
@@ -319,6 +339,18 @@ input[type=number] {
     height: 100%;
     overflow: auto;
   }
+}
+
+.highlighter {
+  color: #dc4734;
+}
+
+.card:last-child {
+  margin-bottom: 30px !important;
+}
+
+.friend-cards {
+  //margin-right: 10px;
 }
 
 /*

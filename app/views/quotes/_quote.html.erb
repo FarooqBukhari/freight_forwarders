@@ -88,7 +88,7 @@
     <p class="pull-left post-desc">
       <strong class="goods-ready-dates-bold"> Total Charges: </strong> <%= quote.total_price %>
     </p>
-    <p class="pull-right post-desc">
+    <p class="pull-right post-desc status-<%= quote.status %>">
       <strong class="goods-ready-dates-bold"> Status: </strong> <%= Quote.statuses[quote.status] %>
     </p>
   </div>

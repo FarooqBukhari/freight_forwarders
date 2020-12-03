@@ -143,7 +143,7 @@
               <td><%= inquiry.origin_country %></td>
               <td><%= inquiry.destination_location_type.split('_').map(&:capitalize).join(' ') %></td>
               <td><%= inquiry.destination_country %></td>
-              <td><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></td>
+              <td class="status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></td>
               <td><%=  time_ago_in_words inquiry.created_at %></td>
               <td><%= link_to "<i class='fa fa-eye'> <i/>".html_safe, inquiry_path(inquiry) %></td>
               <td><%= link_to "<i class='fa fa-pencil'> <i/>".html_safe, edit_inquiry_path(inquiry) %></td>

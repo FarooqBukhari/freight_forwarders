@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     users_to_remove = current_user.get_friends_users_array
-    users_to_remove << current_user
+    users_to_remove = users_to_remove << current_user
     users_to_remove = users_to_remove.pluck(:id)
     @pagy, @users = pagy(User.where.not(id: users_to_remove), items: 10)
     @recommendations = current_user.strangers

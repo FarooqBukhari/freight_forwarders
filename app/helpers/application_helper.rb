@@ -17,4 +17,8 @@ module ApplicationHelper
   def events_ajax_next_link(user_id)
     ->(param, date_range) { link_to my_calender_user_path(id: user_id), {param => date_range.last + 1.day}, remote: :true}
   end
+
+  def check_attribute_presence(value)
+    value.present?
+  end
 end
