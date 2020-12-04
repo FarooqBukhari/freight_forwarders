@@ -2,5 +2,10 @@
 // They will automatically be included in application.css.scss.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@import "landing_page/libraries";
-@import "landing_page/landing";
+
+@import "./landing_page/bootstrap.min";
+@import "./landing_page/icofont.min";
+@import "./landing_page/animate.min";
+@import "./landing_page/owl.carousel.min";
+@import "./landing_page/venobox.min";
+@import "./landing_page/style";
