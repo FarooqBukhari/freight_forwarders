@@ -52,7 +52,8 @@ gem 'simple_form'
 gem 'unread'
 gem "chartkick"
 gem 'groupdate'
-gem "simple_calendar", "~> 2.0"
+gem "simple_calendar"
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

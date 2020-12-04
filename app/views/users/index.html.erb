@@ -62,7 +62,7 @@
         <div class="col-lg-6 order-2 order-lg-2">
           <div class="row">
           <% @users.each do |user| %>
-          <div class="card col-md-6 col-sm-12 friend-cards" style="padding: 15px 30px 0px 30px;">
+          <div class="card col-md-6 col-sm-12 friend-cards" style="padding: 15px 30px 0px 30px">
             <div class="post-title d-flex align-items-center">
               <!-- profile picture end -->
               <div class="profile-thumb justify-content-center">
@@ -76,8 +76,9 @@
                     <% if current_user.isFriend(user).exists? %>
                       <%= link_to "<i class='fa fa-minus'></i>".html_safe ,reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
                     <% else %>
-                      <%= link_to "<i class='fa fa-plus'></i>".html_safe ,add_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+                      <%= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
                     <% end %>
+
                       <hr>
                       <%= link_to "<i class='fa fa-comments'></i>".html_safe ,conversations_path(user_id: user.id, con_type: "User"), method: :post, class: "btn btn-blue highlighter" %>
                   </div>

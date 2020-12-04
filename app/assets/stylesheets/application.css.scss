@@ -14,11 +14,11 @@
  *= require select2
  *= require select2-bootstrap
  *= require bootstrap-datepicker
- *= require simple_calendar
-
  */
 
+@import "simple_calendar";
 @import "../fonts/flaticon";
+@import "../fonts/fontawesome.min";
 @import "./theme_files/vendor/bootstrap.min";
 @import "theme_files/vendor/bicon.min.css";
 @import "./theme_files/vendor/flaticon";
@@ -276,7 +276,7 @@
 
   .today {
     a {
-      color: #dc4734 !important;
+      //color: #dc4734 !important;
     }
   }
   .past {}
@@ -295,6 +295,47 @@
     a {
       color: #ffffff;
     }
+  }
+
+  .calendar-heading {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .calendar-heading > a {
+    margin: 0px 20px 0px 20px;
+    font-size: large;
+    text-decoration: none;
+    color: black;
+  }
+
+  .calendar-heading > a:first-child::before {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: large;
+    content: "\f04a";
+    margin-right: 20px;
+  }
+
+  .calendar-heading a:nth-of-type(2)::after {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: large;
+    content: "\f04e";
+    margin-left: 20px;
+  }
+
+  .calendar-title {
+    font-size: xx-large;
+    color: #dc4734;
   }
 }
 

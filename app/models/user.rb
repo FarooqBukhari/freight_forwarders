@@ -42,6 +42,7 @@ class User < ApplicationRecord
   has_many :inquiries, inverse_of: :user, dependent: :destroy
   has_many :quotes, inverse_of: :user, dependent: :destroy
   has_many :quotes_received, through: :inquiries, source: :quotes
+  has_many :quoted_inquiry, through: :quotes, source: :inquiry
 
   has_many :friended_users, foreign_key: :friend_id, class_name: 'Friendship'
   has_many :frienders, through: :friended_users

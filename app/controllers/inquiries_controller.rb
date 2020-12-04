@@ -7,7 +7,7 @@ class InquiriesController < ApplicationController
   # GET /inquiries
   # GET /inquiries.json
   def index
-    @inquiries = Inquiry.where("user_id != ?", current_user.id)
+    @inquiries = Inquiry.current_user_friends_inquiries(current_user).order! 'created_at DESC'
   end
 
   # GET /inquiries/1

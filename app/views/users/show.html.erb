@@ -63,6 +63,14 @@
           <!-- share box end -->
           <!-- post status start -->
           <%= render 'inquiries/inquiries', inquiries: @inquiries %>
+
+          <% if @inquiries.length == 0 %>
+            <% if @user == current_user %>
+              <h2 style="text-align: center"> No quotes found. <a style="color: #dc4734" href="<%= inquiries_path %>">Give a Quote</a></h2>
+            <% else %>
+              <h2 style="text-align: center"> This user has not posted any Inquiries</h2>
+        <% end %>
+          <% end %>
           <!-- post status end -->
         </div>
       </div>

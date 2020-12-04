@@ -5,7 +5,8 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    users_to_remove = current_user.get_friends_users_array
+    # users_to_remove = current_user.get_friends_users_array
+    users_to_remove = []
     users_to_remove = users_to_remove << current_user
     users_to_remove = users_to_remove.pluck(:id)
     @pagy, @users = pagy(User.where.not(id: users_to_remove), items: 10)
@@ -33,7 +34,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     if current_user == @user
-      @inquiries = Inquiry.current_user_friends_inquiries(current_user)
+      @inquiries = current_user.quoted_inquiry
     else
       @inquiries = @user.inquiries
     end
