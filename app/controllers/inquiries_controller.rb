@@ -7,7 +7,7 @@ class InquiriesController < ApplicationController
   # GET /inquiries
   # GET /inquiries.json
   def index
-    @inquiries = Inquiry.current_user_friends_inquiries(current_user).order! 'created_at DESC'
+    @pagy, @inquiries = pagy(Inquiry.current_user_friends_inquiries(current_user), items: 5)
   end
 
   # GET /inquiries/1

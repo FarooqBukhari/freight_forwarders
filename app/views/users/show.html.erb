@@ -69,8 +69,13 @@
               <h2 style="text-align: center"> No quotes found. <a style="color: #dc4734" href="<%= inquiries_path %>">Give a Quote</a></h2>
             <% else %>
               <h2 style="text-align: center"> This user has not posted any Inquiries</h2>
-        <% end %>
+            <% end %>
           <% end %>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="display: <%= @inquiries.count > 0 ? 'block' : 'none' %>; text-align: center"> <%== pagy_bootstrap_nav(@pagy) %> </div>
+            <div class="col-md-4"></div>
+          </div>
           <!-- post status end -->
         </div>
       </div>

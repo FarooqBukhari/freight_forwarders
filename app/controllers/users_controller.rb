@@ -34,9 +34,9 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     if current_user == @user
-      @inquiries = current_user.quoted_inquiry
+      @pagy, @inquiries = pagy(current_user.quoted_inquiry, items: 5)
     else
-      @inquiries = @user.inquiries
+      @pagy, @inquiries = pagy(@user.inquiries, items: 5)
     end
     @is_friend = current_user.isFriend(@user).exists?
     @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )

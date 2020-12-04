@@ -34,7 +34,7 @@ class Inquiry < ApplicationRecord
   end
 
   def self.current_user_friends_inquiries(current_user)
-    Inquiry.where(user_id: current_user.get_friends_users_array.pluck(:id))
+    Inquiry.where(user_id: current_user.get_friends_users_array.pluck(:id)).order! 'created_at DESC'
   end
 
   #Callback functions
