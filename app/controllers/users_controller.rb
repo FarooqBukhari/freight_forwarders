@@ -12,6 +12,7 @@ class UsersController < ApplicationController
     @pagy, @users = pagy(User.where.not(id: users_to_remove), items: 10)
     @recommendations = current_user.strangers
     @requested_users = current_user.requested_users
+    @requester_users = current_user.requester_users
   end
 
   def my_inquiries

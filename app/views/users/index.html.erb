@@ -74,9 +74,16 @@
                 <div class="d-flex flex-row">
                   <div class="d-flex">
                     <% if current_user.isFriend(user).exists? %>
-                      <%= link_to "<i class='fa fa-minus'></i>".html_safe ,reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+                      <%= link_to "<i class='fa fa-minus'></i>".html_safe ,remove_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
                     <% else %>
-                      <%= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+                      <% if @requested_users.include(user) %>
+                        <%= link_to "<i class='fa fa-thumbs-down'></i>".html_safe, cancel_request_path({id: user.id}), class: "btn btn-blue highlighter", method: :post %>
+                      <% else if @requester_users.include(user) %>
+                        <%= link_to "<i class='fa fa-handshake-o'></i>".html_safe, add_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+                        <%= link_to "<i class='fa fa-thumbs-o-down'></i>".html_safe, reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+                      <% else %>
+                        <%= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+                      <% end %>
                     <% end %>
 
                       <hr>
