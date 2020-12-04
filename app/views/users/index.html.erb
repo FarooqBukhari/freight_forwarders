@@ -42,7 +42,7 @@
                     <!-- profile picture end -->
 
                     <div class="unorder-list-info">
-                      <h3 class="list-title"><a href="<%= user_path(user.id) %>"><%= user.name %></a></h3>
+                      <h3 class="list-title m-0"><a href="<%= user_path(user.id) %>"><%= user.name %></a></h3>
                       <p class="list-subtitle"><a> <i class="fa fa-address-card" aria-hidden="true"></i> <%= user.job_title %></a></p>
                     </div>
                     <button class="like-button active">
@@ -76,18 +76,19 @@
                     <% if current_user.isFriend(user).exists? %>
                       <%= link_to "<i class='fa fa-minus'></i>".html_safe ,remove_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
                     <% else %>
-                      <% if @requested_users.include(user) %>
-                        <%= link_to "<i class='fa fa-thumbs-down'></i>".html_safe, cancel_request_path({id: user.id}), class: "btn btn-blue highlighter", method: :post %>
-                      <% else if @requester_users.include(user) %>
+                      <% if @requester_users.include?(user.id) %>
+                        <%= link_to "<i class='fa fa-thumbs-down'></i>".html_safe, cancel_request_path({id: user.id}), method: :post, class: "btn btn-blue highlighter" %>
+                      <% elsif @requested_users.include?(user.id) %>
                         <%= link_to "<i class='fa fa-handshake-o'></i>".html_safe, add_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
                         <%= link_to "<i class='fa fa-thumbs-o-down'></i>".html_safe, reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
                       <% else %>
                         <%= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
                       <% end %>
                     <% end %>
-
-                      <hr>
+                    <hr>
+                    <% if !@requested_users.include?(user.id) %>
                       <%= link_to "<i class='fa fa-comments'></i>".html_safe ,conversations_path(user_id: user.id, con_type: "User"), method: :post, class: "btn btn-blue highlighter" %>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -121,7 +122,7 @@
                   <h4 class="widget-title">Network Requests (<%= @requested_users.count %>)</h4>
                   <div class="widget-body">
                     <ul class="like-page-list-wrapper">
-                      <% @requested_users.each do |request| %>
+                      <% @friend_requests.each do |request| %>
                         <li class="unorder-list">
                           <!-- profile picture end -->
                           <div class="profile-thumb">
@@ -134,7 +135,7 @@
                           <!-- profile picture end -->
 
                           <div class="unorder-list-info">
-                            <h3 class="list-title"><a href="#"><strong><a href="<%= user_path(request.requester.id) %>"><%= request.requester.name %></a> </strong> requested to join your network</a></h3>
+                            <h3 class="list-title m-0"><a href="#"><strong><a href="<%= user_path(request.requester.id) %>"><%= request.requester.name %></a> </strong> requested to join your network</a></h3>
                             <p class="list-subtitle"><%= time_ago_in_words( request.created_at) %> ago</p>
                             <div class="row">
                               <%= link_to 'Accept', add_friend_path(id: request.requester.id), method: :post, class: "btn btn-primary col-md-5"  %>
