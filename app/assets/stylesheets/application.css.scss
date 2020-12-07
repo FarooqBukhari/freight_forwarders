@@ -152,10 +152,6 @@
   margin-top: 0px !important;
 }
 
-.table > thead > tr > th{
-  color: #dc4734;
-}
-
 .goods-ready-dates-bold {
   color: #dc4734;
 }
@@ -224,12 +220,11 @@
 }
 
 .inquiry-manage-option {
-  color: #000 !important;
+  color: #fff !important;
 }
 
 .inquiry-manage-option:hover {
-  text-decoration: underline;
-  color: #dc4734 !important;
+  text-decoration: none;
 }
 
 .select2-container{ width: 100% !important; }
@@ -242,24 +237,24 @@
 
 }
 
-.status-pending {
-  color: orange;
+.badge-status-pending {
+  background-color: orange;
 }
 
-.status-receiving_quotes {
-  color: darkgreen;
+.badge-status-receiving_quotes {
+  background-color: darkgreen;
 }
 
-.status-closed {
-  color: red;
+.badge-status-closed {
+  background-color: red;
 }
 
-.status-posted {
-  color: orange;
+.badge-status-posted {
+  background-color: orange;
 }
 
-.status-selected {
-  color: darkgreen;
+.badge-status-selected {
+  background-color: darkgreen;
 }
 
 /* Calender Styling */
@@ -394,6 +389,39 @@ input[type=number] {
   //margin-right: 10px;
 }
 
+/* varaibles defined here*/
+
+$base-spacing-unit: 24px;
+$half-spacing-unit: $base-spacing-unit / 2;
+.table-header {
+    width: 100%;
+    background: #dc4734;
+    padding: ($half-spacing-unit * 1.5) 0;
+    th {
+        color: white;
+    }
+}
+
+.table-row {
+    width: 100%;
+    padding: ($half-spacing-unit * 1.5) 0;
+    &:nth-of-type(odd) {
+        background: #EEEEEE;
+        ;
+    }
+}
+
+.table-data,
+.header__item {
+    flex: 1 1 20%;
+    text-align: center;
+}
+
+.header__item {
+    text-transform: uppercase;
+    color: #fff;
+}
+
 /*
  * Off Canvas wider at sm breakpoint
  * --------------------------------------------------
@@ -438,20 +466,6 @@ input[type=number] {
   -ms-transform: rotate(-44deg);
   transform: rotate(-44deg);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .content-wrapper {
   min-height: calc(100vh - 56px);

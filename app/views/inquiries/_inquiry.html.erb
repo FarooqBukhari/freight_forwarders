@@ -32,32 +32,32 @@
   </div>
   <!-- post title start -->
   <div class="post-content">
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-4">Origin Location Type</th>
           <th class="col-md-4">Origin Country</th>
           <th class="col-md-4">Origin Address</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-row">
           <td class="col-md-4"><%= Inquiry.origin_location_types[inquiry.origin_location_type] %></td>
           <td class="col-md-4"><%= country_name(inquiry.origin_country) %></td>
           <td class="col-md-4"><%= inquiry.origin_address %></td>
         </tr>
       </tbody>
     </table>
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-4">Destination Location Type</th>
           <th class="col-md-4">Destination Country</th>
           <th class="col-md-4">Destination Address</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr class="table-row">
           <td class="col-md-4"><%= Inquiry.destination_location_types[inquiry.destination_location_type] %></td>
           <td class="col-md-4"><%= country_name(inquiry.destination_country) %></td>
           <td class="col-md-4"><%= inquiry.destination_address %></td>
@@ -67,18 +67,64 @@
     <p class="pull-right post-desc">
       <strong class="goods-ready-dates-bold"> Goods ready by: </strong> <%= inquiry.goods_ready_date %>
     </p>
-    <p class="pull-left post-desc status-<%= inquiry.status %>">
-      <strong class="goods-ready-dates-bold"> Status: </strong> <%= Inquiry.statuses[inquiry.status] %>
+    <p class="pull-left post-desc">
+      <strong class="goods-ready-dates-bold"> Status: </strong><span class="badge badge-status-<%= inquiry.status %>"> <%= Inquiry.statuses[inquiry.status] %> </span>
     </p>
+  </div>
+</div>
+
+<div class="card inquiry-items">
+  <h2 class="goods-ready-dates-bold">Delivery Specifics</h2>
+  <div class="post-content">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr class="table-header">
+          <th class="col-md-2">Transport Mode</th>
+          <th class="col-md-3">Item Type</th>
+          <th class="col-md-3">INCO Term</th>
+          <th class="col-md-2">Custom Clearance</th>
+          <th class="col-md-1">Personal</th>
+          <th class="col-md-1">Hazardous</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-row">
+          <td class="col-md-2"><%= Inquiry.transport_modes[inquiry.transport_mode] %></td>
+          <td class="col-md-3"><%= Inquiry.item_types[inquiry.item_type] %></td>
+          <td class="col-md-3"><%= Inquiry.inco_terms[inquiry.inco_terms] %></td>
+          <td class="col-md-2">
+            <% if inquiry.need_custom_clearance %>
+              <span class="label label-success"><i class="fa fa-check-circle"></i></span>
+            <% else %>
+              <span class="label label-warning"><i class="fa fa-times-circle"></i></span>
+            <% end %>
+          </td>
+          <td class="col-md-1">
+            <% if inquiry.is_personal %>
+              <span class="label label-success"><i class="fa fa-check-circle"></i></span>
+            <% else %>
+              <span class="label label-warning"><i class="fa fa-times-circle"></i></span>
+            <% end %>
+          </td>
+          <td class="col-md-1">
+            <% if inquiry.is_hazardous %>
+              <span class="label label-success"><i class="fa fa-check-circle"></i></span>
+            <% else %>
+              <span class="label label-warning"><i class="fa fa-times-circle"></i></span>
+            <% end %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <div class="card inquiry-items">
   <h2 class="goods-ready-dates-bold">Inquiry Items</h2>
   <div class="post-content">
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-4">Commodity</th>
           <th class="col-md-2">No. of Units</th>
           <th class="col-md-4">Dimensions <span>L*W*H</span></th>
@@ -87,7 +133,7 @@
       </thead>
       <tbody>
         <% inquiry.inquiry_items.each do |item| %>
-          <tr>
+          <tr class="table-row">
             <td class="col-md-4"><%= item.commodity %></td>
             <td class="col-md-2"><%= item.number_of_units %></td>
             <td class="col-md-4"><%= item.length.to_s + '*' + item.width.to_s + '*' + item.heigth.to_s %></td>
@@ -103,24 +149,24 @@
   <div class="card inquiry-items">
     <h2 class="goods-ready-dates-bold">Selected Quote</h2>
     <div class="post-content">
-      <table class="table table-striped">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-          <tr>
+          <tr class="table-header">
             <th>Price</th>
             <th>User</th>
             <th colspan=2 >Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr class="table-row">
             <td><%= inquiry.selected_quote.total_price %></td>
             <td><%= inquiry.selected_quote.user.name %></td>
             <% if current_user == inquiry.user %>
-              <td><%= link_to '',  deselect_quote_inquiry_quote_path(inquiry, inquiry.selected_quote), method: :patch, data: { confirm: 'Do you want to deselect this Quote?' }, class: 'inquiry-manage-option fa fa-trash' %></td>
+              <td><span class="label label-warning"><%= link_to '',  deselect_quote_inquiry_quote_path(inquiry, inquiry.selected_quote), method: :patch, data: { confirm: 'Do you want to deselect this Quote?' }, class: 'inquiry-manage-option fa fa-ban' %> Deselect</span></td>
             <% end %>
-            <td><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
+            <td><span class="label label-primary"><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), class: 'inquiry-manage-option fa fa-info-circle' %> Show</span></td>
             <% if current_user == inquiry.selected_quote.user %>
-              <td><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-times' %></td>
+              <td><span class="label label-danger"><%= link_to '',  inquiry_quote_path(inquiry, inquiry.selected_quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-trash' %> Delete</span></td>
             <% end %>
           </tr>
         </tbody>
@@ -133,9 +179,9 @@
 <div class="card inquiry-items">
     <h2 class="goods-ready-dates-bold">Received Quotes</h2>
     <div class="post-content">
-      <table class="table table-striped">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-          <tr>
+          <tr class="table-header">
             <th>Price</th>
             <th>User</th>
             <th colspan=3 >Actions</th>
@@ -143,18 +189,18 @@
         </thead>
         <tbody>
           <% inquiry.quotes.each do |quote| %>
-            <tr>
+            <tr class="table-row">
               <td><%= quote.total_price %></td>
               <td><%= quote.user.name %></td>
               <% if current_user == inquiry.user && inquiry.selected_quote.nil? %>
-                <td><%= link_to '',  select_quote_inquiry_quote_path(inquiry, quote), method: :patch, data: { confirm: 'Do you want to select this Quote?' }, class: 'inquiry-manage-option fa fa-check' %></td>
+                <td><span class="label label-success"><%= link_to '',  select_quote_inquiry_quote_path(inquiry, quote), method: :patch, data: { confirm: 'Do you want to select this Quote?' }, class: 'inquiry-manage-option fa fa-check' %> Select</span></td>
               <% end %>
-              <td><%= link_to '',  inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-info-circle' %></td>
+              <td><span class="label label-primary"><%= link_to '',  inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-info-circle' %> Show</span></td>
               <% if current_user == quote.user %>
-                <td><%= link_to '',  edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-pencil' %></td>
-                <td><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-eraser' %></td>
+                <td><span class="label label-warning"><%= link_to '',  edit_inquiry_quote_path(inquiry, quote), class: 'inquiry-manage-option fa fa-pencil' %> Edit</span></td>
+                <td><span class="label label-danger"><%= link_to '',  inquiry_quote_path(inquiry, quote), method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-eraser' %> Delete</span></td>
               <% else %>
-                <td> <%= link_to "<i class='fa fa-comment'></i>".html_safe ,conversations_path(user_id: quote.user.id, con_type: "Quote", inquiry_id: inquiry.id, quote_id: quote.id), method: :post, class: "btn btn-blue" %></td>
+                <td><span class="label label-info"><%= link_to "".html_safe ,conversations_path(user_id: quote.user.id, con_type: "Quote", inquiry_id: inquiry.id, quote_id: quote.id), method: :post, class: "inquiry-manage-option fa fa-comments" %> Chat</span></td>
             <% end %>
             </tr>
           <% end %>

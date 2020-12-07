@@ -2,9 +2,9 @@
   <% if inquiries.present? %>
     <h2>Inquiries Posted By <strong class="goods-ready-dates-bold" ><%= inquiries.first.user.name %></strong> </h2>
     <div class="post-content">
-      <table class="table table-striped">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-          <tr>
+          <tr class="table-header">
             <th>Source</th>
             <th>Destination</th>
             <th>Good Ready By</th>
@@ -14,14 +14,14 @@
         </thead>
         <tbody>
           <% inquiries.each do |inquiry| %>
-          <tr>
+          <tr class="table-row">
             <td><%= '( '+ Inquiry.origin_location_types[inquiry.origin_location_type] + ' ) ' + inquiry.origin_address + ', ' + inquiry.origin_country %></td>
             <td><%= '( '+ Inquiry.destination_location_types[inquiry.destination_location_type] + ' ) ' + inquiry.destination_address + ', ' + inquiry.destination_country %></td>
             <td><%= inquiry.goods_ready_date %></td>
-            <td class="status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %> </td>
-            <td><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %></td>
-            <td><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-trash' %></td>
-            <td><%= link_to '', inquiry, class: 'inquiry-manage-option fa fa-eye' %></td>
+            <td><span class="badge badge-status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></span></td>
+            <td><span class="label label-warning"><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %> Edit</span></td>
+            <td><span class="label label-danger"><%= link_to '', inquiry, method: :delete, data: { confirm: 'Are you sure?' }, class: 'inquiry-manage-option fa fa-trash' %> Delete</span></td>
+            <td><span class="label label-success"><%= link_to '', inquiry, class: 'inquiry-manage-option fa fa-eye' %> Show</span></td>
           </tr>
           <% end %>
         </tbody>

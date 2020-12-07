@@ -27,6 +27,12 @@
           <%= f.input :website, as: :url, input_html: {autocomplete: "website", class:"single-field", placeholder: "Company Website Url"} %>
         </div>
         <div class="col-12">
+          <%= f.input :country, as: :country, prompt: "Select country", input_html: { :class=> "single-field select2-dropdown"} %>
+        </div>
+        <div class="col-12">
+          <%= f.input :company_name, as: :url, input_html: {autocomplete: "website", class:"single-field", placeholder: "Company Name"} %>
+        </div>
+        <div class="col-12">
           <%= f.input :job_title, input_html: {autocomplete: "job_title", class:"single-field", placeholder: "Job Title"} %>
         </div>
         <div class="col-12">

@@ -125,7 +125,7 @@
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
-            <tr>
+            <tr class="table-header">
               <th>Origin Location Type</th>
               <th>Origin Country</th>
               <th>Destination Location Type</th>
@@ -138,15 +138,15 @@
             </thead>
             <tbody>
             <% current_user.inquiries.last(10).each do |inquiry| %>
-            <tr>
+            <tr class="table-row">
               <td><%= inquiry.origin_location_type.split('_').map(&:capitalize).join(' ') %></td>
               <td><%= inquiry.origin_country %></td>
               <td><%= inquiry.destination_location_type.split('_').map(&:capitalize).join(' ') %></td>
               <td><%= inquiry.destination_country %></td>
-              <td class="status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></td>
+              <td><span class="badge badge-status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></span></td>
               <td><%=  time_ago_in_words inquiry.created_at %></td>
-              <td><%= link_to "<i class='fa fa-eye'> <i/>".html_safe, inquiry_path(inquiry) %></td>
-              <td><%= link_to "<i class='fa fa-pencil'> <i/>".html_safe, edit_inquiry_path(inquiry) %></td>
+              <td><span class="label label-success"><%= link_to "".html_safe, inquiry_path(inquiry), class:"inquiry-manage-option fa fa-eye" %> Show</span></td>
+              <td><span class="label label-warning"><%= link_to "".html_safe, edit_inquiry_path(inquiry), class:"inquiry-manage-option fa fa-edit" %> Edit</span></td>
             </tr>
             <% end %>
             </tbody>

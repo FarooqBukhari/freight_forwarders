@@ -6,7 +6,13 @@
                     <div class="row no-gutters">
                         <div class="col-12 d-flex align-items-center justify-content-center">
                             <div class="signup-form-wrapper">
-                                <h1 class="create-acc text-center">Post An Inquiry</h1>
+                                <h1 class="create-acc text-center">
+                                  <% if action_name == 'new' %>
+                                    Post An Inquiry
+                                  <% else %>
+                                    Update Inquiry
+                                  <% end %>
+                                </h1>
                                 <div class="signup-inner inquiry-inner text-center">
                                     <%= simple_form_for inquiry, html: {id: 'inquiry-form'} do |f| %>
                                       <h3 class="title">Where are you shipping from?</h3>
@@ -46,6 +52,37 @@
                                           </div>
                                         </div>
                                       </div>
+                                      <h3 class="title">Do you have any special instructions for the delivery?</h3>
+                                      <div class="signup-inner--form less-spacing-form-part">
+                                        <div class="row">
+                                          <div class="col-md-12">
+                                            <%= f.input :special_instructions, input_html: { class: "single-field", placeholder: 'Special instructions', style:"min-height: 100px;" } %>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <h3 class="title">Delivery Specifics</h3>
+                                      <div class="signup-inner--form less-spacing-form-part">
+                                        <div class="row">
+                                          <div class="col-md-4">
+                                            <%= f.input :transport_mode, collection: Inquiry.transport_modes, label_method: :second, value_method: :first, prompt: "Select transport mode", input_html: { :class=> "single-field select2-dropdown"} %>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <%= f.input :item_type, collection: Inquiry.item_types, label_method: :second, value_method: :first, prompt: "Select item type", input_html: { :class=> "single-field select2-dropdown"} %>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <%= f.input :inco_terms, collection: Inquiry.inco_terms, label_method: :second, value_method: :first, prompt: "Select INCO term", input_html: { :class=> "single-field select2-dropdown"} %>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <%= f.input :need_custom_clearance, wrapper: :vertical_collection_inline %>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <%= f.input :is_personal, wrapper: :vertical_collection_inline %>
+                                          </div>
+                                          <div class="col-md-4">
+                                            <%= f.input :is_hazardous, wrapper: :vertical_collection_inline %>
+                                          </div>
+                                        </div>
+                                      </div>
                                       <h3 class="title">What are you shipping?</h3>
                                       <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
@@ -62,7 +99,7 @@
                                           </div>
                                           <div class="col-4"></div>
                                           <div class="col-4">
-                                            <%= f.button :submit, "Post Inquiry", class: "submit-btn" %>
+                                            <%= f.button :submit, action_name == 'new' ? "Post Inquiry" : "Update Inquiry", class: "submit-btn" %>
                                           </div>
                                         </div>
                                       </div>

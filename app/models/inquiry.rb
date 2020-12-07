@@ -15,10 +15,16 @@ class Inquiry < ApplicationRecord
   ORIGIN_LOCATION_TYPE = {src_residential: 'Residential', src_factory_warehouse: 'Factory / Warehouse', src_airport_port: 'Port / Airport (FOB)'}
   DESTINATION_LOCATION_TYPE = {dest_residential: 'Residential', dest_factory_warehouse: 'Factory / Warehouse', dest_airport_port: 'Port / Airport (FOB)'}
   STATUS = {pending: "Pending", receiving_quotes: "Receiving Quotes", closed: "Closed"}
+  MODE_OF_FREIGHT = {air: "Air", sea: "Sea"}
+  TYPE_OF_UNIT = {cartons: "Cartons", pallets: "Pallets"}
+  INCO_TERM = {exw: "EXW", fob: "FOB", dap: "DAP", ddp: "DDP"}
   #Enums
   enum origin_location_type: ORIGIN_LOCATION_TYPE
   enum destination_location_type: DESTINATION_LOCATION_TYPE
   enum status: STATUS
+  enum transport_mode: MODE_OF_FREIGHT
+  enum item_type: TYPE_OF_UNIT
+  enum inco_terms: INCO_TERM
   #Validations
   validates :origin_country, :origin_address,
    :destination_country, :destination_address,
@@ -26,6 +32,9 @@ class Inquiry < ApplicationRecord
   validates :status, inclusion: { in: statuses.keys }
   validates :origin_location_type, inclusion: { in: origin_location_types.keys }
   validates :destination_location_type, inclusion: { in: destination_location_types.keys }
+  validates :transport_mode, inclusion: { in: transport_modes.keys }
+  validates :item_type, inclusion: { in: item_types.keys }
+  validates :inco_terms, inclusion: { in: inco_terms.keys }
   validates_associated :inquiry_items
   #Scopes
 

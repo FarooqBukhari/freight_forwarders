@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_063949) do
+ActiveRecord::Schema.define(version: 2020_12_07_103418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,13 @@ ActiveRecord::Schema.define(version: 2020_12_02_063949) do
     t.decimal "origin_lng", precision: 10, scale: 6
     t.decimal "destination_lat", precision: 10, scale: 6
     t.decimal "destination_lng", precision: 10, scale: 6
+    t.text "special_instructions", default: ""
+    t.string "transport_mode", default: "0"
+    t.string "item_type", default: "0"
+    t.string "inco_terms", default: "0"
+    t.boolean "need_custom_clearance", default: false
+    t.boolean "is_hazardous", default: false
+    t.boolean "is_personal", default: false
     t.index ["deleted_at"], name: "index_inquiries_on_deleted_at"
     t.index ["user_id"], name: "index_inquiries_on_user_id"
   end
@@ -177,6 +184,8 @@ ActiveRecord::Schema.define(version: 2020_12_02_063949) do
     t.string "website", default: "", null: false
     t.string "job_title", default: "", null: false
     t.datetime "deleted_at"
+    t.string "company_name", default: ""
+    t.string "country", default: ""
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true

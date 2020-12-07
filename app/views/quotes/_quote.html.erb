@@ -33,9 +33,9 @@
   <!-- post title start -->
   <div class="post-content">
     <h2 class="goods-ready-dates-bold">Carrier Charges</h2>
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-4">Carrier Name</th>
           <th class="col-md-2">Amount</th>
           <th class="col-md-6">Routing</th>
@@ -43,8 +43,8 @@
       </thead>
       <tbody>
         <% quote.carrier_quote_items.each do |quote_item| %>
-          <tr>
-            <td class="col-md-4"><%= quote_item.name %></td>
+          <tr class="table-row">
+            <td class="col-md-4"><%= QuoteItem.carrier_names[quote_item.name] %></td>
             <td class="col-md-2"><%= quote_item.amount %></td>
             <td class="col-md-6"><%= quote_item.routing %></td>
           </tr>
@@ -52,16 +52,16 @@
       </tbody>
     </table>
     <h2 class="goods-ready-dates-bold">Origin based Service Charges</h2>
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-8">Service</th>
           <th class="col-md-4">Amount</th>
         </tr>
       </thead>
       <tbody>
         <% quote.origin_quote_items.each do |quote_item| %>
-          <tr>
+          <tr class="table-row">
             <td class="col-md-8"><%= quote_item.name %></td>
             <td class="col-md-4"><%= quote_item.amount %></td>
           </tr>
@@ -69,16 +69,16 @@
       </tbody>
     </table>
     <h2 class="goods-ready-dates-bold">Destination based Service Charges</h2>
-    <table class="table table-striped">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
-        <tr>
+        <tr class="table-header">
           <th class="col-md-8">Service</th>
           <th class="col-md-4">Amount</th>
         </tr>
       </thead>
       <tbody>
         <% quote.destination_quote_items.each do |quote_item| %>
-          <tr>
+          <tr class="table-row">
             <td class="col-md-8"><%= quote_item.name %></td>
             <td class="col-md-4"><%= quote_item.amount %></td>
           </tr>
@@ -88,8 +88,8 @@
     <p class="pull-left post-desc">
       <strong class="goods-ready-dates-bold"> Total Charges: </strong> <%= quote.total_price %>
     </p>
-    <p class="pull-right post-desc status-<%= quote.status %>">
-      <strong class="goods-ready-dates-bold"> Status: </strong> <%= Quote.statuses[quote.status] %>
+    <p class="pull-right post-desc">
+      <strong class="goods-ready-dates-bold"> Status: </strong><span class="badge badge-status-<%= quote.status %>"> <%= Quote.statuses[quote.status] %> </span>
     </p>
   </div>
 </div>
