@@ -7,11 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #
 25.times do
-  User.create(
-      name: Faker::Name.name_with_middle,
-      job_title: Faker::Job.title,
-      email: Faker::Internet.email,
-      website: Faker::Internet.url,
-      encrypted_password: '123456'
-  )
+  user = User.new( name: Faker::Name.name_with_middle, job_title: Faker::Job.title, email: Faker::Internet.email, website: Faker::Internet.url, encrypted_password: '$2a$12$nTLaFMr/C59jtU4vshxPWutnuL9cditzcwWafRxH5ywh3q26eU6j2')
+  user.save(validate: false )
 end
