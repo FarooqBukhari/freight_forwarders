@@ -9,7 +9,9 @@
                                 <h1 class="create-acc text-center">Give Quotation on an Inquiry</h1>
                                 <div class="signup-inner inquiry-inner text-center">
                                     <%= simple_form_for [inquiry, quote], html: {id: 'quote-form'} do |f| %>
-                                      <h3 class="title">Air Freight</h3>
+                                      <h3 class="title">
+                                        <%= inquiry.transport_mode.humanize %> Freight
+                                      </h3>
                                       <div class="signup-inner--form less-spacing-form-part">
                                         <div class="row">
                                           <div class="col-12">

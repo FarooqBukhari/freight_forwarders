@@ -15,7 +15,7 @@
       <div class="col-md-4" style="text-align: center"> <%== pagy_bootstrap_nav(pagy) %> </div>
       <div class="col-md-4"></div>
     </div>
-  <% else %>
+  <% elsif pagy.count == 0 %>
     <h2 style="text-align: center">Sorry, No inquiries found for your country !</h2>
   <% end %>
 </div>
