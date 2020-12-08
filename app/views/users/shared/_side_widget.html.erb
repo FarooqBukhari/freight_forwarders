@@ -1,8 +1,24 @@
-<div class="widget-body">
+<div class="widget-body" style="width: 100%">
   <div class="about-author">
     <ul class="author-into-list">
-      <li><a href="#"><i class="bi bi-office-bag"></i><%=user.job_title%></a></li>
-      <li><a href="#"><i class="bi bi-phone"></i><%=user.phone%></a></li>
+<!--      <li><a href="#"><i class="bi bi-office-bag"></i><%#=user.job_title%></a></li>-->
+<!--      <li><a href="#"><i class="bi bi-phone"></i><%#=user.phone%></a></li>-->
+
+        <% if check_attribute_presence(user.country) %>
+          <li > <a ><i class="fa fa-flag" aria-hidden="true"></i> <%= user.country %> </a></li>
+        <% end %>
+        <% if check_attribute_presence(user.job_title) %>
+          <li> <a > <i class="fa fa-address-card" aria-hidden="true"></i><%= user.job_title %></a></li>
+        <% end %>
+        <% if check_attribute_presence(user.company_name) %>
+          <li> <a > <i class="fa fa-building" aria-hidden="true"></i><%= user.company_name %></a></li>
+        <% end %>
+
+
+        <% if check_attribute_presence(user.website) %>
+          <li ><a href="<%= user.website %>"><i class="fa fa-link" aria-hidden="true"></i> Visit Website</a></li>
+        <% end %>
+
       <hr>
       <li class="text-center">
         <% if @user !=  current_user %>

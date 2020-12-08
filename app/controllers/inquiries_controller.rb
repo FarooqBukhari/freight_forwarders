@@ -7,7 +7,7 @@ class InquiriesController < ApplicationController
   # GET /inquiries
   # GET /inquiries.json
   def index
-    @pagy, @inquiries = pagy(Inquiry.current_user_friends_inquiries(current_user), items: 5)
+    @pagy, @inquiries = pagy(Inquiry.current_user_friends_inquiries(current_user).where(destination_country: current_user.country), items: 5)
   end
 
   # GET /inquiries/1
@@ -23,6 +23,7 @@ class InquiriesController < ApplicationController
 
   # GET /inquiries/1/edit
   def edit
+    redirect_to my_inquiries_user_path(id: current_user.id) if @inquiry.status == "closed"
   end
 
   # POST /inquiries

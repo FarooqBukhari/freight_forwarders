@@ -1,0 +1,21 @@
+
+<h2 style="text-align: center; color: #dc4734">Inquiries In Your Network</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <!-- post status start -->
+      <%= render 'inquiries/inquiries', inquiries: inquiries %>
+      <!-- post status end -->
+    </div>
+  </div>
+
+  <% if pagy.pages != 1 %>
+    <div class="row">
+      <div class="col-md-4"></div>
+      <div class="col-md-4" style="text-align: center"> <%== pagy_bootstrap_nav(pagy) %> </div>
+      <div class="col-md-4"></div>
+    </div>
+  <% else %>
+    <h2 style="text-align: center">Sorry, No inquiries found for your country !</h2>
+  <% end %>
+</div>

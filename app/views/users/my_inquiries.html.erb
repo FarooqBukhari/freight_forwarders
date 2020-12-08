@@ -1,13 +1,43 @@
 <main>
   <div class="main-wrapper">
     <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <!-- post status start -->
-          <%= render 'inquiries', inquiries: @inquiries %>
-          <!-- post status end -->
+
+      <div class="row" id="inq-tabs" style="margin-top: 100px ">
+      <ul class="nav nav-tabs" style="margin-left: 40%">
+        <li class="nav-item">
+          <a class="nav-link active" id="myInqTab" data-toggle="tab" href="#myInq">My Inquiries</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="networkInqTab" data-toggle="tab" href="#networkInq">Inquiries in Network</a>
+        </li>
+      </ul>
+      </div>
+
+      <!-- Tab panes -->
+
+      <div class="tab-content" id="inq-tab-content">
+        <div class="tab-pane container active" id="myInq"><div class="row">
+          <div class="col-md-12">
+            <!-- post status start -->
+            <%= render 'inquiries', inquiries: @inquiries %>
+            <!-- post status end -->
+          </div>
+        </div></div>
+        <div class="tab-pane container fade" id="networkInq">
+          <%= render 'inquiries/index', pagy: @pagy, inquiries: @inquiries_network %>
         </div>
       </div>
+
     </div>
   </div>
 </main>
+
+
+<script>
+  <% if @tab != "" %>
+
+  $(document).ready(function() {
+      $('#networkInqTab')[0].click();
+  });
+  <% end %>
+</script>

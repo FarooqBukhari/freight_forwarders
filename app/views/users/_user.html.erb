@@ -1,0 +1,118 @@
+<div class="profile-card col-md-6">
+
+  <div class="img-area">
+
+    <div class="inner-area">
+
+      <a href="<%= user_path(user) %>">
+      <img src="<%= show_attachment(user.profile_picture, 'avatar/user_default') %>" alt="profile picture">
+      </a>
+    </div>
+
+  </div>
+
+  <div class="name">
+    <a href="<%= user_path(user) %>" style="text-decoration: none; color: black">
+      <%= user.name %>
+    </a>
+  </div>
+  <div class="about">
+    <p class="post-time"><i class="fa fa-flag" aria-hidden="true"></i>
+      <% if check_attribute_presence(user.country) %>
+        <%= user.country %>
+      <% else %>
+        N/A
+      <% end %>
+    </p>
+    <p class="post-time"><i class="fa fa-address-card" aria-hidden="true"></i>
+    <% if check_attribute_presence(user.job_title) %>
+         <%= user.job_title %>
+        <% if check_attribute_presence(user.company_name) %>
+          at <%= user.company_name %>
+        <% end %>
+    <% else %>
+      N/A
+    <%end %>
+    </p>
+    <p class="post-time"><i class="fa fa-link" aria-hidden="true"></i>
+      <% if check_attribute_presence(user.website) %>
+        <a href="<%= user.website %>"> Visit Website</a>
+      <% else %>
+        N/A
+      <% end %>
+    </p>
+  </div>
+
+  <div class="social-share">
+
+    <div class="row">
+      <% if current_user.isFriend(user).exists? %>
+      <%= link_to "<i class='fa fa-minus'></i>".html_safe ,remove_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+      <% else %>
+      <% if @requester_users.include?(user.id) %>
+      <%= link_to "<i class='fa fa-thumbs-down'></i>".html_safe, cancel_request_path({id: user.id}), method: :post, class: "btn btn-blue highlighter" %>
+      <% elsif @requested_users.include?(user.id) %>
+      <%= link_to "<i class='fa fa-handshake-o'></i>".html_safe, add_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+      <%= link_to "<i class='fa fa-thumbs-o-down'></i>".html_safe, reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+      <% else %>
+      <%= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+      <% end %>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <% if !@requested_users.include?(user.id) %>
+      <%= link_to "<i class='far fa-comment'></i>".html_safe ,conversations_path(user_id: user.id, con_type: "User"), method: :post, class: "btn btn-blue highlighter" %>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <%= link_to "<i class='fas fa-eye'></i>".html_safe, user_path(user), class: "btn btn-blue highlighter" %>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!--<div class="card col-md-6 col-sm-12 friend-cards" style="padding: 15px 30px 0px 30px">-->
+<!--  <div class="post-title d-flex align-items-center">-->
+<!--    <div class="profile-thumb justify-content-center">-->
+<!--      <a href="#">-->
+<!--        <figure class="profile-thumb-large" style="margin-left: 10px;">-->
+<!--          <img src="<%#= show_attachment(user.profile_picture, 'avatar/user_default') %>" alt="profile picture">-->
+<!--        </figure>-->
+<!--      </a>-->
+<!--      <div class="d-flex flex-row">-->
+<!--        <div class="d-flex">-->
+          <%# if current_user.isFriend(user).exists? %>
+            <%#= link_to "<i class='fa fa-minus'></i>".html_safe ,remove_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+          <%# else %>
+            <%# if @requester_users.include?(user.id) %>
+              <%#= link_to "<i class='fa fa-thumbs-down'></i>".html_safe, cancel_request_path({id: user.id}), method: :post, class: "btn btn-blue highlighter" %>
+            <%# elsif @requested_users.include?(user.id) %>
+              <%#= link_to "<i class='fa fa-handshake-o'></i>".html_safe, add_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+              <%#= link_to "<i class='fa fa-thumbs-o-down'></i>".html_safe, reject_friend_path(id: user.id), method: :post, class: "btn btn-blue highlighter"  %>
+            <%# else %>
+              <%#= link_to "<i class='fa fa-plus'></i>".html_safe ,friends_path(id: user.id), method: :post, class: "btn btn-blue highlighter" %>
+            <%# end %>
+          <%# end %>
+<!--          <hr>-->
+          <%# if !@requested_users.include?(user.id) %>
+            <%#= link_to "<i class='fa fa-comments'></i>".html_safe ,conversations_path(user_id: user.id, con_type: "User"), method: :post, class: "btn btn-blue highlighter" %>
+          <%# end %>
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="posted-author" style="margin-top: -35px;">-->
+<!--      <h5 class="author"><a href="<%#= user_path(user.id) %>"><%#= user.name %></a></h5>-->
+      <%# if check_attribute_presence(user.website) %>
+<!--        <span class="post-time"><i class="fa fa-link" aria-hidden="true"></i><a href="<%#= user.website %>"> Visit Website</a></span>-->
+      <%# end %>
+      <%# if check_attribute_presence(user.job_title) %>
+<!--        <span class="post-time"><i class="fa fa-address-card" aria-hidden="true"></i> <%#= user.job_title %></span>-->
+      <%# end %>
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

@@ -523,3 +523,15 @@ $( document ).ready(function() {
         });
     })(jQuery); // End of use strict
 });
+
+$(document).ready(function() {
+    $("#inq-tabs > .nav-tabs > .nav-item > .nav-link").click(function (e) {
+        var tab = $(this).attr('href');
+        $(".tab-pane").addClass("fade");
+        $(".tab-pane").removeClass("active");
+        $(".tab-pane").removeClass("show");
+        var id = tab.substring(1);
+        $('#'+id).addClass("active show");
+        $('#'+id).removeClass("fade");
+    });
+});

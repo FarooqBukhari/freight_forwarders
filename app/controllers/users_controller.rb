@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
   def my_inquiries
     @inquiries = @user.inquiries.order! 'created_at DESC'
+    @pagy, @inquiries_network = pagy(Inquiry.current_user_friends_inquiries(current_user), items: 5)
+    @tab = params[:page] == nil ? "" : "networkInqTab"
   end
 
   def my_calender
