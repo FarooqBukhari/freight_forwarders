@@ -9,6 +9,8 @@
             <th>Destination</th>
             <th>Good Ready By</th>
             <th>Status</th>
+            <th>Transport Mode</th>
+            <th>Inco Terms</th>
             <th colspan="3">Actions</th>
           </tr>
         </thead>
@@ -19,6 +21,8 @@
             <td><%= '( '+ Inquiry.destination_location_types[inquiry.destination_location_type] + ' ) ' + inquiry.destination_address + ', ' + inquiry.destination_country %></td>
             <td><%= inquiry.goods_ready_date %></td>
             <td><span class="badge badge-status-<%= inquiry.status %>"><%= inquiry.status.split('_').map(&:capitalize).join(' ') %></span></td>
+            <td><%= inquiry.transport_mode == nil ? "N/A": inquiry.transport_mode.humanize %></td>
+            <td><%= inquiry.inco_terms == nil ? "N/A" : inquiry.inco_terms.humanize %></td>
             <td>
               <% if inquiry.status != "closed" %>
               <span class="label label-warning"><%= link_to '', edit_inquiry_path(inquiry), class: 'inquiry-manage-option fa fa-edit' %> Edit</span>
