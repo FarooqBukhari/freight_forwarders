@@ -72,6 +72,20 @@
         <%# if @requested_users.any? %>
           <div class="col-lg-3 order-3">
               <aside class="widget-area">
+                <div class="card widget-item">
+                  <h4 class="widget-title">Filters</h4>
+                  <div class="widget-body">
+                    <%= filter_form_for @q do |f| %>
+                      <%= f.filter_input :name, class: "single-field" %>
+                      <%= f.filter_input :company_name, class: "single-field" %>
+                      <%= f.filter_input :country, as: :select, collection: User.select(:country).distinct.map {|u| u.country }, in: :select2 %>
+                      <%= f.button :submit, 'Filter', class: 'submit-btn'%>
+                    <% end %>
+                    <span class="terms-condition"><%= link_to "Reset Filters", users_path, class:"btn btn-sm submit-btn" %></span>
+                  </div>
+                </div>
+              </aside>
+              <aside class="widget-area">
                 <!-- widget single item start -->
                 <div class="card widget-item">
                   <h4 class="widget-title">Network Requests (<%= @requested_users.count %>)</h4>
@@ -104,7 +118,6 @@
                   </div>
                 </div>
                 <!-- widget single item end -->
-
               </aside>
             </div>
         <%# end %>

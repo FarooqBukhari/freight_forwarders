@@ -9,7 +9,9 @@ class UsersController < ApplicationController
     users_to_remove = []
     users_to_remove = users_to_remove << current_user
     users_to_remove = users_to_remove.pluck(:id)
-    @pagy, @users = pagy(User.where.not(id: users_to_remove), items: 10)
+    @q = User.search(params[:q])
+    @users = @q.result
+    @pagy, @users = pagy(@users.where.not(id: users_to_remove), items: 10)
     @recommendations = current_user.strangers
     @friend_requests = current_user.requested_users
     @requested_users = current_user.requested_users.pluck(:requester_id)
