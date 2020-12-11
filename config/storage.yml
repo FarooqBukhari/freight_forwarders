@@ -6,15 +6,14 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+ Use rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
  amazon:
-    service: S3
-    s3_endpoint: "s3-south-1.amazonaws.com"
-    s3_protocol: 'https'
-    s3_host_name: 's3-ap-south-1.amazonaws.com'
-    s3_permissions: "public-read"
-    access_key_id: "AKIAIYYD5X432YNLFLLA"
-    secret_access_key: "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"
-    bucket: "send2world"
+   service: S3
+   access_key_id: "AKIAIYYD5X432YNLFLLA"
+   secret_access_key: "tNqcztyZkm3u/UPKt6HYYCjWJfs/SqtIP/z87NtE"
+   region: us-south-1
+   bucket: send2world
+   host_name: "s3-south-1.amazonaws.com"
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
