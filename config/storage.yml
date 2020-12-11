@@ -12,7 +12,6 @@ amazon:
   secret_access_key: tNqcztyZkm3u/UPKt6HYYCjWJfs/SqtIP/z87NtE
   region: us-south-1
   bucket: send2world
-  host_name: s3-south-1.amazonaws.com
 
 # Remember not to checkin your GCS keyfile to a repository
 # google:
