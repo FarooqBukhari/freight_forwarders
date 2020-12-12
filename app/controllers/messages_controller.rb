@@ -18,6 +18,7 @@ class MessagesController < ApplicationController
         msg.mark_as_read! for: current_user
       end
     end
+    #  render 'messages/read'
   end
 
   private

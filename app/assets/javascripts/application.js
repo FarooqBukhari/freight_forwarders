@@ -98,23 +98,17 @@ $( document ).ready(function() {
         });
     })();
 
-    $('.users-tabs > form > li').on('click',function () {
-        $(this).removeClass('user-box-message');
+    $('.users-tabs > form > div').on('click',function () {
+       // $(this).removeClass('user-box-message');
         var ref = $(this).attr("id");
         var con_id = ref.substr(ref.lastIndexOf('-')+1);
         var conversation = $('#conversations-list').find("[data-conversation-id='" + con_id + "']");
-        $('.users-tabs > form > li').removeClass("active show");
+        $('.users-tabs > form > div').removeClass("active_chat");
+        $(this).addClass('active_chat');
 
 
-        var allConversations = $('#conversations-list > div').removeClass("show");
-        // console.log(allConversations);
-        // for (var i = 0, len = allConversations.length; i < len; i++) {
-        //     //work with element
-        //     allConversations[i].addClass("tab-pane fade");
-        // }
-
-        //conversation.removeClass("tab-pane fade");
-
+        var allConversations = $('#conversations-list > div').removeClass("active show");
+        conversation.addClass("active show");
 
         var ul = conversation.find('.commentList');
         var abc = conversation.find('.commentList li:last');
