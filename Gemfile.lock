@@ -135,6 +135,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    email_validator (2.2.2)
+      activemodel
     erubi (1.10.0)
     execjs (2.7.0)
     faker (2.12.0)
@@ -327,6 +329,7 @@ DEPENDENCIES
   countries
   country_select
   devise
+  email_validator
   faker
   filter_form
   geokit

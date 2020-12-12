@@ -64,7 +64,12 @@ class User < ApplicationRecord
   # has_many :products, -> { distinct },  through: :line_items
 
   #Validations
-
+  validates :email, email: true
+  validates_presence_of :name, on: :update
+  validates_presence_of :company_name, on: :update
+  validates_presence_of :job_title, on: :update
+  validates_presence_of :country, on: :update
+  validates_presence_of :phone, on: :update
 
   # methods
   def friend_request(user)

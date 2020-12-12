@@ -6,6 +6,12 @@
           <div class="timeline-wrapper">
             <div class="timeline-page-wrapper">
               <div class="container-fluid p-0">
+                <% if alert %>
+                  <div class="alert alert-danger alert-dismissible">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong><%= alert %></strong>
+                  </div>
+                <% end %>
                 <div class="row no-gutters">
                   <div class="col-md-6 col-sm-12 align-items-center">
                     <%= render 'users/shared/user_info_form', user: user %>
