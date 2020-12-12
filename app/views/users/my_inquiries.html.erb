@@ -5,13 +5,13 @@
       <div class="row" id="inq-tabs" style="margin-top: 100px ">
         <ul class="nav nav-tabs" style="margin-left: 40%">
           <li class="nav-item">
-            <a class="nav-link active" id="myInqTab" data-toggle="tab" href="#myInq">My Inquiries</a>
+            <a class="nav-link <%= 'active' if params[:active_tab] == 'myInqTab' || params[:active_tab] == nil %>" id="myInqTab" data-toggle="tab" href="#myInq">My Inquiries</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" id="networkInqTab" data-toggle="tab" href="#networkInq">Inquiries in Network</a>
+            <a class="nav-link <%= 'active' if params[:active_tab] == 'networkInqTab' %>" id="networkInqTab" data-toggle="tab" href="#networkInq">Inquiries in Network</a>
           </li>
         </ul>
-        <aside class="widget-area col-md-12">
+        <aside class="widget-area col-md-12 mt-5">
           <div class="card widget-item">
             <div class="row">
               <div class="col-md-5">
@@ -25,11 +25,11 @@
             <div class="widget-body">
                 <%= filter_form_for @q do |f| %>
                   <div class="row">
-                    <div class="col-md-4"><%= f.filter_input :origin_country, as: :select, collection: ISO3166::Country.all, in: :select2 %></div>
-                    <div class="col-md-4"><%= f.filter_input :destination_country, as: :select, collection: ISO3166::Country.all, in: :select2 %></div>
-                    <div class="col-md-4"><%= f.filter_input :status, as: :select, collection: Inquiry.statuses, in: :select2 %></div>
-                    <div class="col-md-4"><%= f.filter_input :transport_mode, as: :select, collection: Inquiry.transport_modes, in: :select2 %></div>
-                    <div class="col-md-4"><%= f.filter_input :inco_terms, as: :select, collection: Inquiry.inco_terms, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.filter_input :origin_country, as: :select, collection: ISO3166::Country.all.sort, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %></div>
+                    <div class="col-md-4"><%= f.filter_input :destination_country, as: :select, collection: ISO3166::Country.all.sort,  prompt: "Select destination country", input_html: { :class=> "single-field select2-dropdown"}  %></div>
+                    <div class="col-md-4"><%= f.filter_input :status, as: :select, collection: Inquiry.statuses.values,  prompt: "Select status", input_html: { :class=> "single-field select2-dropdown"}  %></div>
+                    <div class="col-md-4"><%= f.filter_input :transport_mode, as: :select, collection: Inquiry.transport_modes, prompt: "Select transport mode", input_html: { :class=> "single-field select2-dropdown"}  %></div>
+                    <div class="col-md-4"><%= f.filter_input :inco_terms, as: :select, collection: Inquiry.inco_terms,  prompt: "Select INCO terms", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.button :submit, 'Filter', class: 'btn btn-sm submit-btn'%></div>
                   </div>
                 <% end %>
@@ -41,14 +41,14 @@
       <!-- Tab panes -->
 
       <div class="tab-content" id="inq-tab-content">
-        <div class="tab-pane container active" id="myInq"><div class="row">
+        <div class="tab-pane container <%=  (params[:active_tab] == 'myInqTab' || params[:active_tab] == nil) ? 'show active': 'fade'  %>" id="myInq"><div class="row">
           <div class="col-md-12">
             <!-- post status start -->
             <%= render 'inquiries', pagy: @pagy_self, inquiries: @inquiries %>
             <!-- post status end -->
           </div>
         </div></div>
-        <div class="tab-pane container fade" id="networkInq">
+        <div class="tab-pane container <%= params[:active_tab] == 'networkInqTab' ? 'show active': 'fade' %>" id="networkInq">
           <%= render 'inquiries/index', pagy: @pagy, inquiries: @inquiries_network %>
         </div>
       </div>
@@ -57,11 +57,11 @@
 </main>
 
 
-<script>
-  <% if @tab != "" %>
+<!--<script>-->
+  <%# if @tab != "" %>
 
-  $(document).ready(function() {
-      $('#networkInqTab')[0].click();
-  });
-  <% end %>
-</script>
+<!--  $(document).ready(function() {-->
+<!--      $('#networkInqTab')[0].click();-->
+<!--  });-->
+  <%# end %>
+<!--</script>-->

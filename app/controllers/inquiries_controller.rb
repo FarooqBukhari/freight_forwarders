@@ -84,7 +84,7 @@ class InquiriesController < ApplicationController
   end
 
   def inquiry_params
-    params.require(:inquiry).permit(:origin_location_type, :origin_country, :origin_address,
+    params.require(:inquiry).permit(:origin_location_type, :origin_country, :origin_address, :special_instructions,
        :destination_location_type, :destination_country, :destination_address, :goods_ready_date, :destination_lat, :destination_lng,
        :is_personal, :is_hazardous, :need_custom_clearance, :transport_mode, :inco_terms, :item_type,
         :origin_lat, :origin_lng, inquiry_items_attributes: [:id, :commodity, :number_of_units, :length, :width, :heigth, :weight, :_destroy])
