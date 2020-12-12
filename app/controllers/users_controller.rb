@@ -24,7 +24,7 @@ class UsersController < ApplicationController
     # inquiries_network_ids = (Inquiry.current_user_friends_inquiries(current_user)) & @q.result
     inquiries_network_ids = (Inquiry.current_user_friends_inquiries(current_user).where(destination_country: current_user.country)) & @q.result
     @pagy, @inquiries_network = pagy(Inquiry.where(id: inquiries_network_ids.pluck(:id)), items: 4, page_param: :page_network, params: { active_tab: 'networkInqTab' })
-    @pagy_self, @inquiries = pagy(Inquiry.where(id: inquiries_ids.pluck(:id)), items: 1, page_param: :page_self, params: { active_tab: 'myInqTab' } )
+    @pagy_self, @inquiries = pagy(Inquiry.where(id: inquiries_ids.pluck(:id)), items: 10, page_param: :page_self, params: { active_tab: 'myInqTab' } )
     @tab = params[:active_tab]
   end
 
