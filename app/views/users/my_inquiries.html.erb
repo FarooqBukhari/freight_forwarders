@@ -3,14 +3,39 @@
     <div class="container">
 
       <div class="row" id="inq-tabs" style="margin-top: 100px ">
-      <ul class="nav nav-tabs" style="margin-left: 40%">
-        <li class="nav-item">
-          <a class="nav-link active" id="myInqTab" data-toggle="tab" href="#myInq">My Inquiries</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="networkInqTab" data-toggle="tab" href="#networkInq">Inquiries in Network</a>
-        </li>
-      </ul>
+        <ul class="nav nav-tabs" style="margin-left: 40%">
+          <li class="nav-item">
+            <a class="nav-link active" id="myInqTab" data-toggle="tab" href="#myInq">My Inquiries</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="networkInqTab" data-toggle="tab" href="#networkInq">Inquiries in Network</a>
+          </li>
+        </ul>
+        <aside class="widget-area col-md-12">
+          <div class="card widget-item">
+            <div class="row">
+              <div class="col-md-5">
+                <h4 class="widget-title pull-left">Filters</h4>
+              </div>
+              <div class="col-md-5"></div>
+              <div class="col-md-2">
+                <span class="terms-condition"><%= link_to "Reset Filters", my_inquiries_user_path, class:"btn btn-sm submit-btn"%></span>
+              </div>
+            </div>
+            <div class="widget-body">
+                <%= filter_form_for @q do |f| %>
+                  <div class="row">
+                    <div class="col-md-4"><%= f.filter_input :origin_country, as: :select, collection: ISO3166::Country.all, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.filter_input :destination_country, as: :select, collection: ISO3166::Country.all, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.filter_input :status, as: :select, collection: Inquiry.statuses, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.filter_input :transport_mode, as: :select, collection: Inquiry.transport_modes, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.filter_input :inco_terms, as: :select, collection: Inquiry.inco_terms, in: :select2 %></div>
+                    <div class="col-md-4"><%= f.button :submit, 'Filter', class: 'btn btn-sm submit-btn'%></div>
+                  </div>
+                <% end %>
+            </div>
+          </div>
+        </aside>
       </div>
 
       <!-- Tab panes -->
@@ -19,7 +44,7 @@
         <div class="tab-pane container active" id="myInq"><div class="row">
           <div class="col-md-12">
             <!-- post status start -->
-            <%= render 'inquiries', inquiries: @inquiries %>
+            <%= render 'inquiries', pagy: @pagy_self, inquiries: @inquiries %>
             <!-- post status end -->
           </div>
         </div></div>
@@ -27,7 +52,6 @@
           <%= render 'inquiries/index', pagy: @pagy, inquiries: @inquiries_network %>
         </div>
       </div>
-
     </div>
   </div>
 </main>

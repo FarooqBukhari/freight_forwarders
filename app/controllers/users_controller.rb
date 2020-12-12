@@ -19,8 +19,11 @@ class UsersController < ApplicationController
   end
 
   def my_inquiries
-    @inquiries = @user.inquiries.order! 'created_at DESC'
-    @pagy, @inquiries_network = pagy(Inquiry.current_user_friends_inquiries(current_user).where(destination_country: current_user.country), items: 5)
+    @q = Inquiry.search(params[:q])
+    inquiries_ids = (@user.inquiries.order! 'created_at DESC') & @q.result
+    inquiries_network_ids = (Inquiry.current_user_friends_inquiries(current_user).where(destination_country: current_user.country)) & @q.result
+    @pagy, @inquiries_network = pagy(Inquiry.where(id: inquiries_network_ids.pluck(:id)), items: 1)
+    @pagy_self, @inquiries = pagy(Inquiry.where(id: inquiries_ids.pluck(:id)), items: 1)
     @tab = params[:page] == nil ? "" : "networkInqTab"
   end
 

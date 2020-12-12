@@ -78,7 +78,7 @@
                     <%= filter_form_for @q do |f| %>
                       <%= f.filter_input :name, class: "single-field" %>
                       <%= f.filter_input :company_name, class: "single-field" %>
-                      <%= f.filter_input :country, as: :select, collection: User.select(:country).distinct.map {|u| u.country }, in: :select2 %>
+                      <%= f.filter_input :country, as: :select, collection: ISO3166::Country.all, in: :select2 %>
                       <%= f.button :submit, 'Filter', class: 'submit-btn'%>
                     <% end %>
                     <span class="terms-condition"><%= link_to "Reset Filters", users_path, class:"btn btn-sm submit-btn" %></span>

@@ -324,6 +324,7 @@ DEPENDENCIES
   chromedriver-helper
   cocoon
   coffee-rails (~> 4.2)
+  countries
   country_select
   devise
   faker

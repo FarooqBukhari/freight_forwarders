@@ -22,7 +22,7 @@
                                             <%= f.input :origin_location_type, collection: Inquiry.origin_location_types, label_method: :second, value_method: :first, prompt: "Select origin type", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.input :origin_country, as: :country, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %>
+                                            <%= f.input :origin_country, as: :select, collection: ISO3166::Country.all, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
                                             <%= f.input :origin_address, input_html: { autocomplete: "origin_address", class: "single-field", onkeyup: 'get_origin_address_suggestions()' } %>
@@ -36,7 +36,7 @@
                                             <%= f.input :destination_location_type, collection: Inquiry.destination_location_types, label_method: :second, value_method: :first, prompt: "Select destination type", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
-                                            <%= f.input :destination_country, as: :country, prompt: "Select destination country", input_html: { :class=> "single-field select2-dropdown"} %>
+                                            <%= f.input :destination_country, as: :select, collection: ISO3166::Country.all, prompt: "Select destination country", input_html: { :class=> "single-field select2-dropdown"} %>
                                           </div>
                                           <div class="col-md-4">
                                             <%= f.input :destination_address, error: 'Destination is mandatory, please specify one', input_html: { autocomplete: "destination_address", class: "single-field", onkeyup: 'get_origin_address_suggestions()' } %>
