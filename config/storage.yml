@@ -10,7 +10,7 @@ amazon:
   service: S3
   access_key_id: AKIAIYYD5X432YNLFLLA
   secret_access_key: tNqcztyZkm3u/UPKt6HYYCjWJfs/SqtIP/z87NtE
-  region: us-south-1
+  region: ap-south-1
   bucket: send2world
 
 # Remember not to checkin your GCS keyfile to a repository
