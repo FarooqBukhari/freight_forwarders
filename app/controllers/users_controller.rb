@@ -7,8 +7,11 @@ class UsersController < ApplicationController
   def index
     # users_to_remove = current_user.get_friends_users_array
     users_to_remove = []
-    users_to_remove = users_to_remove << current_user
-    users_to_remove = users_to_remove.pluck(:id)
+    if current_user.friended_users.present?
+      users_to_remove = current_user.friended_users.pluck(:friendable_id) + current_user.friender_users.pluck(:friend_id) + [current_user.id]
+    else 
+      users_to_remove = users_to_remove.push(current_user.id)
+    end
     @q = User.search(params[:q])
     @users = @q.result
     @pagy, @users = pagy(@users.where.not(id: users_to_remove), items: 10)

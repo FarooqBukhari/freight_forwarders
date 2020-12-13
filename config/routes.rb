@@ -14,6 +14,12 @@ Rails.application.routes.draw do
       root 'home#index'
     end
   end
+  
+  namespace :users do 
+    resources :connections, only: [:index]
+    resources :requests, only: [:index]
+  end
+
   resources :after_signup
   resources :users do
     member do

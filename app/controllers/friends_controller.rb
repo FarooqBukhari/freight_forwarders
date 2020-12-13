@@ -32,7 +32,7 @@ class FriendsController < ApplicationController
         @user = current_user
         friend = User.find_by(id: params[:id])
         @user.remove_friend(friend)
-        redirect_to user_path(friend)
+        redirect_to users_connections_path(id: @user.id)
     end
 
     def cancel

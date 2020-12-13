@@ -3,43 +3,40 @@
 
         <div class="pc-user">
             <div class="pc-user-image">
-                <a href="<%=user_path(user) %>" target="_blank">
-                    <% if user.profile_picture.present?%>
-                      <img src="<%= show_attachment(user.profile_picture, 'avatar/user_default')%>" style="border-radius: 40%; height: 90px; width: 110px;">
+                <a href="<%=user_path(requester) %>" target="_blank">
+                    <% if requester.profile_picture.present?%>
+                      <img src="<%= show_attachment(requester.profile_picture, 'avatar/user_default')%>" style="border-radius: 40%; height: 90px; width: 110px;">
                     <% else %>
-                      <a style="cursor: pointer" href="<%= user_path(user) %>"><img class="img-fluid card_image" src="http://placehold.it/110x110/336699/fff?text=<%= user.initials%>" alt="card image" style="border-radius: 50%;width: 110px;height: 110px;box-shadow: 5px 5px 20px rgba(0,0,0,0.5);"></a>
+                      <a style="cursor: pointer" href="<%= user_path(requester) %>"><img class="img-fluid card_image" src="http://placehold.it/110x110/336699/fff?text=<%= requester.initials%>" alt="card image" style="border-radius: 50%;width: 110px;height: 110px;box-shadow: 5px 5px 20px rgba(0,0,0,0.5);"></a>
                     <% end %>
                 </a>
             </div>
             <div class="pc-user-info">
-                <h3><a href="<%= user_path(user)%>" target="_blank"><%= user.name.titleize%></a></h3>
+                <h3><a href="<%= user_path(requester)%>" target="_blank"><%= requester.name.titleize%></a></h3>
                 <div class="pc-user-title">
-                    <% if check_attribute_presence(user.job_title) %>
-                      <a class="card__text__minor"> <i class="fa fa-address-card" aria-hidden="true" style="color: #6c6577"></i><%= user.job_title.titleize%></a>
-                      
+                    <% if check_attribute_presence(requester.job_title) %>
+                      <p><%= requester.job_title.titleize%></p>
                     <% else %>
-                      <a class="card__text__minor" style="color: #e8e8e8;"><i class="fa fa-address-card" style="color: #6c6577" aria-hidden="true"></i>N/A</a>
+                      <p>N/A</p>
                     <% end %>
                 </div>
 
                 <div class="pc-user-title">
-                    <% if check_attribute_presence(user.company_name) %>
-                      <a class="card__text__minor"> <i class="fa fa-building" style="color: #6c6577" aria-hidden="true"></i><%= user.company_name.titleize%></a>
+                    <% if check_attribute_presence(requester.company_name) %>
+                      <p>
+                        <%= requester.company_name.titleize%></p>
                     <% else %>
-                      <a class="card__text__minor"> <i class="fa fa-building" style="color: #6c6577" aria-hidden="true"></i>N/A</a>
+                      <p>
+                        N/A
+                      </p>
                     <% end %>
                 </div>
                 <div class="pc-user-location">
                     <p>
-                        <!--
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.932 23.909">
-				                  <path id="map-marker-alt" d="M8.044,23.427C1.259,13.59,0,12.581,0,8.966a8.966,8.966,0,0,1,17.932,0c0,3.615-1.259,4.624-8.044,14.461a1.121,1.121,0,0,1-1.843,0ZM8.966,12.7A3.736,3.736,0,1,0,5.23,8.966,3.736,3.736,0,0,0,8.966,12.7Z" fill="#6c6577"/>
-			                  </svg>
-                        -->
-                        <% if check_attribute_presence(user.country) %>
-                          <a class="card__text__minor"> <i class="fa fa-flag" aria-hidden="true" style="color: #6c6577"></i><%= user.country.titleize %></a>
+                        <% if check_attribute_presence(requester.country) %>
+                          <%= requester.country.titleize %>
                         <% else %>
-                          <a class="card__text__minor"> <i class="fa fa-flag" aria-hidden="true" style="color: #6c6577"></i>N/A</a>
+                          N/A
                         <% end %>
                     </p>
                 </div>
@@ -62,8 +59,8 @@
             </div>
         </div>
         <div class="pc-user-buttons">
-            <%= link_to '+ Friend', friends_path(id: user.id), method: :post, class: "pc-btn accent"  %>
-            <%= link_to "Message", conversations_path(user_id: user.id, con_type: "User"), method: :post, class: "pc-btn" %>
+            <%= link_to 'Add', add_friend_path(id: requester.id), method: :post, class: "pc-btn accent"  %>
+            <%= link_to "Cancel", reject_friend_path(id: requester.id), method: :post, class: "pc-btn" %>
         </div>
     </div>
 </div>

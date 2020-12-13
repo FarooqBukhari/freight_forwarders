@@ -1,0 +1,71 @@
+<main>
+  <div class="main-wrapper pt-80">
+    <div class="container__like">
+      <div class="row">
+        <div class="col-lg-3 order-1 order-lg-1">
+          <aside class="widget-area">
+            <!-- widget single item start -->
+            <div class="card widget-item">
+              <h4 class="widget-title" >Manage my network</h4>
+              <div class="widget-body">
+                <ul class="like-page-list-wrapper">
+                  
+                  <li class="unorder-list">
+                    <div class="unorder-list-info">
+                      <h3 class="list-title m-0"><a href="<%= users_connections_path(id: current_user.id)%>">Connections</a></h3>
+                    </div>
+                  </li>
+                  <li class="unorder-list">
+                    <div class="unorder-list-info">
+                      <h3 class="list-title m-0"><a href="<%= users_requests_path(id: current_user.id)%>">Requests</a></h3>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="col-lg-6 order-2 order-lg-2">
+            <% if @requests.present?%>
+                <% @requests.each do |c|%>
+                    <div class="row">
+                        <%= render 'request', requester: c.requester %>
+                    </div>
+                <% end%>
+                <% if @pagy.pages != 1 %>
+                    <div class="row text-center">
+                        <div class="col-3"></div>
+                        <div class="col-6" > <%== pagy_bootstrap_nav(@pagy) %> </div>
+                    </div>
+                <% end %>
+            <% else %>
+                <center>
+                <h3>No requests found.</h3>
+                <h3><%= link_to 'Back to Network', users_path, class: 'btn btn-sm submit-btn__final'%></h3>
+                </center>
+            <% end %>
+        </div>
+
+        <%# if @requested_users.any? %>
+        <div class="col-lg-3 order-3">
+            <aside class="widget-area">
+                <div class="card widget-item">
+                  <h4 class="widget-title">Filters</h4>
+                  <div class="widget-body">
+                    <%= filter_form_for @q do |f| %>
+                      <%= f.filter_input :name, class: "single-field" %>
+                      <%= f.filter_input :company_name, class: "single-field" %>
+                      <%= f.filter_input :country, as: :select, collection: ISO3166::Country.all.sort, in: :select2 %>
+                      <%= f.button :submit, 'Filter', class: 'submit-btn__final'%>
+                    <% end %>
+                    <span class="terms-condition"><%= link_to "Reset Filters", users_path, class:"btn btn-sm submit-btn__final" %></span>
+                  </div>
+                </div>
+              </aside>
+            </div>
+        </div>
+    </div>
+  </div>
+
+</main>

@@ -70,10 +70,16 @@
             </div>
             <div class="content-box friends-zone">
               <div class="row mt-20 friends-list">
+                <% @friends.each do |c|%>
+                <div class="row">
+                    <%= render 'users/connections/connections', user: c, friend: c.friender %>
+                </div>
+              <% end%>
+                <!-- 
                 <% @friends.each do |friend| %>
                   <div class="col-lg-4 col-sm-6 recently request">
                     <div class="friend-list-view">
-                      <!-- profile picture end -->
+                      
                       <div class="profile-thumb pull-left">
                         <a href="#">
                           <figure class="profile-thumb-middle">
@@ -85,7 +91,7 @@
                           </figure>
                         </a>
                       </div>
-                      <!-- profile picture end -->
+                      
 
                       <div class="posted-author pull-left">
                         <h6 class="author pull-left"><a href="<%= user_path(id: friend.other_user(@user).id) %>"><%= friend.other_user(@user).name %></a></h6>
@@ -98,6 +104,7 @@
                     </div>
                   </div>
                 <% end %>
+                -->
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 <main>
   <div class="main-wrapper">
-    <div class="container">
+    <div class="container__final">
 
       <div class="row" id="inq-tabs" style="margin-top: 100px ">
         <ul class="nav nav-tabs" style="margin-left: 40%">
@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-5"></div>
               <div class="col-md-2">
-                <span class="terms-condition"><%= link_to "Reset Filters", my_inquiries_user_path, class:"btn btn-sm submit-btn"%></span>
+                <span class="terms-condition"><%= link_to "Reset Filters", my_inquiries_user_path, class:"btn btn-sm submit-btn__final"%></span>
               </div>
             </div>
             <div class="widget-body">
@@ -30,7 +30,7 @@
                     <div class="col-md-4"><%= f.filter_input :status, as: :select, collection: Inquiry.statuses.values,  prompt: "Select status", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.filter_input :transport_mode, as: :select, collection: Inquiry.transport_modes, prompt: "Select transport mode", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.filter_input :inco_terms, as: :select, collection: Inquiry.inco_terms,  prompt: "Select INCO terms", input_html: { :class=> "single-field select2-dropdown"}  %></div>
-                    <div class="col-md-4"><%= f.button :submit, 'Filter', class: 'btn btn-sm submit-btn'%></div>
+                    <div class="col-md-4"><%= f.button :submit, 'Filter', class: 'btn btn-sm submit-btn__final'%></div>
                   </div>
                 <% end %>
             </div>
@@ -41,27 +41,17 @@
       <!-- Tab panes -->
 
       <div class="tab-content" id="inq-tab-content">
-        <div class="tab-pane container <%=  (params[:active_tab] == 'myInqTab' || params[:active_tab] == nil) ? 'show active': 'fade'  %>" id="myInq"><div class="row">
+        <div class="tab-pane  <%=  (params[:active_tab] == 'myInqTab' || params[:active_tab] == nil) ? 'show active': 'fade'  %>" id="myInq"><div class="row">
           <div class="col-md-12">
             <!-- post status start -->
             <%= render 'inquiries', pagy: @pagy_self, inquiries: @inquiries %>
             <!-- post status end -->
           </div>
         </div></div>
-        <div class="tab-pane container <%= params[:active_tab] == 'networkInqTab' ? 'show active': 'fade' %>" id="networkInq">
+        <div class="tab-pane  <%= params[:active_tab] == 'networkInqTab' ? 'show active': 'fade' %>" id="networkInq">
           <%= render 'inquiries/index', pagy: @pagy, inquiries: @inquiries_network %>
         </div>
       </div>
     </div>
   </div>
 </main>
-
-
-<!--<script>-->
-  <%# if @tab != "" %>
-
-<!--  $(document).ready(function() {-->
-<!--      $('#networkInqTab')[0].click();-->
-<!--  });-->
-  <%# end %>
-<!--</script>-->

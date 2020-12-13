@@ -22,7 +22,7 @@
       <hr>
       <li class="text-center">
         <% if @user !=  current_user %>
-          <%= link_to "Chat <i class='fa fa-comments pull-right'></i>".html_safe ,conversations_path(user_id: @user.id, con_type: "User"), method: :post, class: "btn btn-blue" %>
+          <%= link_to "Chat" ,conversations_path(user_id: @user.id, con_type: "User"), method: :post, class: "btn btn-sm submit-btn__final white__colored__text" %>
         <% end %>
       </li>
     </ul>

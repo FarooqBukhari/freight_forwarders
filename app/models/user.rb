@@ -58,11 +58,6 @@ class User < ApplicationRecord
   #chat
   has_many :conversations, foreign_key: :sender_id
   has_many :messages, through: :conversations
-  #chart
-  # has_many :carts
-  # has_many :line_items, through: :carts
-  # has_many :products, -> { distinct },  through: :line_items
-
   #Validations
   validates :email, email: true
   validates_presence_of :name, on: :update
@@ -72,12 +67,24 @@ class User < ApplicationRecord
   validates_presence_of :phone, on: :update
 
   # methods
+
+  def initials
+    splitted = self.name.split
+    if splitted.length > 1
+      fname, l_name = splitted[0], splitted[1]
+    else
+      fname = splitted[0]
+    end
+    return (fname[0] + (l_name.present? ? l_name[0] : '')).upcase
+  end
+
+
   def friend_request(user)
     FriendRequest.create(requester: self, requested: user)
   end
 
   def accept_request(user)
-    FriendRequest.find_by(requested: self, requester: user).destroy
+    FriendRequest.where(requested_id: self.id, requester_id: user.id).destroy_all
     Friendship.create(friended: self, friender: user)
   end
 
