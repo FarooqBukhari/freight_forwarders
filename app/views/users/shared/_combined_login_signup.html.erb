@@ -64,6 +64,10 @@
                                         </div>
 
                                         <div class="col-12">
+                                          <%= f.text_field :name,  class: "single-field", placeholder: "User Name" %>
+                                        </div>
+
+                                        <div class="col-12">
                                           <%= f.email_field :email, autocomplete: "email", class: "single-field", placeholder: "Email" %>
                                         </div>
 
@@ -76,6 +80,10 @@
 
                                         <div class="col-12">
                                           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "single-field", placeholder: "Confirm Password" %>
+                                        </div>
+
+                                        <div class="col-12">
+                                          <%= f.select :country, ISO3166::Country.all.sort, { prompt: "Select Your Country" } , { class: "single-field select2-dropdown" } %>
                                         </div>
 
                                         <div class="col-12">

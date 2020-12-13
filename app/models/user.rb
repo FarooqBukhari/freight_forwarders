@@ -60,10 +60,10 @@ class User < ApplicationRecord
   has_many :messages, through: :conversations
   #Validations
   validates :email, email: true
-  validates_presence_of :name, on: :update
+  validates_presence_of :name, on: [:update, :create]
   validates_presence_of :company_name, on: :update
   validates_presence_of :job_title, on: :update
-  validates_presence_of :country, on: :update
+  validates_presence_of :country, on: [:update, :create]
   validates_presence_of :phone, on: :update
 
   # methods
