@@ -7,7 +7,7 @@
                     <% if user.profile_picture.present?%>
                       <img src="<%= show_attachment(user.profile_picture, 'avatar/user_default')%>" style="border-radius: 40%; height: 90px; width: 110px;">
                     <% else %>
-                      <a style="cursor: pointer" href="<%= user_path(user) %>"><img class="img-fluid card_image" src="http://placehold.it/110x110/336699/fff?text=<%= user.initials%>" alt="card image" style="border-radius: 50%;width: 110px;height: 110px;box-shadow: 5px 5px 20px rgba(0,0,0,0.5);"></a>
+                      <a style="cursor: pointer" href="<%= user_path(user) %>"><img class="img-fluid card_image" src="http://placehold.it/110x110/336699/fff?text=<%= user.initials %>" alt="card image" style="border-radius: 50%;width: 110px;height: 110px;box-shadow: 5px 5px 20px rgba(0,0,0,0.5);"></a>
                     <% end %>
                 </a>
             </div>
