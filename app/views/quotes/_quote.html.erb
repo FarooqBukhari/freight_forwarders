@@ -14,6 +14,9 @@
     <div class="posted-author">
       <h6 class="author"><a href="#"><%= quote.user.name %></a></h6>
       <span class="post-time"><%= time_ago_in_words(quote.updated_at) %></span>
+      <% if quote.user != current_user %>
+        <span class="label label-info"><%= link_to "".html_safe ,conversations_path(user_id: quote.user.id, con_type: "Quote", inquiry_id: inquiry.id, quote_id: quote.id), method: :post, class: "fa fa-comments" %> Chat</span>
+      <% end %>
     </div>
 
     <% if current_user.id == quote.user_id %>

@@ -70,12 +70,14 @@ class User < ApplicationRecord
 
   def initials
     splitted = self.name.split
-    if splitted.length > 1
-      fname, l_name = splitted[0], splitted[1]
-    else
-      fname = splitted[0]
+    if splitted.present?
+      if splitted.length > 1
+        fname, l_name = splitted[0], splitted[1]
+      else
+        fname = splitted[0]
+      end
+      return (fname[0] + (l_name.present? ? l_name[0] : '')).upcase
     end
-    return (fname[0] + (l_name.present? ? l_name[0] : '')).upcase
   end
 
 

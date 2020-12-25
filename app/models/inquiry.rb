@@ -49,6 +49,13 @@ class Inquiry < ApplicationRecord
   #Callback functions
 
   after_create :send_email
+  after_update :destroy_recieved_quotes
+
+  def destroy_recieved_quotes
+    self.quotes.delete_all if self.quotes
+    self.selected_quote.delete if self.selected_quote
+    self.update_column(:status, Inquiry.statuses[:pending]) if self.status != Inquiry.statuses[:pending] 
+  end
 
   def send_email
     users_arry = User.current_user.get_friends_users_array
