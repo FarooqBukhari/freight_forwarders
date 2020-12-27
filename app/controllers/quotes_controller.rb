@@ -1,6 +1,7 @@
 class QuotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inquiry, only: [:show, :new, :create, :edit, :update, :destroy, :select_quote, :deselect_quote]
+  before_action :check_inquiry_inco_terms, only: [:show, :new]
   before_action :set_quote, only: [:show, :edit, :update, :destroy, :select_quote, :deselect_quote]
   before_action :check_user, only: [:edit, :update, :destroy]
 
@@ -12,9 +13,12 @@ class QuotesController < ApplicationController
   # GET /quotes/new
   def new
     @quote = Quote.new
-    1.times {@quote.carrier_quote_items.new}
-    1.times {@quote.origin_quote_items.new}
-    1.times {@quote.destination_quote_items.new}
+    if @import
+      1.times {@quote.carrier_quote_items.new}
+      1.times {@quote.origin_quote_items.new}
+    else
+      1.times {@quote.destination_quote_items.new}
+    end
   end
 
   # GET /quotes/1/edit
@@ -98,6 +102,15 @@ class QuotesController < ApplicationController
 
     def set_inquiry
       @inquiry = Inquiry.find(params[:inquiry_id])
+    end
+
+    def check_inquiry_inco_terms
+      byebug
+      if @inquiry.fob?|| @inquiry.exw?
+        @import = true
+      else
+        @import = false
+      end
     end
 
     def quote_params
