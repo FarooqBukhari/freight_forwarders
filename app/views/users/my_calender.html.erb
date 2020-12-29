@@ -13,7 +13,9 @@
                 <nav>
                   <ul class="main-menu">
                     <li><a href="<%= user_path(@user) %>">timeline</a></li>
-                    <li><a href="<%= friends_user_path(id: @user.id) %>">friends</a></li>
+                    <% if current_user == @user %>
+                      <li><a href="<%= friends_user_path(id: @user.id) %>">friends</a></li>
+                    <% end %>
                     <li class="active"><a href="<%= my_calender_user_path(id: @user.id)%>">calender</a></li>
                   </ul>
                 </nav>

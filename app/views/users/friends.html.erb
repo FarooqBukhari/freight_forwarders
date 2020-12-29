@@ -72,7 +72,7 @@
               <div class="row mt-20 friends-list">
                 <% @friends.each do |c|%>
                 <div class="row">
-                    <%= render 'users/connections/connections', user: c, friend: c.friender %>
+                    <%= render 'users/connections/connections', user: current_user, friend: c.other_user(current_user) %>
                 </div>
               <% end%>
                 <!-- 
