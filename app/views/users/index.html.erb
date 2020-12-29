@@ -77,9 +77,9 @@
                   <h4 class="widget-title">Filters</h4>
                   <div class="widget-body">
                     <%= filter_form_for @q do |f| %>
-                      <%= f.filter_input :name, class: "single-field" %>
-                      <%= f.filter_input :company_name, class: "single-field" %>
-                      <%= f.filter_input :country, as: :select, collection: ISO3166::Country.all.sort, in: :select2 %>
+                      <%= f.filter_input :name, class: "single-field", prompt: "Name" %>
+                      <%= f.filter_input :company_name, class: "single-field", prompt: "Company Name" %>
+                      <%= f.filter_input :country, as: :select, collection: ISO3166::Country.all.sort, in: :select2, prompt: "Select Country" %>
                       <%= f.button :submit, 'Filter', class: 'submit-btn__final'%>
                     <% end %>
                     <span class="terms-condition"><%= link_to "Reset Filters", users_path, class:"btn btn-sm submit-btn__final" %></span>

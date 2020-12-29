@@ -161,10 +161,10 @@
                 <td><%= inquiry.transport_mode == nil ? "N/A": inquiry.transport_mode.humanize %></td>
                 <td><%= inquiry.inco_terms == nil ? "N/A" : inquiry.inco_terms.humanize %></td>
                 <td><%=  time_ago_in_words inquiry.created_at %></td>
-                <td><span class="label label-success"><%= link_to "".html_safe, inquiry_path(inquiry), class:"inquiry-manage-option fa fa-eye" %> Show</span></td>
+                <td><span class="label label-success"><%= link_to "Details", inquiry_path(inquiry), class:"inquiry-manage-option" %></span></td>
                 <td>
                   <% if inquiry.status != "closed" %>
-                    <span class="label label-warning"><%= link_to "".html_safe, edit_inquiry_path(inquiry), class:"inquiry-manage-option fa fa-edit" %> Edit</span>
+                    <span class="label label-warning"><%= link_to "Edit", edit_inquiry_path(inquiry), class:"inquiry-manage-option" %></span>
                   <% else %>
                   N/A
                   <% end %>

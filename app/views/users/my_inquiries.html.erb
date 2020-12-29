@@ -19,18 +19,21 @@
               </div>
               <div class="col-md-5"></div>
               <div class="col-md-2">
-                <span class="terms-condition"><%= link_to "Reset Filters", my_inquiries_user_path, class:"btn btn-sm submit-btn__final"%></span>
+                <span class="terms-condition">
+                  <%= link_to "Post an Inquiry", new_inquiry_path, class:"btn btn-sm submit-btn__final" %>
               </div>
             </div>
             <div class="widget-body">
                 <%= filter_form_for @q do |f| %>
                   <div class="row">
-                    <div class="col-md-4"><%= f.filter_input :origin_country, as: :select, collection: ISO3166::Country.all.sort, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %></div>
+                    <!-- <div class="col-md-4"><%= f.filter_input :origin_country, as: :select, collection: ISO3166::Country.all.sort, prompt: "Select origin country", input_html: { :class=> "single-field select2-dropdown"} %></div>
                     <div class="col-md-4"><%= f.filter_input :destination_country, as: :select, collection: ISO3166::Country.all.sort,  prompt: "Select destination country", input_html: { :class=> "single-field select2-dropdown"}  %></div>
+                    -->
                     <div class="col-md-4"><%= f.filter_input :status, as: :select, collection: Inquiry.statuses.values,  prompt: "Select status", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.filter_input :transport_mode, as: :select, collection: Inquiry.transport_modes, prompt: "Select transport mode", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.filter_input :inco_terms, as: :select, collection: Inquiry.inco_terms,  prompt: "Select INCO terms", input_html: { :class=> "single-field select2-dropdown"}  %></div>
                     <div class="col-md-4"><%= f.button :submit, 'Filter', class: 'btn btn-sm submit-btn__final'%></div>
+                    <div class="col-md-4"><span class="terms-condition"><%= link_to "Reset Filters", my_inquiries_user_path, class:"btn btn-sm submit-btn__final"%></span></div>
                   </div>
                 <% end %>
             </div>
