@@ -60,7 +60,7 @@
         </div>
         <div class="pc-user-buttons">
             <%= link_to 'Remove', remove_friend_path(id: friend.id), method: :post, class: "pc-btn accent"  %>
-            <%= link_to "Message", conversations_path(user_id: user.friendable_id, con_type: "User"), method: :post, class: "pc-btn" %>
+            <%= link_to "Message", conversations_path(user_id: friend.id, con_type: "User"), method: :post, class: "pc-btn" %>
         </div>
     </div>
 </div>

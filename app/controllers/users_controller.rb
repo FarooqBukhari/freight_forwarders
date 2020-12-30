@@ -36,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def friends
+    redirect_to @user if current_user != @user
     @friends = @user.get_friend_users
     @is_friend = current_user.isFriend(@user).exists?
     @can_add =  ( !current_user.isFriend(@user).exists? && !current_user.requester_users.find_by(requested_id: @user.id) )
