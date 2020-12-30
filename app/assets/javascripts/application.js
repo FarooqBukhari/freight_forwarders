@@ -39,6 +39,42 @@ function get_dest_address_suggestions() {
   });
 }
 
+function fetch_inco_terms(mode) {
+  switch(mode) {
+    case 'import':
+      $("#inco-terms-select2").html("");
+      var selectOption = new Option("Select INCO Terms","",false,false);
+      var exw = new Option("EXW","exw",false,false);
+      var fob = new Option("FOB","fob",false,false);
+      $("#inco-terms-select2").append(selectOption, exw, fob).trigger('change');
+      $("#import-btn").addClass("btn-danger").removeClass("btn-warning");
+      $("#cross-trade-btn").addClass("btn-warning").removeClass("btn-danger");
+      $("#export-btn").addClass("btn-warning").removeClass("btn-danger");
+      break;
+    case 'export':
+      $("#inco-terms-select2").html("");
+      var selectOption = new Option("Select INCO Terms","",false,false);
+      var dap = new Option("DAP","dap",false,false);
+      var ddp = new Option("DDP","ddp",false,false);
+      $("#inco-terms-select2").append(selectOption, dap, ddp).trigger('change');
+      $("#export-btn").addClass("btn-danger").removeClass("btn-warning");
+      $("#import-btn").addClass("btn-warning").removeClass("btn-danger");
+      $("#cross-trade-btn").addClass("btn-warning").removeClass("btn-danger");
+      break;
+    default:
+      $("#inco-terms-select2").html("");
+      var selectOption = new Option("Select INCO Terms","",false,false);
+      var exw = new Option("EXW","exw",false,false);
+      var fob = new Option("FOB","fob",false,false);
+      var dap = new Option("DAP","dap",false,false);
+      var ddp = new Option("DDP","ddp",false,false);
+      $("#inco-terms-select2").append(selectOption, exw, fob, dap, ddp).trigger('change');
+      $("#cross-trade-btn").addClass("btn-danger").removeClass("btn-warning");
+      $("#import-btn").addClass("btn-warning").removeClass("btn-danger");
+      $("#export-btn").addClass("btn-warning").removeClass("btn-danger");
+  }
+}
+
  $("input.date_picker").datepicker();
 
  $(document).ready(function(){
